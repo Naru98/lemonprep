@@ -7,17 +7,53 @@
   <meta name="author" content="Narayan Rahul">
   <title>Lemon Prep - Workout & Diet Management</title>
   <!-- Favicon -->
-  <link rel="icon" href="<?php echo base_url()?>/assets/img/brand/favicon.png" type="image/png">
+  <link rel="icon" href="<?php echo base_url()?>assets/img/brand/favicon.png" type="image/png">
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Icons -->
-  <link rel="stylesheet" href="<?php echo base_url()?>/assets/vendor/nucleo/css/nucleo.css" type="text/css">
-  <link rel="stylesheet" href="<?php echo base_url()?>/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/vendor/nucleo/css/nucleo.css" type="text/css">
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Argon CSS -->
-  <link rel="stylesheet" href="<?php echo base_url()?>/assets/css/argon.css?v=1.2.0" type="text/css">
-</head>
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/css/argon.css?v=1.2.0" type="text/css">
+  <style>
+    #overlay
+    {
+      display:none;
+      position: fixed;
+      z-index: 9999;
+      width: 100%;
+      height: 100vh;
+      background: #00000082;
+      text-align: center;
+    }
+    .loader {
+      border: 10px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 10px solid #28df99;
+      width: 70px;
+      height: 70px;
+      -webkit-animation: spin 2s linear infinite; /* Safari */
+      animation: spin 2s linear infinite;
+      margin: auto;
+      margin-top: 45vh;
+    }
 
+    /* Safari */
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
 <body class="bg-default">
+  <div id="overlay">
+    <div class="loader"></div>
+  </div>
   <!-- Navbar -->
   <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light">
     <div class="container">
@@ -44,6 +80,7 @@
           </div>
         </div>
         <ul class="navbar-nav mr-auto">
+          <?php if(empty($this->session->userdata('type'))) {?>
           <li class="nav-item">
             <a href="<?php echo base_url()?>login" class="nav-link">
               <span class="nav-link-inner--text">Login</span>
@@ -54,11 +91,13 @@
               <span class="nav-link-inner--text">Register</span>
             </a>
           </li>
+          <?php }else{ ?>
           <li class="nav-item">
-            <a href="<?php echo base_url()?>company" class="nav-link">
+            <a href="<?php echo base_url().$this->session->userdata('type')?>" class="nav-link">
               <span class="nav-link-inner--text">Dashboard</span>
             </a>
           </li>
+          <?php } ?>
         </ul>
         <hr class="d-lg-none" />
         <ul class="navbar-nav align-items-lg-center ml-lg-auto">

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Welcome extends MY_Controller {
 
 	public function index()
 	{
@@ -11,13 +11,23 @@ class Welcome extends CI_Controller {
 
 	public function login()
 	{
-		$data['child'] = 'login';
-		$this->load->view('layout/index',$data);
+		if(empty($this->session->userdata('type')))
+		{
+			$data['child'] = 'login';
+			$this->load->view('layout/index',$data);
+		}else{
+			redirect(base_url().$this->session->userdata('type'),'refresh');
+		}
 	}
 
 	public function register()
 	{
-		$data['child'] = 'register';
-		$this->load->view('layout/index',$data);
+		if(empty($this->session->userdata('type')))
+		{
+			$data['child'] = 'register';
+			$this->load->view('layout/index',$data);
+		}else{
+			redirect(base_url().$this->session->userdata('type'),'refresh');
+		}
 	}
 }

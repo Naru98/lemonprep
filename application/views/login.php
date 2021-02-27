@@ -26,16 +26,16 @@
               <form role="form">
                 <div class="form-group mb-3">
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="customRadioInline1" name="type" value="company" class="custom-control-input">
-                    <label class="custom-control-label" for="customRadioInline1">Company</label>
+                    <input type="radio" id="usertyp1" name="type" value="company" class="custom-control-input">
+                    <label class="custom-control-label" for="usertyp1">Company</label>
                   </div>
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="customRadioInline2" name="type" value="coach" class="custom-control-input">
-                    <label class="custom-control-label" for="customRadioInline2">Coach</label>
+                    <input type="radio" id="usertyp2" name="type" value="coach" class="custom-control-input">
+                    <label class="custom-control-label" for="usertyp2">Coach</label>
                   </div>
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="customRadioInline2" name="type" value="athlete" class="custom-control-input">
-                    <label class="custom-control-label" for="customRadioInline2">Athlete</label>
+                    <input type="radio" id="usertyp3" name="type" value="athlete" class="custom-control-input">
+                    <label class="custom-control-label" for="usertyp3">Athlete</label>
                   </div>
                 </div>
                 <div class="form-group">

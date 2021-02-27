@@ -5,6 +5,7 @@ class Main extends MY_Controller {
 
 	public function index()
 	{
-		$this->load->view('company/layout/index');
+		$data['child'] = 'company/main';
+		$this->load->view('company/layout/index',$data);
 	}
 }
