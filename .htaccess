@@ -1,5 +1,6 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    #RewriteBase /lemonprep/
     RewriteBase /
     
     #redirect to unsupported page  if browser is IE.
