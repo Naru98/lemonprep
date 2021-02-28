@@ -75,7 +75,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'a2plcpnl0101.prod.iad2.secureserver.net',
+	'hostname' => 'lemonkiosk.com',
 	'username' => 'user_lemonprep',
 	'password' => 'Q^21PV#{&7b;',
 	'database' => 'lemonprep',
