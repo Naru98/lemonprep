@@ -23,10 +23,14 @@
               <div class="text-center mb-3">
                 Login As
               </div>
-              <form role="form">
+              <form role="form" id="login">
+                <div id="success" class="alert alert-success" role="alert" style="display:none;">
+                </div>
+                <div id="error" class="alert alert-warning" role="alert" style="display:none;">
+                </div>
                 <div class="form-group mb-3">
                   <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="usertyp1" name="type" value="company" class="custom-control-input">
+                    <input type="radio" id="usertyp1" name="type" value="company" class="custom-control-input" checked>
                     <label class="custom-control-label" for="usertyp1">Company</label>
                   </div>
                   <div class="custom-control custom-radio custom-control-inline">
@@ -43,7 +47,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Email" type="email" name="email">
+                    <input class="form-control" placeholder="Email" type="email" name="email" required>
                   </div>
                 </div>
                 <div class="form-group">
@@ -51,11 +55,11 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Password" type="password" name="password">
+                    <input class="form-control" placeholder="Password" type="password" name="password" required>
                   </div>
                 </div>
                 <div class="text-center">
-                  <button type="button" class="btn btn-primary my-4">Sign in</button>
+                  <button type="submit" class="btn btn-primary my-4">Sign in</button>
                 </div>
               </form>
             </div>

@@ -56,6 +56,7 @@ $route['translate_uri_dashes'] = FALSE;
 //web
 $route['login'] = 'welcome/login';
 $route['register'] = 'welcome/register';
+$route['logout'] = 'welcome/logout';
 
 //web api
 $route['api/register'] = 'api/web/register';
@@ -63,3 +64,4 @@ $route['api/register'] = 'api/web/register';
 //user
 $route['company'] = 'company/main/index';
 $route['company/coach'] = 'company/coach/index';
+$route['company/coach/add'] = 'company/coach/add';

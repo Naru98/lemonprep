@@ -49,4 +49,39 @@ class Web extends MY_Controller {
         }
 	}
 
+    public function login()
+	{
+        if(!empty($this->input->post('type')) && !empty($this->input->post('email')) && !empty($this->input->post('password')))
+        {
+            if($this->input->post('type')=='company')
+            {
+                $user=$this->WebModel->checkEmail($this->input->post('email'));
+                if($user)
+                {
+                    if(md5($this->input->post('password'))==$user[0]['password'])
+                    {
+                        $company=$this->WebModel->getComapny($user[0]['company_id']);
+                        if($company)
+                        {
+                            $ses=array(
+                                'type'=>$this->input->post('type'),
+                                'company_id'=>$user[0]['company_id'],
+                                'email'=>$_POST['email']
+                            );
+                            $this->session->set_userdata($ses);
+                            $this->msg(1,array( 'url' => $this->input->post('type') ),'Sign IN successfull.');
+                        }else{
+                            $this->msg(0,[],'Company not found!');
+                        }
+                    }else{
+                        $this->msg(0,[],'Invalid email and password!');
+                    }
+                }else{
+                    $this->msg(0,[],'User not found!');
+                }
+            }
+        }else{
+            $this->msg(0,[],'Fields are missing!');
+        }
+    }
 }

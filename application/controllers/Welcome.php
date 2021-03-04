@@ -30,4 +30,10 @@ class Welcome extends MY_Controller {
 			redirect(base_url().$this->session->userdata('type'),'refresh');
 		}
 	}
+
+	public function logout()
+	{
+		$this->session->sess_destroy();
+		redirect(base_url().'login','refresh');
+	}
 }

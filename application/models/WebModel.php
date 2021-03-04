@@ -16,6 +16,18 @@ class WebModel extends CI_Model {
             return false;
         }
     }
+    function getComapny($id)
+    {
+        $this->db->select("*");
+		$this->db->from("company");
+		$this->db->where('id',$id);
+		$result = $this->db->get();
+        if ($result->num_rows() > 0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     function checkEmail($email)
     {
