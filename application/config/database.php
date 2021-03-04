@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'lemonkiosk.com',
-	'username' => 'user_lemonprep',
-	'password' => 'Q^21PV#{&7b;',
-	'database' => 'lemonprep',
+	'hostname' => 'freedb.tech',
+	'username' => 'freedbtech_userlemonprep',
+	'password' => 'lemonprep@123',
+	'database' => 'freedbtech_lemonprep',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
