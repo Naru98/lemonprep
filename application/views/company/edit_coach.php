@@ -4,12 +4,12 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 text-white d-inline-block mb-0">Add Coach</h6>
+                    <h6 class="h2 text-white d-inline-block mb-0">Edit Coach</h6>
                     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                         <li class="breadcrumb-item"><a href="<?php echo base_url().$this->session->userdata('type')?>"><i class="fas fa-home"></i></a></li>
                         <li class="breadcrumb-item"><a href="<?php echo base_url()?>company/coach">Coach</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a>Add</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a>Edit</a></li>
                         </ol>
                     </nav>
                 </div>
@@ -19,12 +19,34 @@
 </div>
 <div class="container-fluid mt--6">
     <div class="row">
-        <div class="col-xl-12">
+    <div class="col-xl-4 order-xl-2">
+          <div class="card card-profile">
+            <img src="<?php echo base_url()?>assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top">
+            <div class="row justify-content-center">
+              <div class="col-lg-3 order-lg-2">
+                <div class="card-profile-image">
+                  <a>
+                    <img src="<?php if($coach[0]['image']){  echo base_url($coach[0]['image']); } else { echo base_url("assets/img/coach.png"); } ?>" class="rounded-circle">
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="card-body pt-0">
+              <div class="text-center pt-7">
+                <h5 class="h3">
+                    <?php echo $coach[0]['name'];?>
+                </h5>
+                <button type="button" class="btn btn-block btn-warning mb-3" onclick="deleteModal('coach',<?php echo $coach[0]['id']?>)">Delete Coach</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-8 order-xl-1">
           <div class="card">
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Add Coach </h3>
+                  <h3 class="mb-0">Edit Coach </h3>
                 </div>
               </div>
             </div>
@@ -33,28 +55,29 @@
                 </div>
                 <div id="error" class="alert alert-warning" role="alert" style="display:none;">
                 </div>
-              <form id="addCoach">
+              <form id="editCoach">
                 <h6 class="heading-small text-muted mb-4">Coach information</h6>
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-name">Name</label>
-                        <input type="text" id="input-name" class="form-control" placeholder="Name" name="name" required>
+                        <input type="text" id="input-name" class="form-control" placeholder="Name" name="name" value="<?php echo $coach[0]['name']?>" required>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-email">Email address</label>
-                        <input type="email" id="input-email" class="form-control" placeholder="jesse@example.com" name="email" required>
+                        <input type="hidden" name="id" value="<?php echo $coach[0]['id']?>">
+                        <input type="email" id="input-email" class="form-control" placeholder="jesse@example.com" name="email"  value="<?php echo $coach[0]['email']?>" required>
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-password">Password</label>
-                        <input type="password" id="input-password" class="form-control" placeholder="***********" name="password" required>
+                        <label class="form-control-label" for="input-password">New Password</label>
+                        <input type="password" id="input-password" class="form-control" placeholder="***********" name="password">
                       </div>
                     </div>
                     <div class="col-lg-6">
@@ -71,7 +94,7 @@
                     </div>
                   </div>
                 </div>
-                <button class="btn btn-primary" type="submit">Add</button>
+                <button class="btn btn-primary" type="submit">Save</button>
               </form>
             </div>
           </div>

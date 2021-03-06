@@ -77,6 +77,9 @@
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url()?>company/coach">Coach</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url()?>company/athlete">Athlete</a>
+            </li>
           </ul>
           <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
             <li class="nav-item dropdown">

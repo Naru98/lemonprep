@@ -60,8 +60,17 @@ $route['logout'] = 'welcome/logout';
 
 //web api
 $route['api/register'] = 'api/web/register';
+$route['api/login'] = 'api/web/login';
+
 
 //user
 $route['company'] = 'company/main/index';
 $route['company/coach'] = 'company/coach/index';
 $route['company/coach/add'] = 'company/coach/add';
+$route['company/coach/edit/(:num)'] = 'company/coach/edit/$1';
+
+
+//user api
+$route['api/company/coach'] = 'api/company/getCoach';
+$route['api/company/coach/add'] = 'api/company/addCoach';
+$route['api/company/coach/edit'] = 'api/company/editCoach';

@@ -13,7 +13,7 @@ $("#register").validate({
 		$('#success').text('');
 		$('#success').hide();
 		$.ajax({
-			url: SITE_URL+'api/web/register',
+			url: SITE_URL+'api/register',
 			data: $(form).serializeArray(),
 			type: 'POST',
 			success: function(data){
@@ -23,16 +23,19 @@ $("#register").validate({
 				{
 					$('#success').text(res.msg);
 					$('#success').show();
+					$("#success").scroll();
 					window.location.href= SITE_URL+'company';
 				}else{
 					$('#error').text(res.msg? res.msg : 'Error occurred! Please try again later.');
 					$('#error').show();
+					$("#error").scroll();
 				}
 			},
 			error:function (e){
 				$('#overlay').hide();
 				$('#error').text('Error occurred! Please try again later.');
 				$('#error').show();
+				$("#error").scroll();
 			}
 		})
     }
@@ -55,7 +58,7 @@ $("#login").validate({
 		$('#success').text('');
 		$('#success').hide();
 		$.ajax({
-			url: SITE_URL+'api/web/login',
+			url: SITE_URL+'api/login',
 			data: $(form).serializeArray(),
 			type: 'POST',
 			success: function(data){
@@ -65,16 +68,19 @@ $("#login").validate({
 				{
 					$('#success').text(res.msg);
 					$('#success').show();
+					$("#success").scroll();
 					window.location.href= res.data.url;
 				}else{
 					$('#error').text(res.msg? res.msg : 'Error occurred! Please try again later.');
 					$('#error').show();
+					$("#error").scroll();
 				}
 			},
 			error:function (e){
 				$('#overlay').hide();
 				$('#error').text('Error occurred! Please try again later.');
 				$('#error').show();
+				$("#error").scroll();
 			}
 		})
     }
