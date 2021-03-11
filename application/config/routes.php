@@ -68,9 +68,16 @@ $route['company'] = 'company/main/index';
 $route['company/coach'] = 'company/coach/index';
 $route['company/coach/add'] = 'company/coach/add';
 $route['company/coach/edit/(:num)'] = 'company/coach/edit/$1';
+$route['company/athlete'] = 'company/athlete/index';
+$route['company/athlete/add'] = 'company/athlete/add';
+$route['company/athlete/edit/(:num)'] = 'company/athlete/edit/$1';
+$route['company/profile'] = 'company/main/profile';
 
 
 //user api
 $route['api/company/coach'] = 'api/company/getCoach';
 $route['api/company/coach/add'] = 'api/company/addCoach';
 $route['api/company/coach/edit'] = 'api/company/editCoach';
+$route['api/company/profile/edit'] = 'api/company/editProfile';
+$route['api/company/athlete'] = 'api/company/getAthlete';
+$route['api/company/athlete/add'] = 'api/company/addAthlete';

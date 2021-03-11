@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="<?php echo base_url()?>assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Page plugins -->
   <link rel="stylesheet" href="<?php echo base_url()?>assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?php echo base_url()?>assets/vendor/select2/dist/css/select2.min.css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="<?php echo base_url()?>assets/css/argon.css?v=1.2.0" type="text/css">
   <style>
@@ -97,13 +98,9 @@
                 <div class="dropdown-header noti-title">
                   <h6 class="text-overflow m-0">Welcome!</h6>
                 </div>
-                <a href="#!" class="dropdown-item">
+                <a href="<?php echo base_url('company/profile')?>" class="dropdown-item">
                   <i class="ni ni-single-02"></i>
                   <span>My profile</span>
-                </a>
-                <a href="#!" class="dropdown-item">
-                  <i class="ni ni-settings-gear-65"></i>
-                  <span>Settings</span>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="<?php echo base_url()?>logout" class="dropdown-item">
