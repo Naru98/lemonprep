@@ -25,7 +25,7 @@
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a>
-                    <img src="<?php if($company[0]['image']){  echo base_url($company[0]['image']); } else { echo base_url("assets/img/coach.png"); } ?>" class="rounded-circle">
+                    <img src="<?php if($company[0]['image']){  echo base_url($company[0]['image']); } else { echo base_url("assets/img/company.png"); } ?>" class="rounded-circle">
                   </a>
                 </div>
               </div>

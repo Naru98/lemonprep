@@ -26,7 +26,7 @@
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a>
-                    <img src="<?php if($athlete[0]['image']){  echo base_url($athlete[0]['image']); } else { echo base_url("assets/img/coach.png"); } ?>" class="rounded-circle">
+                    <img src="<?php if($athlete[0]['image']){  echo base_url($athlete[0]['image']); } else { echo base_url("assets/img/athlete.png"); } ?>" class="rounded-circle">
                   </a>
                 </div>
               </div>
@@ -55,7 +55,7 @@
                 </div>
                 <div id="error" class="alert alert-warning" role="alert" style="display:none;">
                 </div>
-              <form id="addAthlete">
+              <form id="editAthlete">
                 <h6 class="heading-small text-muted mb-4">Athlete information</h6>
                 <div class="pl-lg-4">
                   <div class="row">
@@ -68,6 +68,7 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-email">Email address</label>
+                        <input type="hidden" name="id" value="<?php echo $athlete[0]['id']?>">
                         <input type="email" id="input-email" class="form-control" placeholder="jesse@example.com" name="email" value="<?php echo $athlete[0]['email']?>" required>
                       </div>
                     </div>
@@ -111,7 +112,7 @@
                     </div>
                   </div>
                 </div>
-                <button class="btn btn-primary" type="submit">Add</button>
+                <button class="btn btn-primary" type="submit">Save</button>
               </form>
             </div>
           </div>
@@ -123,7 +124,6 @@ if(!empty($selected_coach))
 {
     ?>
     <script>
-        const SELECTED_VALUE=[];
         <?php
             foreach($selected_coach as $scoach)
             {

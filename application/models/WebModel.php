@@ -23,7 +23,7 @@ class WebModel extends CI_Model {
 		$this->db->where('id',$id);
 		$result = $this->db->get();
         if ($result->num_rows() > 0) {
-            return true;
+            return $result->result_array();
         }else{
             return false;
         }

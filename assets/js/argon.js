@@ -546,6 +546,7 @@ var Navbar = (function() {
 
 	$collapse.on({
 		'show.bs.collapse': function() {
+			alert();
 			accordion($(this));
 		}
 	})

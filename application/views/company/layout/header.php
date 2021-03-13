@@ -53,7 +53,9 @@
       100% { transform: rotate(360deg); }
     }
   </style>
-
+  <script>
+  let SELECTED_VALUE=[];
+  </script>
 </head>
 
 <body>
@@ -63,13 +65,13 @@
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
-    <nav class="navbar navbar-top navbar-expand-lg navbar-dark bg-primary border-bottom">
+    <nav class="navbar navbar-nav  navbar-top navbar-expand-lg navbar-dark bg-primary border-bottom">
       <div class="container-fluid">
         <a class="navbar-brand" href="<?php echo base_url()?>">Lemon Prep</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-collapse navbar-custom-collapse collapse" id="navbar-collapse">
           <!-- Navbar links -->
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 mr-auto">
             <li class="nav-item">
@@ -87,10 +89,10 @@
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="<?php echo base_url()?>assets/img/theme/team-4.jpg">
+                    <img alt="Image placeholder" src="<?php if(!empty($this->session->userdata('image'))){ echo base_url($this->session->userdata('image')); }else{ echo base_url("assets/img/company.png");} ?>">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
+                    <span class="mb-0 text-sm  font-weight-bold"><?php if(!empty($this->session->userdata('name'))){ echo $this->session->userdata('name'); }else{ echo 'Company';} ?></span>
                   </div>
                 </div>
               </a>

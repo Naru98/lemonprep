@@ -53,7 +53,8 @@
                   <tr>
                     <th>#</th>
                     <th scope="col" class="sort" data-sort="name">Name</th>
-                    <th scope="col" class="sort" data-sort="budget">email</th>
+                    <th scope="col" class="sort" data-sort="budget">Email</th>
+                    <th scope="col" class="sort" data-sort="budget">Coach</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>

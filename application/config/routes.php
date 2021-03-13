@@ -81,3 +81,4 @@ $route['api/company/coach/edit'] = 'api/company/editCoach';
 $route['api/company/profile/edit'] = 'api/company/editProfile';
 $route['api/company/athlete'] = 'api/company/getAthlete';
 $route['api/company/athlete/add'] = 'api/company/addAthlete';
+$route['api/company/athlete/edit'] = 'api/company/editAthlete';

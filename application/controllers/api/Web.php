@@ -27,7 +27,9 @@ class Web extends MY_Controller {
                             $ses=array(
                                 'type'=>'company',
                                 'company_id'=>$company_id,
-                                'email'=>$_POST['email']
+                                'email'=>$_POST['email'],
+                                'image'=> '',
+                                'name'=>$_POST['name'],
                             );
                             $this->session->set_userdata($ses);
                             $this->msg(1,[],'Account created successfully.');
@@ -66,7 +68,9 @@ class Web extends MY_Controller {
                             $ses=array(
                                 'type'=>$this->input->post('type'),
                                 'company_id'=>$user[0]['company_id'],
-                                'email'=>$_POST['email']
+                                'email'=>$_POST['email'],
+                                'image'=>$company[0]['image'],
+                                'name'=>$company[0]['name'],
                             );
                             $this->session->set_userdata($ses);
                             $this->msg(1,array( 'url' => $this->input->post('type') ),'Sign IN successfull.');

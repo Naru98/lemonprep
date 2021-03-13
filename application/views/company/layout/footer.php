@@ -45,7 +45,7 @@
       $('.select-input').select2({
         placeholder: 'Select an option'
       });
-      if(SELECTED_VALUE)
+      if(SELECTED_VALUE )
         $('.select-input').val(SELECTED_VALUE).trigger('change');
       $('#dtabel').DataTable({
         // Processing indicator
@@ -98,7 +98,7 @@
           },
           { 
             "className": "text-right",
-            "targets": [3] 
+            "targets": [4] 
           }
         ],
         'language': {
@@ -344,6 +344,63 @@
               $("#success").scroll();
               setTimeout(function(){
                 window.location.href= SITE_URL+'company/athlete';
+              },2000);
+            }else{
+              $('#error').text(res.msg? res.msg : 'Error occurred! Please try again later.');
+              $('#error').show();
+              $("#error").scroll();
+            }
+          },
+          error:function (e){
+            $('#overlay').hide();
+            $('#error').text('Error occurred! Please try again later.');
+            $('#error').show();
+            $("#error").scroll();
+          }
+        })
+      }
+    })
+
+    $("#editAthlete").validate({
+      rules: {
+        password: {
+          minlength: 6,
+          maxlength: 16
+        },
+        cpassword: {
+          equalTo: "#input-password"
+        },
+        image:{
+          extension: "png,jpeg,jpg,svg,gif,webp"
+        },
+      },
+      messages: {
+        cpassword:{
+          equalTo: 'Please enter the same password again.'
+        }
+      },
+      submitHandler: function (form){
+        $('#overlay').show();
+        $('#error').text('');
+        $('#error').hide();
+        $('#success').text('');
+        $('#success').hide();
+        $.ajax({
+          url: SITE_URL+'api/company/athlete/edit',
+          type: 'POST',
+          data: new FormData(form),
+          processData: false,
+          contentType: false,
+          success: function(data){
+            $('#overlay').hide();
+            const res = JSON.parse(data)
+            if(res?.status==1)
+            {
+              $('#success').text(res.msg);
+              $('#success').show();
+              $("#success").scroll();
+              setTimeout(function(){
+                window.location.reload();
               },2000);
             }else{
               $('#error').text(res.msg? res.msg : 'Error occurred! Please try again later.');

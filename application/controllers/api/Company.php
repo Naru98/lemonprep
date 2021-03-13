@@ -79,6 +79,8 @@ class Company extends MY_Controller {
                     if(!empty($this->input->post('password')))
                     {
                         $_POST['password']=md5($_POST['password']);
+                    }else{
+                        unset($_POST['password']);
                     }
                     $id=$_POST['id'];
                     unset($_POST['id']);
@@ -173,7 +175,20 @@ class Company extends MY_Controller {
         $i = $_POST['start'];
         foreach($athleteData as $athlete){
             $i++;
-            $img = $athlete->image? (base_url($athlete->image)) : (base_url("assets/img/coach.png"));
+            $img = $athlete->image? (base_url($athlete->image)) : (base_url("assets/img/athlete.png"));
+            $coachText='';
+            $coach=$this->UserModel->getAthleteCoach($athlete->id);
+            if($coach)
+            {
+                foreach($coach as $c)
+                {
+                    $curl= base_url('company/coach/edit/'.$c['id']);
+                    $cimg= $c['image']? (base_url($c['image'])) : (base_url("assets/img/coach.png"));
+                    $coachText.='<a href="'.$curl.'" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="'.$c['name'].'">
+                                <img alt="Image placeholder" src="'.$cimg.'">
+                                </a>';
+                }
+            }
             $data[] = array(
                 $i,
                 '<div class="media align-items-center">
@@ -185,6 +200,7 @@ class Company extends MY_Controller {
                     </div>
                 </div>',
                 $athlete->email,
+                '<div class="avatar-group">'.$coachText.'</div>',
                 '<div class="dropdown">
                     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-ellipsis-v"></i>
@@ -230,6 +246,7 @@ class Company extends MY_Controller {
                             exit();
                         } else {
                             $company['image'] = 'uploads/coach/'.$this->upload->data('file_name');
+                            $this->session->set_userdata('image',$company['image']);
                         }
                     }
                     $company['name']=$_POST['name'];
@@ -237,6 +254,8 @@ class Company extends MY_Controller {
                     if(!empty($this->input->post('password')))
                     {
                         $_POST['password']=md5($_POST['password']);
+                    }else{
+                        unset($_POST['password']);
                     }
                     $id=$_POST['id'];
                     unset($_POST['id']);
@@ -301,6 +320,64 @@ class Company extends MY_Controller {
                         $this->msg(1,[],'Athlete added successfully.');
                     }else{
                         $this->msg(0,[],'Error while adding athlete!');
+                    }
+                }else{
+                    $this->msg(0,[],'Email already exists!');
+                }
+            }else{
+                $this->msg(0,[],'Error occurred please try again later!');
+            }
+        }else{
+            $this->msg(0,[],'Fields are missing!');
+        }
+    }
+    public function editAthlete()
+    {
+        if(!empty($this->input->post('name')) && !empty($this->input->post('email')) && !empty($this->input->post('id')))
+        {
+            if(!empty($this->session->userdata('company_id')))
+            {
+                if(!$this->UserModel->checkEmailByID($this->input->post('email'),$this->input->post('id'),'athlete'))
+                {
+                    if(!empty($_FILES['image']['name']))
+                    {
+                        $config['upload_path'] = './uploads/athlete';
+                        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                        $config['max_size'] = 0;
+                        $new_name = time() . '-' . $_FILES["image"]['name'];
+                        $config['file_name'] = $new_name;
+                        $this->load->library('upload', $config);
+                        if (!$this->upload->do_upload('image')) {
+                            $this->msg(0,[],$this->upload->display_errors());
+                            exit();
+                        } else {
+                            $_POST['image'] = 'uploads/athlete/'.$this->upload->data('file_name');
+                        }
+                    }
+                    if(!empty($this->input->post('password')))
+                    {
+                        $_POST['password']=md5($_POST['password']);
+                    }else{
+                        unset($_POST['password']);
+                    }
+                    $id=$_POST['id'];
+                    $coaches=$this->input->post('coach');
+                    unset($_POST['id']);
+                    unset($_POST['cpassword']);
+                    unset($_POST['coach']);
+                    if($this->UserModel->updateByID($_POST,$id,'athlete'))
+                    {
+                        $this->UserModel->deleteByField('athlete_id',$id,'coach_athlete');
+                        if(!empty($coaches))
+                        {
+                            foreach($coaches as $coach)
+                            {
+                                $this->UserModel->insert(array('coach_id'=>$coach,'athlete_id'=>$id),'coach_athlete');
+                            }
+                        }
+                        $this->msg(1,[],'Athlete updated successfully.');
+                    }else{
+                        $this->msg(0,[],'Error while adding coach!');
                     }
                 }else{
                     $this->msg(0,[],'Email already exists!');
