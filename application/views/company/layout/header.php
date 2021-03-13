@@ -68,9 +68,37 @@
     <nav class="navbar navbar-nav  navbar-top navbar-expand-lg navbar-dark bg-primary border-bottom">
       <div class="container-fluid">
         <a class="navbar-brand" href="<?php echo base_url()?>">Lemon Prep</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+        <ul class="navbar-nav align-items-center  ml-auto ml-md-0 order-md-2">
+          <li class="nav-item dropdown">
+            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div class="media align-items-center">
+                <span class="avatar avatar-sm rounded-circle">
+                  <img alt="Image placeholder" src="<?php if(!empty($this->session->userdata('image'))){ echo base_url($this->session->userdata('image')); }else{ echo base_url("assets/img/company.png");} ?>">
+                </span>
+                <div class="media-body  ml-2  d-none d-lg-block">
+                  <span class="mb-0 text-sm  font-weight-bold"><?php if(!empty($this->session->userdata('name'))){ echo $this->session->userdata('name'); }else{ echo 'Company';} ?></span>
+                </div>
+              </div>
+            </a>
+            <div class="dropdown-menu  dropdown-menu-right ">
+              <div class="dropdown-header noti-title">
+                <h6 class="text-overflow m-0">Welcome!</h6>
+              </div>
+              <a href="<?php echo base_url('company/profile')?>" class="dropdown-item">
+                <i class="ni ni-single-02"></i>
+                <span>My profile</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="<?php echo base_url()?>logout" class="dropdown-item">
+                <i class="ni ni-user-run"></i>
+                <span>Logout</span>
+              </a>
+            </div>
+          </li>
+        </ul>
         <div class="navbar-collapse navbar-custom-collapse collapse" id="navbar-collapse">
           <!-- Navbar links -->
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 mr-auto">
@@ -82,34 +110,6 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url()?>company/athlete">Athlete</a>
-            </li>
-          </ul>
-          <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
-            <li class="nav-item dropdown">
-              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <div class="media align-items-center">
-                  <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="<?php if(!empty($this->session->userdata('image'))){ echo base_url($this->session->userdata('image')); }else{ echo base_url("assets/img/company.png");} ?>">
-                  </span>
-                  <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold"><?php if(!empty($this->session->userdata('name'))){ echo $this->session->userdata('name'); }else{ echo 'Company';} ?></span>
-                  </div>
-                </div>
-              </a>
-              <div class="dropdown-menu  dropdown-menu-right ">
-                <div class="dropdown-header noti-title">
-                  <h6 class="text-overflow m-0">Welcome!</h6>
-                </div>
-                <a href="<?php echo base_url('company/profile')?>" class="dropdown-item">
-                  <i class="ni ni-single-02"></i>
-                  <span>My profile</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="<?php echo base_url()?>logout" class="dropdown-item">
-                  <i class="ni ni-user-run"></i>
-                  <span>Logout</span>
-                </a>
-              </div>
             </li>
           </ul>
         </div>

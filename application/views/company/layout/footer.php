@@ -67,7 +67,8 @@
           },
           { 
             "className": "text-right",
-            "targets": [3] 
+            "targets": [3],
+            "orderable": false
           }
         ],
         'language': {
@@ -97,8 +98,13 @@
             "orderable": false
           },
           { 
+            "targets": [3],
+            "orderable": false
+          },
+          { 
             "className": "text-right",
-            "targets": [4] 
+            "targets": [4] ,
+            "orderable": false
           }
         ],
         'language': {
