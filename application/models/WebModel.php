@@ -29,10 +29,10 @@ class WebModel extends CI_Model {
         }
     }
 
-    function checkEmail($email)
+    function checkEmail($email,$table)
     {
         $this->db->select("*");
-		$this->db->from("users");
+		$this->db->from($table);
 		$this->db->where('email',$email);
 		$result = $this->db->get();
         if ($result->num_rows() > 0) {
