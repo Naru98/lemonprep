@@ -105,3 +105,8 @@ $route['api/coach/getDiet'] = 'api/coach/getDiet';
 //athlete
 $route['athlete'] = 'athlete/main/index';
 $route['athlete/profile'] = 'athlete/main/profile';
+$route['athlete/workouts'] = 'athlete/main/workouts';
+
+
+//athlete api
+$route['api/athlete/workouts'] = 'api/athlete/getworkouts';

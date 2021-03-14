@@ -44,7 +44,7 @@
   <script>
     const SITE_URL = '<?php echo base_url();?>'
     $(document).ready( function () {
-      $('#athleteDataTable').DataTable({
+      $('#athleteWorkoutsDatatable').DataTable({
         // Processing indicator
         "processing": true,
         // DataTables server-side processing mode
@@ -53,7 +53,7 @@
         "order": [],
         // Load data from an Ajax source
         "ajax": {
-            "url": "<?php echo base_url('api/coach/athlete'); ?>",
+            "url": "<?php echo base_url('api/athlete/workouts'); ?>",
             "type": "POST"
         },
         //Set column definition initialisation properties
@@ -63,8 +63,12 @@
             "orderable": false
           },
           { 
+            "targets": [4],
+            "orderable": false
+          },
+          { 
             "className": "text-right",
-            "targets": [3],
+            "targets": [5],
             "orderable": false
           }
         ],
