@@ -89,7 +89,9 @@ $route['coach'] = 'coach/main/index';
 $route['coach/athlete'] = 'coach/athlete/index';
 $route['coach/athlete/view/(:num)'] = 'coach/athlete/view/$1';
 $route['coach/athlete/workout/add/(:num)'] = 'coach/workout/add/$1';
+$route['coach/athlete/workout/edit/(:num)'] = 'coach/workout/edit/$1';
 $route['coach/athlete/diet/add/(:num)'] = 'coach/diet/add/$1';
+$route['coach/athlete/diet/edit/(:num)'] = 'coach/diet/edit/$1';
 $route['coach/profile'] = 'coach/main/profile';
 
 //coach api

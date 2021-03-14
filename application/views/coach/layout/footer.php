@@ -208,7 +208,7 @@
                         '<div class="col-lg-8">'+
                           '<textarea class="form-control" name="wdata'+w+'"></textarea>'+
                         '</div>'+
-                      '</div><br><br><br>');
+                      '</div><br>');
         w++;
       }
     }
