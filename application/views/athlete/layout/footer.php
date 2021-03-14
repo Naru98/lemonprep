@@ -94,49 +94,9 @@
             "targets": [0],
             "orderable": false
           },
-          { 
-            "targets": [3],
-            "orderable": false
-          },
           {
             "className": "text-right",
-            "targets": [4],
-            "orderable": false
-          }
-        ],
-        'language': {
-          'paginate': {
-            'next': '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
-            'previous': '<i class="fa fa-arrow-left" aria-hidden="true"></i>'  
-          }
-        }
-      });
-
-      $('#dietDataTable').DataTable({
-        // Processing indicator
-        "processing": true,
-        // DataTables server-side processing mode
-        "serverSide": true,
-        // Initial no order.
-        "order": [],
-        // Load data from an Ajax source
-        "ajax": {
-            "url": "<?php echo base_url('api/coach/getDiet'); ?>",
-            "type": "POST"
-        },
-        //Set column definition initialisation properties
-        "columnDefs": [
-          { 
-            "targets": [0],
-            "orderable": false
-          },
-          { 
             "targets": [3],
-            "orderable": false
-          },
-          {
-            "className": "text-right",
-            "targets": [4],
             "orderable": false
           }
         ],
@@ -213,7 +173,7 @@
       }
     }
 
-    $("#coachProfile").validate({
+    $("#athleteProfile").validate({
       rules: {
         password: {
           minlength: 6,
@@ -238,7 +198,7 @@
         $('#success').text('');
         $('#success').hide();
         $.ajax({
-          url: SITE_URL+'api/company/coach/edit',
+          url: SITE_URL+'api/company/athlete/edit',
           type: 'POST',
           data: new FormData(form),
           processData: false,
@@ -310,45 +270,7 @@
       }
     });
 
-    $("#addDiet").validate({
-      submitHandler: function (form){
-        $('#overlay').show();
-        $('#error').text('');
-        $('#error').hide();
-        $('#success').text('');
-        $('#success').hide();
-        $.ajax({
-          url: SITE_URL+'api/coach/addDiet',
-          type: 'POST',
-          data: new FormData(form),
-          processData: false,
-          contentType: false,
-          success: function(data){
-            $('#overlay').hide();
-            const res = JSON.parse(data)
-            if(res?.status==1)
-            {
-              $('#success').text(res.msg);
-              $('#success').show();
-              $("#success").scroll();
-              setTimeout(function(){
-                window.location.href= res.data.url;
-              },3000);
-            }else{
-              $('#error').text(res.msg? res.msg : 'Error occurred! Please try again later.');
-              $('#error').show();
-              $("#error").scroll();
-            }
-          },
-          error:function (e){
-            $('#overlay').hide();
-            $('#error').text('Error occurred! Please try again later.');
-            $('#error').show();
-            $("#error").scroll();
-          }
-        })
-      }
-    });
+    
   </script>
 </body>
 

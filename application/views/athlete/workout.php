@@ -36,10 +36,10 @@
               <form id="addWorkout">
                 <h6 class="heading-small text-muted mb-4">Workout information</h6>
                 <div class="pl-lg-4">
-                <?php if(!empty($this->session->userdata('company_id'))){ ?><input type="hidden" name="company_id" value="<?php echo $this->session->userdata('company_id'); ?>"> <?php } ?>
+                  <div class="row input-daterange datepicker align-items-center">
+                    <?php if(!empty($this->session->userdata('company_id'))){ ?><input type="hidden" name="company_id" value="<?php echo $this->session->userdata('company_id'); ?>"> <?php } ?>
                     <?php if(!empty($this->session->userdata('id'))){ ?><input type="hidden" name="coach_id" value="<?php echo $this->session->userdata('id'); ?>"> <?php } ?>
                     <?php if(!empty($id)){ ?><input type="hidden" name="athlete_id" value="<?php echo $id; ?>"> <?php } ?>
-                  <div class="row input-daterange datepicker align-items-center">
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label">Start date</label>
