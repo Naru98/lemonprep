@@ -29,7 +29,7 @@
     .loader {
       border: 10px solid #f3f3f3;
       border-radius: 50%;
-      border-top: 10px solid #28df99;
+      border-top: 10px solid #5DC184;
       width: 70px;
       height: 70px;
       -webkit-animation: spin 2s linear infinite; /* Safari */

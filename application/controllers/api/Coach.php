@@ -38,7 +38,8 @@ class Coach extends MY_Controller {
                     <i class="fas fa-ellipsis-v"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                    <a class="dropdown-item" href="'.base_url("coach/athlete/view/".$athlete->id).'">View</a>
+                    <a class="dropdown-item" href="'.base_url("coach/athlete/edit/".$athlete->id).'">Edit</a>
+                    <a class="dropdown-item" onclick="deleteModal(\'athlete\','.$athlete->id.')">Delete</a>
                     </div>
                 </div>'
             );

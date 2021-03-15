@@ -34,7 +34,7 @@
     .loader {
       border: 10px solid #f3f3f3;
       border-radius: 50%;
-      border-top: 10px solid #28df99;
+      border-top: 10px solid #5DC184;
       width: 70px;
       height: 70px;
       -webkit-animation: spin 2s linear infinite; /* Safari */
@@ -53,6 +53,22 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+
+    .clogo{
+      max-width:100px;
+    }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
+    {
+      color:#000;
+    }
+    .breadcrumb-dark .breadcrumb-item a
+    {
+      color: #000 !important;
+    }
+    body, .btn-primary , .page-item.active .page-link
+    {
+      color:#000!important;
+    }
   </style>
   <script>
   let SELECTED_VALUE=[];
@@ -66,7 +82,7 @@
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
-    <nav class="navbar navbar-nav  navbar-top navbar-expand-lg navbar-dark bg-primary border-bottom">
+    <nav class="navbar navbar-nav  navbar-top navbar-expand-lg navbar-light bg-primary border-bottom">
       <div class="container-fluid">
         <a class="navbar-brand" href="<?php echo base_url()?>">Lemon Prep</a>
         <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -113,3 +129,18 @@
         </div>
       </div>
     </nav>
+    <!-- Header -->
+    <div class="header bg-primary pb-2">
+        <div class="container-fluid">
+            <div class="header-body">
+                <div class="row align-items-center py-2">
+                    <div class="col-12 mx-auto text-center">
+                      <img class="clogo" src="<?php if(!empty($this->session->userdata('cimage'))){ echo base_url($this->session->userdata('cimage')); } else { echo base_url('assets/img/company.png');} ?>" />
+                    </div>
+                    <div class="col-12 mx-auto text-center">
+                      <h4><?php if(!empty($this->session->userdata('cname'))){ echo $this->session->userdata('cname'); } ?></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

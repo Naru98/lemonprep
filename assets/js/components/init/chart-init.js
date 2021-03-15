@@ -29,7 +29,7 @@ var Charts = (function() {
 		},
 		theme: {
 			'default': '#172b4d',
-			'primary': '#28df99',
+			'primary': '#5DC184',
 			'secondary': '#f4f5f7',
 			'info': '#11cdef',
 			'success': '#2dce89',
