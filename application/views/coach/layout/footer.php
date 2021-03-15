@@ -90,7 +90,6 @@
       $('#athleteDataTable tbody').on('click', 'tr', function () {
         var row = $(this).data();
         console.log(this);
-        alert();
         console.log(row);   //full row of array data
         console.log(row[1]);   //EmployeeId
       });
