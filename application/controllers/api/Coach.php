@@ -23,6 +23,7 @@ class Coach extends MY_Controller {
             $i++;
             $img = $athlete->image? (base_url($athlete->image)) : (base_url("assets/img/athlete.png"));
             $data[] = array(
+                'id'=>$athlete->id,
                 $i,
                 '<div class="media align-items-center">
                     <a href="#" class="avatar rounded-circle mr-3">
@@ -152,22 +153,10 @@ class Coach extends MY_Controller {
         {
             $sdata= date($this->input->post('sdate'));
             $edata= date($this->input->post('edate'));
-            $cdate= date($this->input->post('sdate'));
-            $data=array();
-            $c=1;
-            while (strtotime($cdate) <= strtotime($edata)) {
-                $d= '';
-                if(!empty($this->input->post('wdata'.$c)))
-                    $d=$this->input->post('wdata'.$c);
-                $data[]=array('date'=>$cdate, 'data'=> $d);
-                $cdate = date ("m/d/Y", strtotime("+1 days", strtotime($cdate)));
-                $c++;
-            }
             $workout=array(
                 'sdate'=> date('y-m-d',strtotime($sdata)),
                 'edate'=> date('y-m-d',strtotime($edata)),
-                'data'=> json_encode($data),
-                'per'=> 0,
+                'data'=> $this->input->post('data'),
                 'company_id'=>$this->input->post('company_id'),
                 'coach_id'=>$this->input->post('coach_id'),
                 'athlete_id'=>$this->input->post('athlete_id'),
@@ -190,29 +179,17 @@ class Coach extends MY_Controller {
         {
             $sdata= date($this->input->post('sdate'));
             $edata= date($this->input->post('edate'));
-            $cdate= date($this->input->post('sdate'));
-            $data=array();
-            $c=1;
-            while (strtotime($cdate) <= strtotime($edata)) {
-                $d= '';
-                if(!empty($this->input->post('wdata'.$c)))
-                    $d=$this->input->post('wdata'.$c);
-                $data[]=array('date'=>$cdate, 'data'=> $d);
-                $cdate = date ("m/d/Y", strtotime("+1 days", strtotime($cdate)));
-                $c++;
-            }
             $workout=array(
                 'sdate'=> date('y-m-d',strtotime($sdata)),
                 'edate'=> date('y-m-d',strtotime($edata)),
-                'data'=> json_encode($data),
-                'per'=> 0,
+                'data'=> $this->input->post('data'),
                 'company_id'=>$this->input->post('company_id'),
                 'coach_id'=>$this->input->post('coach_id'),
                 'athlete_id'=>$this->input->post('athlete_id'),
             );
             if($this->UserModel->insert($workout,'diet'))
             {
-                $this->msg(1,array( 'url' => base_url('coach/athlete/view/'.$workout['athlete_id']) ),'Diet added successfully.');
+                $this->msg(1,array( 'url' => base_url('coach/athlete/view/'.$workout['athlete_id'].'/2') ),'Diet added successfully.');
             }else{
                 $this->msg(0,[],'Error while adding Diet!');
             }

@@ -34,7 +34,7 @@
     .loader {
       border: 10px solid #f3f3f3;
       border-radius: 50%;
-      border-top: 10px solid #5DC184;
+      border-top: 10px solid #defc8c;
       width: 70px;
       height: 70px;
       -webkit-animation: spin 2s linear infinite; /* Safari */
@@ -61,13 +61,17 @@
     {
       color:#000;
     }
-    .breadcrumb-dark .breadcrumb-item a
+    .breadcrumb-dark .breadcrumb-item a,.nav-pills .nav-link
     {
       color: #000 !important;
     }
     body, .btn-primary , .page-item.active .page-link
     {
       color:#000!important;
+    }
+    .clickable
+    {
+      cursor: pointer;
     }
   </style>
   <script>
@@ -130,17 +134,3 @@
       </div>
     </nav>
     <!-- Header -->
-    <div class="header bg-primary pb-2">
-        <div class="container-fluid">
-            <div class="header-body">
-                <div class="row align-items-center py-2">
-                    <div class="col-12 mx-auto text-center">
-                      <img class="clogo" src="<?php if(!empty($this->session->userdata('cimage'))){ echo base_url($this->session->userdata('cimage')); } else { echo base_url('assets/img/company.png');} ?>" />
-                    </div>
-                    <div class="col-12 mx-auto text-center">
-                      <h4><?php if(!empty($this->session->userdata('cname'))){ echo $this->session->userdata('cname'); } ?></h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>

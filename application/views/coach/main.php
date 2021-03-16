@@ -1,4 +1,18 @@
 <!-- Header -->
+<div class="header bg-primary pb-2">
+        <div class="container-fluid">
+            <div class="header-body">
+                <div class="row align-items-center py-2">
+                    <div class="col-12 mx-auto text-center">
+                      <img class="clogo" src="<?php if(!empty($this->session->userdata('cimage'))){ echo base_url($this->session->userdata('cimage')); } else { echo base_url('assets/img/company.png');} ?>" />
+                    </div>
+                    <div class="col-12 mx-auto text-center">
+                      <h4><?php if(!empty($this->session->userdata('cname'))){ echo $this->session->userdata('cname'); } ?></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <div class="header bg-primary pb-6">
     <div class="container-fluid">
         <div class="header-body">

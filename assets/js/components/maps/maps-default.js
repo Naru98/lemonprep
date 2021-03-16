@@ -6,7 +6,7 @@ var $map = $('#map-default'),
     map,
     lat,
     lng,
-    color = "#5DC184";
+    color = "#defc8c";
 
 function initMap() {
 

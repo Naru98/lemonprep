@@ -43,17 +43,21 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label">Start date</label>
-                        <input class="form-control" placeholder="Start date" type="text" name="sdate" id="sdate" onchange="workoutInput()" >
+                        <input class="form-control" placeholder="Start date" type="text" name="sdate" id="sdate" >
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label">End date</label>
-                        <input class="form-control" placeholder="End date" type="text" name="edate" id="edate" onchange="workoutInput()" >
+                        <input class="form-control" placeholder="End date" type="text" name="edate" id="edate" >
                       </div>
                     </div>
-                  </div>
-                  <div id="workoutInput">
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <label class="form-control-label">Details</label>
+                        <textarea class="form-control" name="data"></textarea>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <button class="btn btn-primary" type="submit">Add</button>

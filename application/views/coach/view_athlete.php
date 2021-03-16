@@ -19,10 +19,9 @@
 </div>
 <div class="container-fluid mt--6">
     <div class="row">
-        <div class="col-xl-4 order-xl-2">
-          <div class="card card-profile">
-            <img src="<?php echo base_url()?>assets/img/theme/img-1-1000x600.jpg" alt="Image placeholder" class="card-img-top">
-            <div class="row justify-content-center">
+        <div class="col-md-12 mx-auto">
+          <div class="card card-profile mt-5">
+            <div class="row justify-content-center mt-3">
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a>
@@ -41,82 +40,34 @@
                 </h5>
               </div>
             </div>
+            <div class="card-footer">
+            <ul class="nav nav-pills nav-fill flex-column flex-sm-row" id="tabs-text" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==1){ echo 'active'; } ?>" id="tabs-text-1-tab"  href="<?php echo base_url('coach/athlete/view/'.$id);?>" role="tab" aria-controls="tabs-text-1" aria-selected="true">Workouts</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==2){ echo 'active'; } ?>" id="tabs-text-2-tab" href="<?php echo base_url('coach/athlete/view/'.$id.'/2');?>" role="tab" aria-controls="tabs-text-2" aria-selected="false">Diet</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==3){ echo 'active'; } ?>" id="tabs-text-3-tab"  href="<?php echo base_url('coach/athlete/view/'.$id.'/3');?>" role="tab" aria-controls="tabs-text-3" aria-selected="false">Check-In</a>
+              </li>
+            </ul>
+            </div>
           </div>
         </div>
-        <div class="col-xl-8 order-xl-1">
-        <div class="card">
-            <!-- Card header -->
-            <div class="card-header border-0  <?php if(empty($this->session->userdata('success')) && empty($this->session->userdata('error'))) {  echo 'd-none';}?>">
-              <?php if(!empty($this->session->userdata('success'))) { ?>
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <span class="alert-text"><strong>Success!</strong> <?php echo $this->session->userdata('success');?></span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-              <?php
-                $this->session->set_userdata('success','');
-                } ?>
-                <?php if(!empty($this->session->userdata('error'))) { ?>
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <span class="alert-text"><strong>Error!</strong> <?php echo $this->session->userdata('error');?></span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-              <?php
-                $this->session->set_userdata('error','');
-                } ?>
-            </div>
-            <div class="card-header border-0">
-              <div class="row">
-                <div class="col-6">Workouts</div>
-                <div class="col-6 text-right"><a class="btn btn-primary" href="<?php echo base_url('coach/athlete/workout/add/'.$athlete[0]['id']);?>">Add</a></div>
-              </div>
-            </div>
-            <!-- Light table -->
-            <div class="table-responsive">
-              <table id="workoutDataTable" class="table align-items-center table-flush">
-                <thead class="thead-light">
-                  <tr>
-                    <th>#</th>
-                    <th scope="col" class="sort" data-sort="name">Start Date</th>
-                    <th scope="col" class="sort" data-sort="budget">End Date</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
-                <tbody class="list">
-                  
-                </tbody>
-              </table>
-            </div>
-          </div><div class="card">
-            <!-- Card header -->
-            <div class="card-header border-0">
-              <div class="row">
-                <div class="col-6">Diet</div>
-                <div class="col-6 text-right"><a class="btn btn-primary" href="<?php echo base_url('coach/athlete/diet/add/'.$athlete[0]['id']);?>">Add</a></div>
-              </div>
-            </div>
-            <!-- Light table -->
-            <div class="table-responsive">
-              <table id="dietDataTable" class="table align-items-center table-flush">
-                <thead class="thead-light">
-                  <tr>
-                    <th>#</th>
-                    <th scope="col" class="sort" data-sort="name">Start Date</th>
-                    <th scope="col" class="sort" data-sort="budget">End Date</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
-                <tbody class="list">
-                  
-                </tbody>
-              </table>
-            </div>
-          </div>
+        <div class="col-xl-12 order-xl-1">
+        <?php
+          if($snav==1)
+          {
+            $this->load->view('coach/workout.php');
+          }else if($snav==2)
+          {
+            $this->load->view('coach/diet.php');
+          }else if($snav==3)
+          {
+            $this->load->view('coach/checkin.php');
+          }
+        ?>
         </div>
     </div>
 </div>

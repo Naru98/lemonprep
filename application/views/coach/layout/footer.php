@@ -44,7 +44,7 @@
   <script>
     const SITE_URL = '<?php echo base_url();?>'
     $(document).ready( function () {
-      $('#athleteDataTable').DataTable({
+      var table = $('#athleteDataTable').DataTable({
         // Processing indicator
         "processing": true,
         // DataTables server-side processing mode
@@ -61,17 +61,14 @@
           { 
             "targets": [0],
             "orderable": false,
-            "className": "clickable",
           },
           { 
             "targets": [1],
             "orderable": false,
-            "className": "clickable",
           },
           { 
             "targets": [2],
             "orderable": false,
-            "className": "clickable",
           },
           { 
             "className": "text-right",
@@ -79,6 +76,17 @@
             "orderable": false
           }
         ],
+        "createdRow": function( row, data, dataIndex ) {
+          $( row ).find('td:eq(0)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(1)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(2)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+        },
         'language': {
           'paginate': {
             'next': '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
@@ -87,11 +95,8 @@
         }
       });
 
-      $('#athleteDataTable tbody').on('click', 'tr', function () {
-        var row = $(this).data();
-        console.log(this);
-        console.log(row);   //full row of array data
-        console.log(row[1]);   //EmployeeId
+      $('#athleteDataTable').on('click', 'td.clickable', function () {
+        window.location.href=SITE_URL+'coach/athlete/view/'+$(this).attr('data-id');
       });
 
       $('#workoutDataTable').DataTable({
@@ -209,28 +214,6 @@
       })
     }
 
-    const workoutInput= ()=>{
-      const sdate=$('#sdate').val();
-      const edate=$('#edate').val();
-      const diffTime = Math.abs(new Date(sdate) - new Date(edate));
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-      $('#workoutInput').html('');
-      let w=1;
-      for (var d = new Date(sdate); d <= new Date(edate); d.setDate(d.getDate() + 1)) {
-        $('#workoutInput').append('<div class="row">'+
-                        '<div class="col-lg-4">'+
-                          '<div class="form-group">'+
-                            '<input class="form-control" type="text" value="'+new Date(d).toLocaleDateString("en-US")+'" disabled>'+
-                          '</div>'+
-                        '</div>'+
-                        '<div class="col-lg-8">'+
-                          '<textarea class="form-control" name="wdata'+w+'"></textarea>'+
-                        '</div>'+
-                      '</div><br>');
-        w++;
-      }
-    }
-
     $("#coachProfile").validate({
       rules: {
         password: {
@@ -288,7 +271,7 @@
       }
     });
 
-    $("#addCoach").validate({
+    $("#addAthlete").validate({
       rules: {
         password: {
           required: true,
@@ -314,7 +297,7 @@
         $('#success').text('');
         $('#success').hide();
         $.ajax({
-          url: SITE_URL+'api/company/coach/add',
+          url: SITE_URL+'api/company/athlete/add',
           type: 'POST',
           data: new FormData(form),
           processData: false,
@@ -328,7 +311,7 @@
               $('#success').show();
               $("#success").scroll();
               setTimeout(function(){
-                window.location.href= SITE_URL+'company/coach';
+                window.location.href= SITE_URL+'coach/athlete';
               },2000);
             }else{
               $('#error').text(res.msg? res.msg : 'Error occurred! Please try again later.');
@@ -344,9 +327,9 @@
           }
         })
       }
-    })
+    });
 
-    $("#editCoach").validate({
+    $("#editAthlete").validate({
       rules: {
         password: {
           minlength: 6,
@@ -371,7 +354,7 @@
         $('#success').text('');
         $('#success').hide();
         $.ajax({
-          url: SITE_URL+'api/company/coach/edit',
+          url: SITE_URL+'api/company/athlete/edit',
           type: 'POST',
           data: new FormData(form),
           processData: false,
@@ -386,7 +369,7 @@
               $("#success").scroll();
               setTimeout(function(){
                 window.location.reload();
-              },3000);
+              },2000);
             }else{
               $('#error').text(res.msg? res.msg : 'Error occurred! Please try again later.');
               $('#error').show();
@@ -401,7 +384,7 @@
           }
         })
       }
-    })
+    });
 
     $("#addWorkout").validate({
       submitHandler: function (form){

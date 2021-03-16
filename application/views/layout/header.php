@@ -29,13 +29,17 @@
     .loader {
       border: 10px solid #f3f3f3;
       border-radius: 50%;
-      border-top: 10px solid #5DC184;
+      border-top: 10px solid #defc8c;
       width: 70px;
       height: 70px;
       -webkit-animation: spin 2s linear infinite; /* Safari */
       animation: spin 2s linear infinite;
       margin: auto;
       margin-top: 45vh;
+    }
+    .btn-primary
+    {
+      color:#000;
     }
 
     /* Safari */
@@ -47,6 +51,14 @@
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
+    }
+    body
+    {
+      color:#000;
+    }
+    .navbar-horizontal.navbar-transparent .navbar-brand, .navbar-horizontal.navbar-transparent .navbar-nav .nav-link
+    {
+      color:#000!important;
     }
   </style>
 </head>

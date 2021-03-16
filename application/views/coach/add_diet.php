@@ -52,8 +52,12 @@
                         <input class="form-control" placeholder="End date" type="text" name="edate" id="edate" onchange="workoutInput()" >
                       </div>
                     </div>
-                  </div>
-                  <div id="workoutInput">
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <label class="form-control-label">Details</label>
+                        <textarea class="form-control" name="data"></textarea>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <button class="btn btn-primary" type="submit">Add</button>
