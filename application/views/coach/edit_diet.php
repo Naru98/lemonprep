@@ -50,31 +50,12 @@
                         <input class="form-control" placeholder="End date" type="text" name="edate" id="edate" onchange="workoutInput()" value="<?php echo date('m/d/Y',strtotime($workout[0]['edate']));?>" >
                       </div>
                     </div>
-                  </div>
-                  <div id="workoutInput">
-                    <?php
-                    if($workout[0]['data'])
-                    {
-                      $data = json_decode($workout[0]['data']);
-                      $w=1;
-                      foreach($data as $d)
-                      {
-                        ?>
-                        <div class="row">
-                          <div class="col-lg-4">
-                            <div class="form-group">
-                              <input class="form-control" type="text" value="<?php echo date('m/d/Y',strtotime($d->date));?>" disabled>
-                            </div>
-                          </div>
-                          <div class="col-lg-8">
-                            <textarea class="form-control" name="wdata<?php echo $w;?>"><?php echo $d->data;?></textarea>
-                          </div>
-                        </div><br>
-                        <?php
-                        $w++;
-                      }
-                    }
-                    ?>
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <label class="form-control-label">Details</label>
+                        <textarea class="form-control" name="data"><?php echo $workout[0]['data'];?></textarea>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <button class="btn btn-primary" type="submit">Save</button>

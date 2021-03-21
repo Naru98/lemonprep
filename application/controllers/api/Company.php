@@ -281,7 +281,7 @@ class Company extends MY_Controller {
 
     public function addAthlete()
     {
-        if(!empty($this->input->post('name')) && !empty($this->input->post('email')) && !empty($this->input->post('password')))
+        if(!empty($this->input->post('name')) && !empty($this->input->post('email')) && !empty($this->input->post('password')) && !empty($this->input->post('sdate')) && !empty($this->input->post('edate')))
         {
             if(!empty($this->session->userdata('company_id')))
             {
@@ -305,6 +305,8 @@ class Company extends MY_Controller {
                     $coaches=$this->input->post('coach');
                     unset($_POST['coach']);
                     unset($_POST['cpassword']);
+                    $_POST['sdate']=date('Y-m-d',strtotime($_POST['sdate']));
+                    $_POST['edate']=date('Y-m-d',strtotime($_POST['edate']));
                     $_POST['password']=md5($_POST['password']);
                     $_POST['company_id']=$this->session->userdata('company_id');
                     $athlete_id=$this->UserModel->insert($_POST,'athlete');
@@ -333,7 +335,7 @@ class Company extends MY_Controller {
     }
     public function editAthlete()
     {
-        if(!empty($this->input->post('name')) && !empty($this->input->post('email')) && !empty($this->input->post('id')))
+        if(!empty($this->input->post('name')) && !empty($this->input->post('email')) && !empty($this->input->post('id')) && !empty($this->input->post('sdate')) && !empty($this->input->post('edate')))
         {
             if(!empty($this->session->userdata('company_id')))
             {
@@ -365,6 +367,8 @@ class Company extends MY_Controller {
                     unset($_POST['id']);
                     unset($_POST['cpassword']);
                     unset($_POST['coach']);
+                    $_POST['sdate']=date('Y-m-d',strtotime($_POST['sdate']));
+                    $_POST['edate']=date('Y-m-d',strtotime($_POST['edate']));
                     if($this->UserModel->updateByID($_POST,$id,'athlete'))
                     {
                         $this->UserModel->deleteByField('athlete_id',$id,'coach_athlete');

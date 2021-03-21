@@ -37,7 +37,6 @@
                     <th scope="col" class="sort" data-sort="name">Start Date</th>
                     <th scope="col" class="sort" data-sort="budget">End Date</th>
                     <th scope="col"></th>
-                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody class="list">

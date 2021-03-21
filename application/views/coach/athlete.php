@@ -54,6 +54,8 @@
                     <th>#</th>
                     <th scope="col" class="sort" data-sort="name">Name</th>
                     <th scope="col" class="sort" data-sort="budget">Email</th>
+                    <th scope="col" class="sort" data-sort="budget">Valid From</th>
+                    <th scope="col" class="sort" data-sort="budget">Valid To</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>

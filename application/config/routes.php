@@ -90,6 +90,10 @@ $route['coach/athlete'] = 'coach/athlete/index';
 $route['coach/athlete/add'] = 'coach/athlete/add';
 $route['coach/athlete/edit/(:num)'] = 'coach/athlete/edit/$1';
 $route['coach/athlete/view/(:num)/(:num)'] = 'coach/athlete/view/$1/$2';
+$route['coach/shows'] = 'coach/shows/index';
+$route['coach/shows/add'] = 'coach/shows/add';
+$route['coach/checkin'] = 'coach/checkin/index';
+$route['coach/forms'] = 'coach/forms/index';
 $route['coach/athlete/workout/add/(:num)'] = 'coach/workout/add/$1';
 $route['coach/athlete/workout/edit/(:num)'] = 'coach/workout/edit/$1';
 $route['coach/athlete/diet/add/(:num)'] = 'coach/diet/add/$1';
@@ -102,6 +106,7 @@ $route['api/coach/addWorkout'] = 'api/coach/addWorkout';
 $route['api/coach/addDiet'] = 'api/coach/addDiet';
 $route['api/coach/getWorkout'] = 'api/coach/getWorkout';
 $route['api/coach/getDiet'] = 'api/coach/getDiet';
+$route['api/coach/checkinSetting'] = 'api/coach/checkinSetting';
 
 
 //athlete

@@ -38,6 +38,9 @@
                 <h5 class="h3">
                     <?php echo $athlete[0]['email'];?>
                 </h5>
+                <h5 class="h3">
+                  Valid from :- <?php if($athlete[0]['sdate']){ echo date('m/d/Y',strtotime($athlete[0]['sdate']));}?> TO  <?php if($athlete[0]['edate']){ echo date('m/d/Y',strtotime($athlete[0]['edate']));}?>
+                </h5>
               </div>
             </div>
             <div class="card-footer">
@@ -50,6 +53,12 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==3){ echo 'active'; } ?>" id="tabs-text-3-tab"  href="<?php echo base_url('coach/athlete/view/'.$id.'/3');?>" role="tab" aria-controls="tabs-text-3" aria-selected="false">Check-In</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==4){ echo 'active'; } ?>" id="tabs-text-3-tab"  href="<?php echo base_url('coach/athlete/view/'.$id.'/4');?>" role="tab" aria-controls="tabs-text-3" aria-selected="false">Forms</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==5){ echo 'active'; } ?>" id="tabs-text-3-tab"  href="<?php echo base_url('coach/athlete/view/'.$id.'/5');?>" role="tab" aria-controls="tabs-text-3" aria-selected="false">Shows</a>
               </li>
             </ul>
             </div>
@@ -66,6 +75,9 @@
           }else if($snav==3)
           {
             $this->load->view('coach/checkin.php');
+          }else if($snav==5)
+          {
+            $this->load->view('coach/athlete_shows.php');
           }
         ?>
         </div>

@@ -1,6 +1,30 @@
-<div class="card">
+<!-- Header -->
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-2">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-dark d-inline-block mb-0">Shows</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark ">
+                        <li class="breadcrumb-item"><a href="<?php echo base_url().$this->session->userdata('type')?>"><i class="fas fa-home"></i></a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="<?php echo base_url()?>coach/shows">Shows</a></li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    <a href="<?php echo base_url()?>coach/shows/add" class="btn btn-secondary">Add</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt--6">
+    <div class="row">
+        <div class="col">
+          <div class="card">
             <!-- Card header -->
-            <div class="card-header border-0  <?php if(empty($this->session->userdata('success')) && empty($this->session->userdata('error'))) {  echo 'd-none';}?>">
+            <div class="card-header border-0">
               <?php if(!empty($this->session->userdata('success'))) { ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <span class="alert-text"><strong>Success!</strong> <?php echo $this->session->userdata('success');?></span>
@@ -22,20 +46,14 @@
                 $this->session->set_userdata('error','');
                 } ?>
             </div>
-            <div class="card-header border-0">
-              <div class="row">
-                <div class="col-6">Diet</div>
-                <div class="col-6 text-right"><a class="btn btn-primary" href="<?php echo base_url('coach/athlete/diet/add/'.$athlete[0]['id']);?>">Add</a></div>
-              </div>
-            </div>
             <!-- Light table -->
-            <div class="table-responsive">
-              <table id="dietDataTable" class="table align-items-center table-flush">
+          
+              <table id="showsDataTable" class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
                     <th>#</th>
-                    <th scope="col" class="sort" data-sort="name">Start Date</th>
-                    <th scope="col" class="sort" data-sort="budget">End Date</th>
+                    <th scope="col" class="sort" data-sort="name">Title</th>
+                    <th scope="col" class="sort" data-sort="budget">Date</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -43,6 +61,8 @@
                   
                 </tbody>
               </table>
-            </div>
 
-            </div>
+          </div>
+        </div>
+    </div>
+</div>

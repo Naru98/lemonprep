@@ -7000,9 +7000,9 @@ a.badge:focus
 
 .alert-success
 {
-    color: #fff;
-    border-color: #4fd69c;
-    background-color: #4fd69c;
+    color: #000;
+    border-color: #defc8c;
+    background-color: #defc8c;
 }
 .alert-success a
 {
@@ -21126,10 +21126,6 @@ textarea[resize='horizontal']
 {
     color: white;
 }
-.navbar-horizontal.navbar-transparent .navbar-toggler-icon
-{
-    background-image: url('data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'30\' height=\'30\' viewBox=\'0 0 30 30\'><path stroke=\'rgba(255, 255, 255, 0.95)\' stroke-linecap=\'round\' stroke-miterlimit=\'10\' stroke-width=\'2\' d=\'M4 7h22M4 15h22M4 23h22\'/></svg>');
-}
 
 @media (min-width: 768px)
 {
@@ -24132,7 +24128,7 @@ button.bg-lighter:focus
 
 .bg-gradient-primary
 {
-    background: linear-gradient(87deg, #defc8c 0, #825ee4 100%) !important;
+    background: linear-gradient(87deg, #defc8c 0, #cddc39 100%) !important;
 }
 
 .bg-gradient-secondary
@@ -24488,7 +24484,7 @@ button.section-darker:focus
 
 .bg-gradient-primary
 {
-    background: linear-gradient(87deg, #defc8c 0, #825ee4 100%) !important;
+    background: linear-gradient(87deg, #defc8c 0, #cddc39 100%) !important;
 }
 
 .bg-gradient-secondary

@@ -8,7 +8,7 @@
                     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                         <li class="breadcrumb-item"><a href="<?php echo base_url().$this->session->userdata('type')?>"><i class="fas fa-home"></i></a></li>
-                        <li class="breadcrumb-item"><a href="<?php echo base_url()?>company/athlete">Athlete</a></li>
+                        <li class="breadcrumb-item"><a href="<?php echo base_url()?>coach/athlete">Athlete</a></li>
                         <li class="breadcrumb-item active" aria-current="page"><a>Edit</a></li>
                         </ol>
                     </nav>
@@ -71,6 +71,20 @@
                         <label class="form-control-label" for="input-email">Email address</label>
                         <input type="hidden" name="id" value="<?php echo $athlete[0]['id']?>">
                         <input type="email" id="input-email" class="form-control" placeholder="jesse@example.com" name="email" value="<?php echo $athlete[0]['email']?>" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row input-daterange datepicker align-items-center">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-password">Valid From</label>
+                        <input type="text" id="input-sadte" class="form-control"  name="sdate" <?php if($athlete[0]['sdate']){ echo 'value="'.date('m/d/Y',strtotime($athlete[0]['sdate'])).'"'; }?> required>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-confirm-password">Valid To</label>
+                        <input type="text" id="input-edate" class="form-control" name="edate" <?php if($athlete[0]['edate']){ echo 'value="'.date('m/d/Y',strtotime($athlete[0]['edate'])).'"'; }?> required>
                       </div>
                     </div>
                   </div>

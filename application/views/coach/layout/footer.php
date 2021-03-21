@@ -44,6 +44,9 @@
   <script>
     const SITE_URL = '<?php echo base_url();?>'
     $(document).ready( function () {
+      $('.select-input').select2({
+        placeholder: 'Select an option'
+      });
       var table = $('#athleteDataTable').DataTable({
         // Processing indicator
         "processing": true,
@@ -63,16 +66,8 @@
             "orderable": false,
           },
           { 
-            "targets": [1],
-            "orderable": false,
-          },
-          { 
-            "targets": [2],
-            "orderable": false,
-          },
-          { 
             "className": "text-right",
-            "targets": [3],
+            "targets": [5],
             "orderable": false
           }
         ],
@@ -84,6 +79,12 @@
             .attr('data-id', data.id)
             .addClass('clickable');
           $( row ).find('td:eq(2)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(3)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(4)')
             .attr('data-id', data.id)
             .addClass('clickable');
         },
@@ -117,22 +118,33 @@
             "targets": [0],
             "orderable": false
           },
-          { 
-            "targets": [3],
-            "orderable": false
-          },
           {
             "className": "text-right",
-            "targets": [4],
+            "targets": [3],
             "orderable": false
           }
         ],
+        "createdRow": function( row, data, dataIndex ) {
+          $( row ).find('td:eq(0)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(1)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(2)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+        },
         'language': {
           'paginate': {
             'next': '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
             'previous': '<i class="fa fa-arrow-left" aria-hidden="true"></i>'  
           }
         }
+      });
+
+      $('#workoutDataTable').on('click', 'td.clickable', function () {
+        window.location.href=SITE_URL+'coach/workout/edit/'+$(this).attr('data-id');
       });
 
       $('#dietDataTable').DataTable({
@@ -153,16 +165,23 @@
             "targets": [0],
             "orderable": false
           },
-          { 
-            "targets": [3],
-            "orderable": false
-          },
           {
             "className": "text-right",
-            "targets": [4],
+            "targets": [3],
             "orderable": false
           }
         ],
+        "createdRow": function( row, data, dataIndex ) {
+          $( row ).find('td:eq(0)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(1)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(2)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+        },
         'language': {
           'paginate': {
             'next': '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
@@ -171,6 +190,10 @@
         }
       });
 
+      $('#dietDataTable').on('click', 'td.clickable', function () {
+        window.location.href=SITE_URL+'coach/diet/edit/'+$(this).attr('data-id');
+      });
+      
       $('.datepicker').datepicker({
           format: {
               /*
@@ -202,7 +225,7 @@
     function deleteData(user, id)
     {
       $.ajax({
-          url: SITE_URL+'api/coach/delete',
+          url: SITE_URL+'api/company/delete',
           type: 'POST',
           data: { id:id, table: user },
           success: function(data){
@@ -368,7 +391,7 @@
               $('#success').show();
               $("#success").scroll();
               setTimeout(function(){
-                window.location.reload();
+                //window.location.reload();
               },2000);
             }else{
               $('#error').text(res.msg? res.msg : 'Error occurred! Please try again later.');
@@ -449,6 +472,46 @@
               $("#success").scroll();
               setTimeout(function(){
                 window.location.href= res.data.url;
+              },3000);
+            }else{
+              $('#error').text(res.msg? res.msg : 'Error occurred! Please try again later.');
+              $('#error').show();
+              $("#error").scroll();
+            }
+          },
+          error:function (e){
+            $('#overlay').hide();
+            $('#error').text('Error occurred! Please try again later.');
+            $('#error').show();
+            $("#error").scroll();
+          }
+        })
+      }
+    });
+
+    $("#checkinSetting").validate({
+      submitHandler: function (form){
+        $('#overlay').show();
+        $('#error').text('');
+        $('#error').hide();
+        $('#success').text('');
+        $('#success').hide();
+        $.ajax({
+          url: SITE_URL+'api/coach/checkinSetting',
+          type: 'POST',
+          data: new FormData(form),
+          processData: false,
+          contentType: false,
+          success: function(data){
+            $('#overlay').hide();
+            const res = JSON.parse(data)
+            if(res?.status==1)
+            {
+              $('#success').text(res.msg);
+              $('#success').show();
+              $("#success").scroll();
+              setTimeout(function(){
+                window.location.reload()
               },3000);
             }else{
               $('#error').text(res.msg? res.msg : 'Error occurred! Please try again later.');

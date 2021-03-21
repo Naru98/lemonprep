@@ -22,6 +22,16 @@ class Coach extends MY_Controller {
         foreach($athleteData as $athlete){
             $i++;
             $img = $athlete->image? (base_url($athlete->image)) : (base_url("assets/img/athlete.png"));
+            $sdate='';
+            $edate='';
+            if($athlete->sdate)
+            {
+                $sdate=date('m-d-Y',strtotime($athlete->sdate));
+            }
+            if($athlete->edate)
+            {
+                $edate=date('m-d-Y',strtotime($athlete->edate));
+            }
             $data[] = array(
                 'id'=>$athlete->id,
                 $i,
@@ -34,6 +44,8 @@ class Coach extends MY_Controller {
                     </div>
                 </div>',
                 $athlete->email,
+                $sdate,
+                $edate,
                 '<div class="dropdown">
                     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-ellipsis-v"></i>
@@ -68,17 +80,10 @@ class Coach extends MY_Controller {
         foreach($coachData as $coach){
             $i++;
             $data[] = array(
+                'id'=>$coach->id,
                 $i,
                 $coach->sdate,
                 $coach->edate,
-                '<div class="d-flex align-items-center">
-                   <span class="completion mr-2">100%</span>
-                    <div>
-                    <div class="progress">
-                        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-                    </div>
-                    </div>
-                </div>',
                 '<div class="dropdown">
                     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-ellipsis-v"></i>
@@ -113,17 +118,10 @@ class Coach extends MY_Controller {
         foreach($coachData as $coach){
             $i++;
             $data[] = array(
+                'id'=>$coach->id,
                 $i,
                 $coach->sdate,
                 $coach->edate,
-                '<div class="d-flex align-items-center">
-                   <span class="completion mr-2">100%</span>
-                    <div>
-                    <div class="progress">
-                        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-                    </div>
-                    </div>
-                </div>',
                 '<div class="dropdown">
                     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-ellipsis-v"></i>
@@ -198,7 +196,45 @@ class Coach extends MY_Controller {
         }
     }
 
+    public function checkinSetting()
+    {
+        if(!empty($this->input->post('id')))
+        {
+            $data=array();
+            for($i=1;$i<=21;$i++)
+            {
+                $t='Text';
+                $m=0;
+                $r=0;
+                if($i==1 || $i==2 || $i==3 ) 
+                    $t='Date';
+                if($i==4 || $i==5 || $i==6 ) 
+                    $t='Image';
+                if($i==7)
+                    $t='File';
+                if(!empty($_POST['m'.$i]))
+                    $m=1;
+                if(!empty($_POST['r'.$i]))
+                    $r=1;
+                $data[]=array(
+                        'f'=>$i,
+                        't'=>$t,
+                        'o'=>$_POST['o'.$i],
+                        'r'=>$r,
+                        'm'=>$m,
+                        'l'=>$_POST['v'.$i],
+                        );
+            }
 
-    
+            if($this->UserModel->updateByID(array( 'data' => json_encode($data) ),$_POST['id'],'coach'))
+            {
+                $this->msg(1,[],'Settings updated successfully.');
+            }else{
+                $this->msg(0,[],'Error while saving!');
+            }
+        }else{
+            $this->msg(0,[],'Fields are missing!');
+        }
+    }
 
 }

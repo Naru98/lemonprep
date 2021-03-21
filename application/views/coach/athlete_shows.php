@@ -24,18 +24,18 @@
             </div>
             <div class="card-header border-0">
               <div class="row">
-                <div class="col-6">Diet</div>
-                <div class="col-6 text-right"><a class="btn btn-primary" href="<?php echo base_url('coach/athlete/diet/add/'.$athlete[0]['id']);?>">Add</a></div>
+                <div class="col-6">Shows</div>
+                <div class="col-6 text-right"><a class="btn btn-primary" href="<?php echo base_url('coach/athlete/workout/add/'.$athlete[0]['id']);?>">Add</a></div>
               </div>
             </div>
             <!-- Light table -->
             <div class="table-responsive">
-              <table id="dietDataTable" class="table align-items-center table-flush">
+              <table id="workoutDataTable" class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
                     <th>#</th>
-                    <th scope="col" class="sort" data-sort="name">Start Date</th>
-                    <th scope="col" class="sort" data-sort="budget">End Date</th>
+                    <th scope="col" class="sort" data-sort="name">Title</th>
+                    <th scope="col" class="sort" data-sort="budget">Date</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -44,5 +44,4 @@
                 </tbody>
               </table>
             </div>
-
-            </div>
+</div>

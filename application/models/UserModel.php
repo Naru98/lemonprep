@@ -118,6 +118,21 @@ class UserModel extends CI_Model {
             return false;
         }
     }
+
+    public function getCoachAthlete($id)
+    {
+        $this->db->select('athlete.*')
+         ->from('coach_athlete')
+         ->where('coach_athlete.coach_id',$id)
+         ->join('athlete', 'coach_athlete.athlete_id = athlete.id');
+        $result = $this->db->get();
+        if ($result->num_rows() > 0) {
+            return $result->result_array();
+        }else{
+            return false;
+        }
+    }
+
     public function delete($id,$table)
     {
         $this->db->where('id',$id);

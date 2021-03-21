@@ -15,14 +15,14 @@ class AthleteModel extends CI_Model {
             $this->coach_id= 0;
         }
         // Set orderable column fields
-        $this->column_order = array(null, 'name','email');
-        $this->ccolumn_order = array(null, 'athlete.name','athlete.email');
+        $this->column_order = array(null, 'name','email','sdate','edate');
+        $this->ccolumn_order = array(null, 'athlete.name','athlete.email','athlete.sdate','athlete.edate');
         // Set searchable column fields
-        $this->column_search = array('name','email');
-        $this->ccolumn_search = array('athlete.name','athlete.email');
+        $this->column_search = array('name','email','sdate','edate');
+        $this->ccolumn_search = array('athlete.name','athlete.email','athlete.sdate','athlete.edate');
         // Set default order
-        $this->order = array('name' => 'asc');
-        $this->corder = array('athlete.name' => 'asc');
+        $this->order = array('created' => 'desc');
+        $this->corder = array('athlete.created' => 'desc');
 	}
 
     public function getAthlete($postData){

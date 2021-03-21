@@ -129,6 +129,15 @@
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url()?>coach/athlete">My Athlete</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url()?>coach/checkin">Check In</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url()?>coach/form">Forms</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url()?>coach/shows">Shows</a>
+            </li>
           </ul>
         </div>
       </div>
