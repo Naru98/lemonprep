@@ -48,7 +48,7 @@
             </div>
             <!-- Light table -->
           
-              <table id="showsDataTable" class="table align-items-center table-flush">
+              <table id="athleteshowsDataTable" class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
                     <th>#</th>

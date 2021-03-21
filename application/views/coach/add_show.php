@@ -33,7 +33,8 @@
                 </div>
                 <div id="error" class="alert alert-warning" role="alert" style="display:none;">
                 </div>
-              <form id="addCoach">
+              <form id="addShow">
+              <?php if(!empty($this->session->userdata('id'))){ ?><input type="hidden" name="coach_id" value="<?php echo $this->session->userdata('id'); ?>"> <?php } ?>
                 <h6 class="heading-small text-muted mb-4">Show information</h6>
                 <div class="pl-lg-4">
                   <div class="row">
@@ -65,8 +66,8 @@
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-image">Date</label>
-                        <input type="text" id="input-date" class="form-control" name="date">
+                        <label class="form-control-label" for="date">Date</label>
+                        <input class="form-control" type="text" id="date" name="date">
                       </div>
                     </div>
                   </div>

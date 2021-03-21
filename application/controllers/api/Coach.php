@@ -9,6 +9,7 @@ class Coach extends MY_Controller {
         $this->load->model('AthleteModel');
         $this->load->model('WorkoutModel');
         $this->load->model('DietModel');
+        $this->load->model('ShowsModel');
 	}
 
     public function getAthlete()
@@ -145,6 +146,43 @@ class Coach extends MY_Controller {
         echo json_encode($output);
     }
 
+    public function getAthleteShows()
+    {
+        $data = $row = array();
+        
+        // Fetch member's records
+        $athleteData = $this->ShowsModel->getShows($_POST);
+        $i = $_POST['start'];
+        foreach($athleteData as $athlete){
+            $i++;
+            $data[] = array(
+                'id'=>$athlete->id,
+                $i,
+                $athlete->title,
+                $athlete->date,
+                '<div class="dropdown">
+                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                    <a class="dropdown-item" href="'.base_url("coach/shows/edit/".$athlete->id).'">Edit</a>
+                    <a class="dropdown-item" onclick="deleteModal(\'shows\','.$athlete->id.')">Delete</a>
+                    </div>
+                </div>'
+            );
+        }
+        
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->AthleteModel->countAll(),
+            "recordsFiltered" => $this->AthleteModel->countFiltered($_POST),
+            "data" => $data,
+        );
+        
+        // Output to JSON format
+        echo json_encode($output);
+    }
+
     public function addWorkout()
     {
         if(!empty($this->input->post('sdate')) && !empty($this->input->post('edate')) && !empty($this->input->post('company_id')) && !empty($this->input->post('coach_id')) && !empty($this->input->post('athlete_id')))
@@ -190,6 +228,33 @@ class Coach extends MY_Controller {
                 $this->msg(1,array( 'url' => base_url('coach/athlete/view/'.$workout['athlete_id'].'/2') ),'Diet added successfully.');
             }else{
                 $this->msg(0,[],'Error while adding Diet!');
+            }
+        }else{
+            $this->msg(0,[],'Fields are missing!');
+        }
+    }
+
+    public function addShow()
+    {
+        if(!empty($this->input->post('date')) && !empty($this->input->post('title')) )
+        {
+            $_POST['date']=date('y-m-d',strtotime($_POST['date']));
+            $athlete=$_POST['athlete'];
+            unset($_POST['athlete']);
+            $show_id=$this->UserModel->insert($_POST,'shows');
+            if($show_id)
+            {
+                if(!empty($athlete))
+                {
+                    foreach($athlete as $a)
+                    {
+                        $this->UserModel->insert(array('athlete_id'=>$a,'shows_id'=>$show_id),'shows_athlete');
+                    }
+                }
+                $this->msg(1,[],'Show added successfully.');
+            }else
+            {
+                $this->msg(0,[],'Error while adding show!');
             }
         }else{
             $this->msg(0,[],'Fields are missing!');

@@ -106,6 +106,8 @@ $route['api/coach/addWorkout'] = 'api/coach/addWorkout';
 $route['api/coach/addDiet'] = 'api/coach/addDiet';
 $route['api/coach/getWorkout'] = 'api/coach/getWorkout';
 $route['api/coach/getDiet'] = 'api/coach/getDiet';
+$route['api/coach/getAthleteShows'] = 'api/coach/getAthleteShows';
+$route['api/coach/addShow'] = 'api/coach/addShow';
 $route['api/coach/checkinSetting'] = 'api/coach/checkinSetting';
 
 
