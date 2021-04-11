@@ -63,21 +63,34 @@
             "orderable": false
           },
           { 
-            "targets": [4],
-            "orderable": false
-          },
-          { 
             "className": "text-right",
-            "targets": [5],
+            "targets": [4],
             "orderable": false
           }
         ],
+        "createdRow": function( row, data, dataIndex ) {
+          $( row ).find('td:eq(0)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(1)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(2)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(3)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+        },
         'language': {
           'paginate': {
             'next': '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
             'previous': '<i class="fa fa-arrow-left" aria-hidden="true"></i>'  
           }
         }
+      });
+      $('#athleteWorkoutsDatatable').on('click', 'td.clickable', function () {
+        window.location.href=SITE_URL+'athlete/workout/'+$(this).attr('data-id');
       });
 
       $('#workoutDataTable').DataTable({
@@ -210,7 +223,7 @@
           success: function(data){
             $('#overlay').hide();
             const res = JSON.parse(data)
-            if(res?.status==1)
+            if(res.status==1)
             {
               $('#success').text(res.msg);
               $('#success').show();
@@ -250,7 +263,7 @@
           success: function(data){
             $('#overlay').hide();
             const res = JSON.parse(data)
-            if(res?.status==1)
+            if(res.status==1)
             {
               $('#success').text(res.msg);
               $('#success').show();

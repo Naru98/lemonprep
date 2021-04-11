@@ -31,5 +31,12 @@ class Main extends MY_Controller {
 		$data['child'] = 'athlete/my_workouts';
 		$this->load->view('athlete/layout/index',$data);
 	}
+
+	public function workout($id)
+	{
+		$data['nav']=2;
+		$data['child'] = 'athlete/my_workouts';
+		$this->load->view('athlete/layout/index',$data);
+	}
 	
 }

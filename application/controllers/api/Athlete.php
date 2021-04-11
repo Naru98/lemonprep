@@ -20,18 +20,18 @@ class Athlete extends MY_Controller {
         $i = $_POST['start'];
         foreach($athleteData as $athlete){
             $i++;
-            $img = $athlete->image? (base_url($athlete->image)) : (base_url("assets/img/athlete.png"));
+            $img = $athlete->image? (base_url($athlete->image)) : (base_url("assets/img/coach.png"));
             $data[] = array(
+                'id'=>$athlete->id,
                 $i,
                 $athlete->sdate,
                 $athlete->edate,
-                $athlete->name,
-                '<div class="d-flex align-items-center">
-                   <span class="completion mr-2">100%</span>
-                    <div>
-                    <div class="progress">
-                        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-                    </div>
+                '<div class="media align-items-center">
+                    <a href="#" class="avatar rounded-circle mr-3">
+                    <img alt="Image placeholder" src="'.$img.'">
+                    </a>
+                    <div class="media-body">
+                    <span class="name mb-0 text-sm">'.$athlete->name.'</span>
                     </div>
                 </div>',
                 '<div class="dropdown">

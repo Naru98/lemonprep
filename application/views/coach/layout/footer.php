@@ -317,7 +317,7 @@
           success: function(data){
             $('#overlay').hide();
             const res = JSON.parse(data)
-            if(res?.status==1)
+            if(res.status==1)
             {
               $('#success').text(res.msg);
               $('#success').show();
@@ -375,7 +375,7 @@
           success: function(data){
             $('#overlay').hide();
             const res = JSON.parse(data)
-            if(res?.status==1)
+            if(res.status==1)
             {
               $('#success').text(res.msg);
               $('#success').show();
@@ -432,7 +432,7 @@
           success: function(data){
             $('#overlay').hide();
             const res = JSON.parse(data)
-            if(res?.status==1)
+            if(res.status==1)
             {
               $('#success').text(res.msg);
               $('#success').show();
@@ -472,7 +472,7 @@
           success: function(data){
             $('#overlay').hide();
             const res = JSON.parse(data)
-            if(res?.status==1)
+            if(res.status==1)
             {
               $('#success').text(res.msg);
               $('#success').show();
@@ -512,7 +512,7 @@
           success: function(data){
             $('#overlay').hide();
             const res = JSON.parse(data)
-            if(res?.status==1)
+            if(res.status==1)
             {
               $('#success').text(res.msg);
               $('#success').show();
@@ -552,7 +552,7 @@
           success: function(data){
             $('#overlay').hide();
             const res = JSON.parse(data)
-            if(res?.status==1)
+            if(res.status==1)
             {
               $('#success').text(res.msg);
               $('#success').show();
@@ -592,7 +592,7 @@
           success: function(data){
             $('#overlay').hide();
             const res = JSON.parse(data)
-            if(res?.status==1)
+            if(res.status==1)
             {
               $('#success').text(res.msg);
               $('#success').show();
