@@ -22,7 +22,7 @@ class WorkoutModel extends CI_Model {
         $this->order = array('sdate' => 'asc');
 
         // Set orderable column fields
-        $this->acolumn_order = array(null, 'workouts.sdate','workouts.edate','coach.name','workouts.per');
+        $this->acolumn_order = array(null, 'workouts.sdate','workouts.edate','coach.name');
         // Set searchable column fields
         $this->acolumn_search = array('workouts.sdate','workouts.edate','coach.name',);
         // Set default order
@@ -43,12 +43,12 @@ class WorkoutModel extends CI_Model {
         $this->_get_datatables_queryA($postData);
         if($postData['length'] != -1){
             $this->db->limit($postData['length'], $postData['start']);
-
-        $this->db->where('workouts.athlete_id',$this->athlete_id);
-        $this->db->join('coach', 'coach.id = workouts.coach_id');
-        $query = $this->db->get();
-        return $query->result();
-    }
+            $this->db->select('coach.*,workouts.*');
+            $this->db->where('workouts.athlete_id',$this->athlete_id);
+            $this->db->join('coach', 'coach.id = workouts.coach_id');
+            $query = $this->db->get();
+            return $query->result();
+        }
     }
     
     /*

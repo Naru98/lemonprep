@@ -93,7 +93,7 @@
         window.location.href=SITE_URL+'athlete/workout/'+$(this).attr('data-id');
       });
 
-      $('#workoutDataTable').DataTable({
+      $('#athleteDietsDatatable').DataTable({
         // Processing indicator
         "processing": true,
         // DataTables server-side processing mode
@@ -102,7 +102,7 @@
         "order": [],
         // Load data from an Ajax source
         "ajax": {
-            "url": "<?php echo base_url('api/coach/getWorkout'); ?>",
+            "url": "<?php echo base_url('api/athlete/diets'); ?>",
             "type": "POST"
         },
         //Set column definition initialisation properties
@@ -111,12 +111,26 @@
             "targets": [0],
             "orderable": false
           },
-          {
+          { 
             "className": "text-right",
-            "targets": [3],
+            "targets": [4],
             "orderable": false
           }
         ],
+        "createdRow": function( row, data, dataIndex ) {
+          $( row ).find('td:eq(0)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(1)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(2)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(3)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+        },
         'language': {
           'paginate': {
             'next': '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
@@ -124,71 +138,9 @@
           }
         }
       });
-
-      $('.datepicker').datepicker({
-          format: {
-              /*
-              * Say our UI should display a week ahead,
-              * but textbox should store the actual date.
-              * This is useful if we need UI to select local dates,
-              * but store in UTC
-              */
-              toDisplay: function (date, format, language) {
-                  var d = new Date(date);
-                  d.setDate(d.getDate() - 7);
-                  return d.toISOString();
-              },
-              toValue: function (date, format, language) {
-                  var d = new Date(date);
-                  d.setDate(d.getDate() + 7);
-                  return new Date(d);
-              }
-          }
+      $('#athleteDietsDatatable').on('click', 'td.clickable', function () {
+        window.location.href=SITE_URL+'athlete/diet/'+$(this).attr('data-id');
       });
-    });
-
-    function deleteModal(user,id)
-    {
-      $('#modal_delete_button').attr('onclick','deleteData("'+user+'",'+id+')');
-      $('#modal-delete').modal('show');
-    }
-
-    function deleteData(user, id)
-    {
-      $.ajax({
-          url: SITE_URL+'api/coach/delete',
-          type: 'POST',
-          data: { id:id, table: user },
-          success: function(data){
-            window.location.href= SITE_URL+'coach/'+user;
-          },
-          error:function (e){
-            window.location.href= SITE_URL+'coach/'+user;
-          }
-      })
-    }
-
-    const workoutInput= ()=>{
-      const sdate=$('#sdate').val();
-      const edate=$('#edate').val();
-      const diffTime = Math.abs(new Date(sdate) - new Date(edate));
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-      $('#workoutInput').html('');
-      let w=1;
-      for (var d = new Date(sdate); d <= new Date(edate); d.setDate(d.getDate() + 1)) {
-        $('#workoutInput').append('<div class="row">'+
-                        '<div class="col-lg-4">'+
-                          '<div class="form-group">'+
-                            '<input class="form-control" type="text" value="'+new Date(d).toLocaleDateString("en-US")+'" disabled>'+
-                          '</div>'+
-                        '</div>'+
-                        '<div class="col-lg-8">'+
-                          '<textarea class="form-control" name="wdata'+w+'"></textarea>'+
-                        '</div>'+
-                      '</div><br><br><br>');
-        w++;
-      }
-    }
 
     $("#athleteProfile").validate({
       rules: {
@@ -246,47 +198,7 @@
         })
       }
     });
-
-    $("#addWorkout").validate({
-      submitHandler: function (form){
-        $('#overlay').show();
-        $('#error').text('');
-        $('#error').hide();
-        $('#success').text('');
-        $('#success').hide();
-        $.ajax({
-          url: SITE_URL+'api/coach/addWorkout',
-          type: 'POST',
-          data: new FormData(form),
-          processData: false,
-          contentType: false,
-          success: function(data){
-            $('#overlay').hide();
-            const res = JSON.parse(data)
-            if(res.status==1)
-            {
-              $('#success').text(res.msg);
-              $('#success').show();
-              $("#success").scroll();
-              setTimeout(function(){
-                window.location.href= res.data.url;
-              },3000);
-            }else{
-              $('#error').text(res.msg? res.msg : 'Error occurred! Please try again later.');
-              $('#error').show();
-              $("#error").scroll();
-            }
-          },
-          error:function (e){
-            $('#overlay').hide();
-            $('#error').text('Error occurred! Please try again later.');
-            $('#error').show();
-            $("#error").scroll();
-          }
-        })
-      }
-    });
-
+  });
     
   </script>
 </body>

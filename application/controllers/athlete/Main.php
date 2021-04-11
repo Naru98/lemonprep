@@ -35,7 +35,23 @@ class Main extends MY_Controller {
 	public function workout($id)
 	{
 		$data['nav']=2;
-		$data['child'] = 'athlete/my_workouts';
+		$data['workout']=$this->UserModel->getByField('id',$id,'workouts');
+		$data['child'] = 'athlete/workout';
+		$this->load->view('athlete/layout/index',$data);
+	}
+
+	public function diets()
+	{
+		$data['nav']=2;
+		$data['child'] = 'athlete/my_diets';
+		$this->load->view('athlete/layout/index',$data);
+	}
+
+	public function diet($id)
+	{
+		$data['nav']=2;
+		$data['diet']=$this->UserModel->getByField('id',$id,'diet');
+		$data['child'] = 'athlete/diet';
 		$this->load->view('athlete/layout/index',$data);
 	}
 	

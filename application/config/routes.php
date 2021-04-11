@@ -115,7 +115,11 @@ $route['api/coach/checkinSetting'] = 'api/coach/checkinSetting';
 $route['athlete'] = 'athlete/main/index';
 $route['athlete/profile'] = 'athlete/main/profile';
 $route['athlete/workouts'] = 'athlete/main/workouts';
+$route['athlete/workout/(:num)'] = 'athlete/main/workout/$1';
+$route['athlete/diets'] = 'athlete/main/diets';
+$route['athlete/diet/(:num)'] = 'athlete/main/diet/$1';
 
 
 //athlete api
 $route['api/athlete/workouts'] = 'api/athlete/getworkouts';
+$route['api/athlete/diets'] = 'api/athlete/getDiets';
