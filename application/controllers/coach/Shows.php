@@ -5,6 +5,7 @@ class Shows extends MY_Controller {
 
 	function __construct(){
 		parent::__construct();
+		$this->session->set_userdata('athlete_id','');
 		$this->load->model('UserModel');
 	}
 
@@ -32,6 +33,14 @@ class Shows extends MY_Controller {
 		$data['selected_athlete'] = $this->UserModel->getByField('shows_id',$id,'shows_athlete');
         $data['athlete'] = $this->UserModel->getCoachAthlete($this->session->userdata('id'));
 		$data['child'] = 'coach/edit_show';
+		$this->load->view('coach/layout/index',$data);
+	}
+
+	public function view($id)
+	{
+		$data['nav']=4;
+		$data['show'] = $this->UserModel->getByField('id',$id,'shows');
+		$data['child'] = 'coach/view_show';
 		$this->load->view('coach/layout/index',$data);
 	}
 	

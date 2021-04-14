@@ -1,30 +1,30 @@
 <?php
-class FormsModel extends CI_Model {
+class CheckinModel extends CI_Model {
 	function __construct() {
 		parent::__construct();
         // Set table name
-        $this->table = 'forms';
-        if(!empty($this->session->userdata('company_id')))
+        $this->table = 'check_in';
+        if(!empty($this->session->userdata('athlete_id')))
         {
-            $this->comp_id= $this->session->userdata('company_id'); 
+            $this->athlete_id= $this->session->userdata('athlete_id'); 
         }else{
-            $this->comp_id= 0;
+            $this->athlete_id= 0;
         }
         
         // Set orderable column fields
-        $this->column_order = array(null, 'name');
+        $this->column_order = array(null, 'created');
         // Set searchable column fields
-        $this->column_search = array('name');
+        $this->column_search = array('created');
         // Set default order
         $this->order = array('created' => 'asc');
 	}
 
-    public function getCForms($postData){
+    public function getACheckin($postData){
         $this->_get_datatables_query($postData);
         if($postData['length'] != -1){
             $this->db->limit($postData['length'], $postData['start']);
         }
-        $this->db->where('comp_id',$this->comp_id);
+        $this->db->where('athlete_id',$this->athlete_id);
         $query = $this->db->get();
         return $query->result();
     }
@@ -33,7 +33,7 @@ class FormsModel extends CI_Model {
      * Count all records
      */
     public function countAll(){
-        $this->db->where('comp_id',$this->comp_id);
+        $this->db->where('athlete_id',$this->athlete_id);
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }
@@ -44,7 +44,7 @@ class FormsModel extends CI_Model {
      */
     public function countFiltered($postData){
         $this->_get_datatables_query($postData);
-        $this->db->where('comp_id',$this->comp_id);
+        $this->db->where('athlete_id',$this->athlete_id);
         $query = $this->db->get();
         return $query->num_rows();
     }
@@ -56,7 +56,7 @@ class FormsModel extends CI_Model {
     private function _get_datatables_query($postData){
          
         $this->db->from($this->table);
-        $this->db->where('comp_id',$this->comp_id);
+        $this->db->where('athlete_id',$this->athlete_id);
  
         $i = 0;
         // loop searchable columns 

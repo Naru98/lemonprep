@@ -74,10 +74,14 @@
             $this->load->view('coach/diet.php');
           }else if($snav==3)
           {
-            $this->load->view('coach/checkin.php');
-          }else if($snav==5)
+            $this->load->view('coach/checkinA.php');
+          }else if($snav==4)
           {
-            $this->load->view('coach/athlete_shows.php');
+            $this->load->view('coach/formsA.php');
+          }
+          else if($snav==5)
+          {
+            $this->load->view('coach/showsA.php');
           }
         ?>
         </div>

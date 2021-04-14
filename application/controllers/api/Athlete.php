@@ -243,7 +243,7 @@ class Athlete extends MY_Controller {
                                 exit();
                             } else {
                                 $fdata[$d->l] = array(
-                                    't'=>'File',
+                                    't'=>$d->t,
                                     'v'=>'uploads/check_in/'.$this->upload->data('file_name')
                                 );
                             }

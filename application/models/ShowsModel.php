@@ -10,6 +10,10 @@ class ShowsModel extends CI_Model {
         }else{
             $this->coach_id= 0;
         }
+        if(!empty($this->session->userdata('athlete_id')))
+        {
+            $this->coach_id= $this->session->userdata('athlete_id'); 
+        }
         // Set orderable column fields
         $this->column_order = array(null, 'title','date');
         // Set searchable column fields

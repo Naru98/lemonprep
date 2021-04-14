@@ -11,6 +11,7 @@ class Coach extends MY_Controller {
         $this->load->model('DietModel');
         $this->load->model('ShowsModel');
         $this->load->model('FormsModel');
+        $this->load->model('CheckinModel');
 	}
 
     public function getAthlete()
@@ -213,6 +214,113 @@ class Coach extends MY_Controller {
             "draw" => $_POST['draw'],
             "recordsTotal" => $this->AthleteModel->countAll(),
             "recordsFiltered" => $this->AthleteModel->countFiltered($_POST),
+            "data" => $data,
+        );
+        
+        // Output to JSON format
+        echo json_encode($output);
+    }
+
+    public function showsA()
+    {
+        $data = $row = array();
+        
+        // Fetch member's records
+        $athleteData = $this->ShowsModel->getAShowsA($_POST);
+        
+        $i = $_POST['start'];
+        foreach($athleteData as $athlete){
+            $i++;
+            $data[] = array(
+                'id'=>$athlete->id,
+                $i,
+                $athlete->title,
+                $athlete->date,
+                '<div class="dropdown">
+                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                    <a class="dropdown-item" href="'.base_url("coach/show/view/".$athlete->id).'">View</a>
+                    </div>
+                </div>'
+            );
+        }
+        
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->WorkoutModel->countAllA(),
+            "recordsFiltered" => $this->WorkoutModel->countFilteredA($_POST),
+            "data" => $data,
+        );
+        
+        // Output to JSON format
+        echo json_encode($output);
+    }
+
+    public function formsA()
+    {
+        $data = $row = array();
+        
+        // Fetch member's records
+        $athleteData = $this->FormsModel->getCForms($_POST);
+        
+        $i = $_POST['start'];
+        foreach($athleteData as $athlete){
+            $i++;
+            $sub='<span class="text-danger h5">Not Applied</span>';
+            if($this->UserModel->checkForm($this->session->userdata('athlete_id'),$athlete->id))
+            {
+                $sub='<span class="text-dark h5">Applied</span>';
+            }
+            $data[] = array(
+                'id'=>$athlete->id,
+                $i,
+                $athlete->name,
+                $sub
+            );
+        }
+        
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->FormsModel->countAll(),
+            "recordsFiltered" => $this->FormsModel->countFiltered($_POST),
+            "data" => $data,
+        );
+        
+        // Output to JSON format
+        echo json_encode($output);
+    }
+
+    public function checkinA()
+    {
+        $data = $row = array();
+        
+        // Fetch member's records
+        $athleteData = $this->CheckinModel->getACheckin($_POST);
+        $i = $_POST['start'];
+        foreach($athleteData as $athlete){
+            $i++;
+            $data[] = array(
+                'id'=>$athlete->id,
+                $i,
+                date('Y-m-d',strtotime($athlete->created)),
+                '<div class="dropdown">
+                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                    <a class="dropdown-item" href="'.base_url("coach/checkin/view/".$athlete->id).'">View</a>
+                    <a class="dropdown-item" onclick="deleteModal(\'check_in\','.$athlete->id.')">Delete</a>
+                    </div>
+                </div>'
+            );
+        }
+        
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->CheckinModel->countAll(),
+            "recordsFiltered" => $this->CheckinModel->countFiltered($_POST),
             "data" => $data,
         );
         

@@ -286,6 +286,127 @@
       $('#formsDataTable').on('click', 'td.clickable', function () {
         window.location.href=SITE_URL+'coach/forms/edit/'+$(this).attr('data-id');
       });
+
+      $('#showsDataTable').DataTable({
+        // Processing indicator
+        "processing": true,
+        // DataTables server-side processing mode
+        "serverSide": true,
+        // Initial no order.
+        "order": [],
+        // Load data from an Ajax source
+        "ajax": {
+            "url": "<?php echo base_url('api/coach/showsA'); ?>",
+            "type": "POST"
+        },
+        //Set column definition initialisation properties
+        "columnDefs": [
+          { 
+            "targets": [0],
+            "orderable": false
+          },
+          { 
+            "className": "text-right",
+            "targets": [3],
+            "orderable": false
+          }
+        ],
+        "createdRow": function( row, data, dataIndex ) {
+          $( row ).find('td:eq(0)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(1)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(2)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+        },
+        'language': {
+          'paginate': {
+            'next': '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
+            'previous': '<i class="fa fa-arrow-left" aria-hidden="true"></i>'  
+          }
+        }
+      });
+      $('#showsDataTable').on('click', 'td.clickable', function () {
+        window.location.href=SITE_URL+'coach/show/view/'+$(this).attr('data-id');
+      });
+
+      $('#checkinADataTable').DataTable({
+        // Processing indicator
+        "processing": true,
+        // DataTables server-side processing mode
+        "serverSide": true,
+        // Initial no order.
+        "order": [],
+        // Load data from an Ajax source
+        "ajax": {
+            "url": "<?php echo base_url('api/coach/checkinA'); ?>",
+            "type": "POST"
+        },
+        //Set column definition initialisation properties
+        "columnDefs": [
+          { 
+            "targets": [0],
+            "orderable": false
+          },
+          { 
+            "className": "text-right",
+            "targets": [2],
+            "orderable": false
+          }
+        ],
+        "createdRow": function( row, data, dataIndex ) {
+          $( row ).find('td:eq(0)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(1)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+        },
+        'language': {
+          'paginate': {
+            'next': '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
+            'previous': '<i class="fa fa-arrow-left" aria-hidden="true"></i>'  
+          }
+        }
+      });
+      $('#checkinADataTable').on('click', 'td.clickable', function () {
+        window.location.href=SITE_URL+'coach/checkin/view/'+$(this).attr('data-id');
+      });
+
+      $('#FormADataTable').DataTable({
+        // Processing indicator
+        "processing": true,
+        // DataTables server-side processing mode
+        "serverSide": true,
+        // Initial no order.
+        "order": [],
+        // Load data from an Ajax source
+        "ajax": {
+            "url": "<?php echo base_url('api/coach/formsA'); ?>",
+            "type": "POST"
+        },
+        //Set column definition initialisation properties
+        "columnDefs": [
+          { 
+            "targets": [0],
+            "orderable": false
+          },
+          { 
+            "className": "text-right",
+            "targets": [2],
+            "orderable": false
+          }
+        ],
+        'language': {
+          'paginate': {
+            'next': '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
+            'previous': '<i class="fa fa-arrow-left" aria-hidden="true"></i>'  
+          }
+        }
+      });
       $( "#date" ).datepicker();
       $('.datepicker').datepicker({
           format: {
