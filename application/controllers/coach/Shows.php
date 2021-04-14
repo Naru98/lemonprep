@@ -28,8 +28,10 @@ class Shows extends MY_Controller {
 	{
 		$data['nav']=4;
         $data['id']=$id;
-		$data['workout'] = $this->UserModel->getByField('id',$id,'workouts');
-		$data['child'] = 'coach/edit_workout';
+		$data['shows'] = $this->UserModel->getByField('id',$id,'shows');
+		$data['selected_athlete'] = $this->UserModel->getByField('shows_id',$id,'shows_athlete');
+        $data['athlete'] = $this->UserModel->getCoachAthlete($this->session->userdata('id'));
+		$data['child'] = 'coach/edit_show';
 		$this->load->view('coach/layout/index',$data);
 	}
 	

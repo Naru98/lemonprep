@@ -35,7 +35,7 @@
                 </div>
                 <div id="error" class="alert alert-warning" role="alert" style="display:none;">
                 </div>
-                <?php if(!empty($this->session->userdata('id'))){ ?><input type="hidden" name="id" value="<?php echo $this->session->userdata('id'); ?>"> <?php } ?>
+                <?php if(!empty($this->session->userdata('company_id'))){ ?><input type="hidden" name="id" value="<?php echo $this->session->userdata('company_id'); ?>"> <?php } ?>
                 <table class="table align-items-center table-flush">
                     <thead class="thead-light">
                     <tr>

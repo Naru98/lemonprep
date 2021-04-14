@@ -12,7 +12,7 @@ class Checkin extends MY_Controller {
     {
         $data['nav']=2;
 		$data['child'] = 'coach/checkin';
-        $data['company']= $this->UserModel->getID($this->session->userdata('id'),'coach');
+        $data['company']= $this->UserModel->getID($this->session->userdata('company_id'),'company');
 		$this->load->view('coach/layout/index',$data);
     }
 

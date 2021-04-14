@@ -10,6 +10,7 @@ class Coach extends MY_Controller {
         $this->load->model('WorkoutModel');
         $this->load->model('DietModel');
         $this->load->model('ShowsModel');
+        $this->load->model('FormsModel');
 	}
 
     public function getAthlete()
@@ -183,6 +184,42 @@ class Coach extends MY_Controller {
         echo json_encode($output);
     }
 
+    public function getForms()
+    {
+        $data = $row = array();
+        
+        // Fetch member's records
+        $athleteData = $this->FormsModel->getCForms($_POST);
+        $i = $_POST['start'];
+        foreach($athleteData as $athlete){
+            $i++;
+            $data[] = array(
+                'id'=>$athlete->id,
+                $i,
+                $athlete->name,
+                '<div class="dropdown">
+                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                    <a class="dropdown-item" href="'.base_url("coach/forms/edit/".$athlete->id).'">Edit</a>
+                    <a class="dropdown-item" onclick="deleteModal(\'forms\','.$athlete->id.')">Delete</a>
+                    </div>
+                </div>'
+            );
+        }
+        
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->AthleteModel->countAll(),
+            "recordsFiltered" => $this->AthleteModel->countFiltered($_POST),
+            "data" => $data,
+        );
+        
+        // Output to JSON format
+        echo json_encode($output);
+    }
+
     public function addWorkout()
     {
         if(!empty($this->input->post('sdate')) && !empty($this->input->post('edate')) && !empty($this->input->post('company_id')) && !empty($this->input->post('coach_id')) && !empty($this->input->post('athlete_id')))
@@ -261,6 +298,97 @@ class Coach extends MY_Controller {
         }
     }
 
+    public function editShow()
+    {
+        if(!empty($this->input->post('date')) && !empty($this->input->post('title')) )
+        {
+            $_POST['date']=date('y-m-d',strtotime($_POST['date']));
+            $athlete=$_POST['athlete'];
+            $id=$_POST['id'];
+            unset($_POST['athlete']);
+            unset($_POST['id']);
+            if($this->UserModel->updateByID($_POST,$id,'shows'))
+            {
+                $this->UserModel->deleteByField('shows_id',$id,'shows_athlete');
+                if(!empty($athlete))
+                {
+                    foreach($athlete as $a)
+                    {
+                        $this->UserModel->insert(array('athlete_id'=>$a,'shows_id'=>$id),'shows_athlete');
+                    }
+                }
+                $this->msg(1,[],'Show updated successfully.');
+            }else
+            {
+                $this->msg(0,[],'Error while adding show!');
+            }
+        }else{
+            $this->msg(0,[],'Fields are missing!');
+        }
+    }
+
+    public function addForm()
+    {
+        if(!empty($this->input->post('name')) && !empty($_FILES['file']['name']) )
+        {
+            $config['upload_path'] = './uploads/forms';
+            $config['allowed_types'] = '*';
+            $config['max_size'] = 0;
+            $new_name = time() . '-' . $_FILES["file"]['name'];
+            $config['file_name'] = $new_name;
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('file')) {
+                $this->msg(0,[],$this->upload->display_errors());
+                exit();
+            } else {
+                $_POST['file'] = 'uploads/forms/'.$this->upload->data('file_name');
+            }
+            $_POST['coach_id']=$this->session->userdata('id');
+            $_POST['comp_id']=$this->session->userdata('company_id');
+            if($this->UserModel->insert($_POST,'forms'))
+            {
+                $this->msg(1,[],'Form added successfully.');
+            }else
+            {
+                $this->msg(0,[],'Error while adding show!');
+            }
+        }else{
+            $this->msg(0,[],'Fields are missing!');
+        }
+    }
+
+    public function editForm()
+    {
+        if(!empty($this->input->post('name')) && !empty($this->input->post('id')) )
+        {
+            $id=$_POST['id'];
+            $config['upload_path'] = './uploads/forms';
+            $config['allowed_types'] = '*';
+            $config['max_size'] = 0;
+            $new_name = time() . '-' . $_FILES["file"]['name'];
+            $config['file_name'] = $new_name;
+            $this->load->library('upload', $config);
+            if(!empty($_FILES['file']['name']))
+            {
+                if (!$this->upload->do_upload('file')) {
+                    $this->msg(0,[],$this->upload->display_errors());
+                    exit();
+                } else {
+                    $_POST['file'] = 'uploads/forms/'.$this->upload->data('file_name');
+                }
+            }
+            if($this->UserModel->updateByID($_POST,$id,'forms'))
+            {
+                $this->msg(1,[],'Form updated successfully.');
+            }else
+            {
+                $this->msg(0,[],'Error while adding show!');
+            }
+        }else{
+            $this->msg(0,[],'Fields are missing!');
+        }
+    }
+
     public function checkinSetting()
     {
         if(!empty($this->input->post('id')))
@@ -291,7 +419,7 @@ class Coach extends MY_Controller {
                         );
             }
 
-            if($this->UserModel->updateByID(array( 'data' => json_encode($data) ),$_POST['id'],'coach'))
+            if($this->UserModel->updateByID(array( 'data' => json_encode($data) ),$_POST['id'],'company'))
             {
                 $this->msg(1,[],'Settings updated successfully.');
             }else{

@@ -44,6 +44,8 @@
   <script>
     const SITE_URL = '<?php echo base_url();?>'
     $(document).ready( function () {
+      $( ".date" ).datepicker();
+
       $('#athleteWorkoutsDatatable').DataTable({
         // Processing indicator
         "processing": true,
@@ -198,8 +200,48 @@
         })
       }
     });
+  
+
+  $("#athleteProfile").validate({
+      submitHandler: function (form){
+        $('#overlay').show();
+        $('#error').text('');
+        $('#error').hide();
+        $('#success').text('');
+        $('#success').hide();
+        $.ajax({
+          url: SITE_URL+'api/athlete/addCheckIn',
+          type: 'POST',
+          data: new FormData(form),
+          processData: false,
+          contentType: false,
+          success: function(data){
+            $('#overlay').hide();
+            const res = JSON.parse(data)
+            if(res.status==1)
+            {
+              $('#success').text(res.msg);
+              $('#success').show();
+              $("#success").scroll();
+              setTimeout(function(){
+                window.location.reload();
+              },3000);
+            }else{
+              $('#error').text(res.msg? res.msg : 'Error occurred! Please try again later.');
+              $('#error').show();
+              $("#error").scroll();
+            }
+          },
+          error:function (e){
+            $('#overlay').hide();
+            $('#error').text('Error occurred! Please try again later.');
+            $('#error').show();
+            $("#error").scroll();
+          }
+        })
+      }
+    });
   });
-    
   </script>
 </body>
 

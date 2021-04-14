@@ -4,12 +4,12 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 text-dark d-inline-block mb-0">Add Show</h6>
+                    <h6 class="h2 text-dark d-inline-block mb-0">Edit Show</h6>
                     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                         <li class="breadcrumb-item"><a href="<?php echo base_url().$this->session->userdata('type')?>"><i class="fas fa-home"></i></a></li>
                         <li class="breadcrumb-item"><a href="<?php echo base_url()?>/coach/shows">Shows</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a>Add</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a>Edit</a></li>
                         </ol>
                     </nav>
                 </div>
@@ -24,7 +24,7 @@
             <div class="card-header">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Add Show </h3>
+                  <h3 class="mb-0">Edit Show </h3>
                 </div>
               </div>
             </div>
@@ -33,15 +33,15 @@
                 </div>
                 <div id="error" class="alert alert-warning" role="alert" style="display:none;">
                 </div>
-              <form id="addShow">
-              <?php if(!empty($this->session->userdata('id'))){ ?><input type="hidden" name="coach_id" value="<?php echo $this->session->userdata('id'); ?>"> <?php } ?>
+              <form id="editShow">
+                <input type="hidden" name="id" value="<?php echo $id; ?>">
                 <h6 class="heading-small text-muted mb-4">Show information</h6>
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-lg-12">
                       <div class="form-group">
                         <label class="form-control-label" for="input-name">title</label>
-                        <input type="text" id="input-title" class="form-control" placeholder="Title" name="title" required>
+                        <input type="text" id="input-title" class="form-control" placeholder="Title" name="title" value="<?php echo $shows[0]['title']?>" required>
                       </div>
                     </div>
                   </div>
@@ -67,15 +67,31 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="date">Date</label>
-                        <input class="form-control" type="text" id="date" name="date">
+                        <input class="form-control" type="text" id="date" name="date" value="<?php echo date('m/d/Y',strtotime($shows[0]['date']))?>">
                       </div>
                     </div>
                   </div>
                 </div>
-                <button class="btn btn-primary" type="submit">Add</button>
+                <button class="btn btn-primary" type="submit">Save</button>
               </form>
             </div>
           </div>
         </div>
     </div>
 </div>
+
+<?php
+if(!empty($selected_athlete))
+{
+    ?>
+    <script>
+        <?php
+            foreach($selected_athlete as $sathlete)
+            {
+                ?> SELECTED_VALUE.push(<?php echo $sathlete['athlete_id'];?>);<?php
+            }
+        ?>
+    </script>
+    <?php
+}
+?>

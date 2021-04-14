@@ -55,4 +55,18 @@ class Main extends MY_Controller {
 		$this->load->view('athlete/layout/index',$data);
 	}
 	
+	public function shows()
+	{
+		$data['nav']=2;
+		$data['child'] = 'athlete/my_shows';
+		$this->load->view('athlete/layout/index',$data);
+	}
+
+	public function check_in()
+	{
+		$data['nav']=2;
+		$data['company']=$this->UserModel->getID($this->session->userdata('company_id'),'company');
+		$data['child'] = 'athlete/check_in';
+		$this->load->view('athlete/layout/index',$data);
+	}
 }
