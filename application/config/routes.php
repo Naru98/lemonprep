@@ -122,8 +122,16 @@ $route['athlete/workout/(:num)'] = 'athlete/main/workout/$1';
 $route['athlete/diets'] = 'athlete/main/diets';
 $route['athlete/diet/(:num)'] = 'athlete/main/diet/$1';
 $route['athlete/shows'] = 'athlete/main/shows';
+$route['athlete/show/(:num)'] = 'athlete/main/show/$1';
+$route['athlete/forms'] = 'athlete/main/forms';
+$route['athlete/form/(:num)'] = 'athlete/main/form/$1';
 $route['athlete/check_in'] = 'athlete/main/check_in';
 
 //athlete api
 $route['api/athlete/workouts'] = 'api/athlete/getworkouts';
 $route['api/athlete/diets'] = 'api/athlete/getDiets';
+$route['api/athlete/shows'] = 'api/athlete/getShows';
+$route['api/athlete/forms'] = 'api/athlete/getForms';
+$route['api/athlete/applyForm'] = 'api/athlete/applyForm';
+$route['api/athlete/addCheckIn'] = 'api/athlete/addCheckIn';
+

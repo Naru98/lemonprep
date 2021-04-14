@@ -62,6 +62,29 @@ class Main extends MY_Controller {
 		$this->load->view('athlete/layout/index',$data);
 	}
 
+	public function show($id)
+	{
+		$data['nav']=2;
+		$data['show']=$this->UserModel->getByField('id',$id,'shows');
+		$data['child'] = 'athlete/show';
+		$this->load->view('athlete/layout/index',$data);
+	}
+
+	public function forms()
+	{
+		$data['nav']=2;
+		$data['child'] = 'athlete/my_forms';
+		$this->load->view('athlete/layout/index',$data);
+	}
+
+	public function form($id)
+	{
+		$data['nav']=2;
+		$data['form']=$this->UserModel->getByField('id',$id,'forms');
+		$data['child'] = 'athlete/form';
+		$this->load->view('athlete/layout/index',$data);
+	}
+
 	public function check_in()
 	{
 		$data['nav']=2;

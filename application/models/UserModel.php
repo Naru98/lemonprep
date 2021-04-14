@@ -27,6 +27,20 @@ class UserModel extends CI_Model {
             return false;
         }
     }
+
+    function checkForm($id,$fid)
+    {
+        $this->db->select("*");
+		$this->db->from('forms_data');
+		$this->db->where('forms_id',$fid);
+        $this->db->where('athlete_id',$id);
+		$result = $this->db->get();
+        if ($result->num_rows() > 0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
     
     function checkEmailByID($email,$id,$table)
     {
