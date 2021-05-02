@@ -2165,7 +2165,7 @@ pre code
     width: 100%;
     margin-bottom: 1rem;
 
-    color: #525f7f;
+    color: #000;
     background-color: transparent;
 }
 .table th,
@@ -2554,7 +2554,7 @@ pre code
 
 .table .thead-light th
 {
-    color: #8898aa;
+    color: #000;
     border-color: #e9ecef; 
     background-color: #f6f9fc;
 }
@@ -2680,8 +2680,8 @@ pre code
 
     transition: all .15s cubic-bezier(.68, -.55, .265, 1.55); 
 
-    color: #8898aa;
-    border: 1px solid #dee2e6;
+    color: #181818;
+    border: 1px solid #adadad;
     border-radius: .25rem;
     background-color: #fff;
     background-clip: padding-box;
@@ -2706,7 +2706,7 @@ pre code
 }
 .form-control:focus
 {
-    color: #8898aa;
+    color: #181818;
     border-color: #defc8c;
     outline: 0;
     background-color: #fff;
@@ -2720,7 +2720,7 @@ pre code
 .form-control::placeholder
 {
     opacity: 1; 
-    color: #adb5bd;
+    color: #3b3b3b;
 }
 .form-control:disabled,
 .form-control[readonly]
@@ -18961,7 +18961,7 @@ a.btn-icon-only
     position: absolute;
     left: 50%;
 
-    max-width: 140px;
+    max-width: 100px;
 
     transition: all .15s ease; 
     transform: translate(-50%, -50%) scale(1);
@@ -19524,7 +19524,7 @@ a.btn-icon-only
     transition: all .15s cubic-bezier(.68, -.55, .265, 1.55); 
 
     border-radius: 50% !important;
-    background-color: #e9ecef;
+    background-color: #292929;
 }
 
 .custom-toggle-wrapper .custom-toggle + .custom-toggle
@@ -19563,7 +19563,7 @@ a.btn-icon-only
     transition: all .15s ease; 
     text-align: center;
 
-    color: #ced4da;
+    color: #000;
 }
 @media (prefers-reduced-motion: reduce)
 {
@@ -20022,7 +20022,7 @@ a.btn-icon-only
     font-size: .875rem;
     font-weight: 600; 
 
-    color: #525f7f;
+    color: #2c2c2c;
 }
 
 .form-control
@@ -23748,12 +23748,12 @@ textarea[resize='horizontal']
 
 .table .thead-light th
 {
-    color: #8898aa; 
+    color: #000; 
     background-color: #f6f9fc;
 }
 .table .thead-light th a
 {
-    color: #8898aa;
+    color: #000;
 }
 
 .table-hover tr
@@ -28842,7 +28842,7 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
     transition: all .15s cubic-bezier(.68, -.55, .265, 1.55); 
 
     color: #8898aa;
-    border: 1px solid #dee2e6;
+    border: 1px solid #adadad;
     border-radius: .25rem;
     background-color: #fff;
     background-clip: padding-box;

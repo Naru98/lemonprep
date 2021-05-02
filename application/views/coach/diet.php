@@ -24,7 +24,7 @@
             </div>
             <div class="card-header border-0">
               <div class="row">
-                <div class="col-6">Diet</div>
+                <div class="col-6">Nutritions</div>
                 <div class="col-6 text-right"><a class="btn btn-primary" href="<?php echo base_url('coach/athlete/diet/add/'.$athlete[0]['id']);?>">Add</a></div>
               </div>
             </div>

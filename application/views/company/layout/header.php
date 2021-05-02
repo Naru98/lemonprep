@@ -52,6 +52,26 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+
+    .clogo{
+      max-width:100px;
+    }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
+    {
+      color:#000;
+    }
+    .breadcrumb-dark .breadcrumb-item a,.nav-pills .nav-link
+    {
+      color: #000 !important;
+    }
+    body, .btn-primary , .page-item.active .page-link
+    {
+      color:#000!important;
+    }
+    .clickable
+    {
+      cursor: pointer;
+    }
   </style>
   <script>
   let SELECTED_VALUE=[];
@@ -65,7 +85,7 @@
   <!-- Main content -->
   <div class="main-content" id="panel">
     <!-- Topnav -->
-    <nav class="navbar navbar-nav  navbar-top navbar-expand-lg navbar-dark bg-primary border-bottom">
+    <nav class="navbar navbar-nav  navbar-top navbar-expand-lg navbar-light bg-primary border-bottom">
       <div class="container-fluid">
         <a class="navbar-brand" href="<?php echo base_url()?>">Lemon Prep</a>
         <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -110,6 +130,15 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url()?>company/athlete">Athlete</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url()?>company/checkin">Check In</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url()?>company/forms">Forms</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url()?>company/shows">Shows</a>
             </li>
           </ul>
         </div>

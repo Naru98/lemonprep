@@ -30,17 +30,25 @@
                 </div>
               </div>
             </div>
-            <div class="card-body pt-0">
-              <div class="text-center pt-7">
-                <h5 class="h3">
-                    <?php echo $athlete[0]['name'];?>
-                </h5>
-                <h5 class="h3">
-                    <?php echo $athlete[0]['email'];?>
-                </h5>
-                <h5 class="h3">
-                  Valid from :- <?php if($athlete[0]['sdate']){ echo date('m/d/Y',strtotime($athlete[0]['sdate']));}?> TO  <?php if($athlete[0]['edate']){ echo date('m/d/Y',strtotime($athlete[0]['edate']));}?>
-                </h5>
+            <div class="card-body pt-0 pb-1">
+              <div class="text-center pt-5 pb-1">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h5 class="h5">
+                      Name:- <?php echo $athlete[0]['name'];?>
+                    </h5>
+                  </div>
+                  <div class="col-md-12">
+                    <h5 class="h5">
+                    Email:- <?php echo $athlete[0]['email'];?>
+                    </h5>
+                  </div>
+                  <div class="col-md-12">
+                    <h5 class="h5">
+                    Valid from :- <?php if($athlete[0]['sdate']){ echo date('m/d/Y',strtotime($athlete[0]['sdate']));}?> TO  <?php if($athlete[0]['edate']){ echo date('m/d/Y',strtotime($athlete[0]['edate']));}?>
+                    </h5>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="card-footer">
@@ -49,7 +57,7 @@
                 <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==1){ echo 'active'; } ?>" id="tabs-text-1-tab"  href="<?php echo base_url('coach/athlete/view/'.$id);?>" role="tab" aria-controls="tabs-text-1" aria-selected="true">Workouts</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==2){ echo 'active'; } ?>" id="tabs-text-2-tab" href="<?php echo base_url('coach/athlete/view/'.$id.'/2');?>" role="tab" aria-controls="tabs-text-2" aria-selected="false">Diet</a>
+                <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==2){ echo 'active'; } ?>" id="tabs-text-2-tab" href="<?php echo base_url('coach/athlete/view/'.$id.'/2');?>" role="tab" aria-controls="tabs-text-2" aria-selected="false">Nutritions</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==3){ echo 'active'; } ?>" id="tabs-text-3-tab"  href="<?php echo base_url('coach/athlete/view/'.$id.'/3');?>" role="tab" aria-controls="tabs-text-3" aria-selected="false">Check-In</a>

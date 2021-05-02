@@ -151,10 +151,10 @@ class Athlete extends MY_Controller {
         $i = $_POST['start'];
         foreach($athleteData as $athlete){
             $i++;
-            $sub='<a class="btn btn-primary" href="'.base_url("athlete/form/".$athlete->id).'">Apply</a>';
+            $sub='<a class="btn btn-primary" href="'.base_url("athlete/form/".$athlete->id).'">Sign</a>';
             if($this->UserModel->checkForm($this->session->userdata('id'),$athlete->id))
             {
-                $sub='<span class="text-dark h5">Applied</span>';
+                $sub='<span class="text-dark h5">Signed</span>';
             }
             $data[] = array(
                 'id'=>$athlete->id,

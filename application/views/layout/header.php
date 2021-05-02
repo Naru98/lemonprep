@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="Narayan Rahul">
-  <title>Lemon Prep - Workout & Diet Management</title>
+  <title>Lemon Prep - Workout & Nutrition Management</title>
   <!-- Favicon -->
   <link rel="icon" href="<?php echo base_url()?>assets/img/brand/favicon.png" type="image/png">
   <!-- Fonts -->
