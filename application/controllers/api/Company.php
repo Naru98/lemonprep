@@ -536,4 +536,98 @@ class Company extends MY_Controller {
             $this->msg(0,[],'Fields are missing!');
         }
     }
+
+    public function getAthleteShows()
+    {
+        $data = $row = array();
+        
+        // Fetch member's records
+        $athleteData = $this->ShowsModel->getShowsC($_POST);
+        $i = $_POST['start'];
+        foreach($athleteData as $athlete){
+            $i++;
+            $data[] = array(
+                'id'=>$athlete->id,
+                $i,
+                $athlete->title,
+                $athlete->date,
+                '<div class="dropdown">
+                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                    <a class="dropdown-item" href="'.base_url("company/shows/edit/".$athlete->id).'">Edit</a>
+                    <a class="dropdown-item" onclick="deleteModal(\'shows\','.$athlete->id.')">Delete</a>
+                    </div>
+                </div>'
+            );
+        }
+        
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->AthleteModel->countAllC(),
+            "recordsFiltered" => $this->AthleteModel->countFilteredC($_POST),
+            "data" => $data,
+        );
+        
+        // Output to JSON format
+        echo json_encode($output);
+    }
+
+    public function addShow()
+    {
+        if(!empty($this->input->post('date')) && !empty($this->input->post('title')) )
+        {
+            $_POST['date']=date('y-m-d',strtotime($_POST['date']));
+            $athlete=$_POST['athlete'];
+            $_POST['type']=1;
+            unset($_POST['athlete']);
+            $show_id=$this->UserModel->insert($_POST,'shows');
+            if($show_id)
+            {
+                if(!empty($athlete))
+                {
+                    foreach($athlete as $a)
+                    {
+                        $this->UserModel->insert(array('athlete_id'=>$a,'shows_id'=>$show_id),'shows_athlete');
+                    }
+                }
+                $this->msg(1,[],'Show added successfully.');
+            }else
+            {
+                $this->msg(0,[],'Error while adding show!');
+            }
+        }else{
+            $this->msg(0,[],'Fields are missing!');
+        }
+    }
+
+    public function editShow()
+    {
+        if(!empty($this->input->post('date')) && !empty($this->input->post('title')) )
+        {
+            $_POST['date']=date('y-m-d',strtotime($_POST['date']));
+            $athlete=$_POST['athlete'];
+            $id=$_POST['id'];
+            unset($_POST['athlete']);
+            unset($_POST['id']);
+            if($this->UserModel->updateByID($_POST,$id,'shows'))
+            {
+                $this->UserModel->deleteByField('shows_id',$id,'shows_athlete');
+                if(!empty($athlete))
+                {
+                    foreach($athlete as $a)
+                    {
+                        $this->UserModel->insert(array('athlete_id'=>$a,'shows_id'=>$id),'shows_athlete');
+                    }
+                }
+                $this->msg(1,[],'Show updated successfully.');
+            }else
+            {
+                $this->msg(0,[],'Error while adding show!');
+            }
+        }else{
+            $this->msg(0,[],'Fields are missing!');
+        }
+    }
 }

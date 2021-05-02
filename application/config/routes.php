@@ -76,6 +76,9 @@ $route['company/checkin'] = 'company/checkin/index';
 $route['company/forms'] = 'company/forms/index';
 $route['company/forms/add'] = 'company/forms/add';
 $route['company/forms/edit/(:num)'] = 'company/forms/edit/$1';
+$route['company/shows'] = 'company/shows/index';
+$route['company/shows/add'] = 'company/shows/add';
+$route['company/show/view/(:num)'] = 'company/shows/view/$1';
 
 //user api
 $route['api/company/coach'] = 'api/company/getCoach';
