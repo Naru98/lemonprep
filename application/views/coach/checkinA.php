@@ -25,7 +25,7 @@
             <div class="card-header border-0">
               <div class="row">
                 <div class="col-6">Check In</div>
-                <div class="col-6 text-right"><a class="btn btn-primary" href="<?php echo base_url('coach/athlete/diet/add/'.$athlete[0]['id']);?>">Add</a></div>
+                <div class="col-6 text-right"></div>
               </div>
             </div>
             <!-- Light table -->
