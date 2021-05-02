@@ -663,6 +663,46 @@
       }
     });
 
+    $("#editWorkout").validate({
+      submitHandler: function (form){
+        $('#overlay').show();
+        $('#error').text('');
+        $('#error').hide();
+        $('#success').text('');
+        $('#success').hide();
+        $.ajax({
+          url: SITE_URL+'api/coach/editWorkout',
+          type: 'POST',
+          data: new FormData(form),
+          processData: false,
+          contentType: false,
+          success: function(data){
+            $('#overlay').hide();
+            const res = JSON.parse(data)
+            if(res.status==1)
+            {
+              $('#success').text(res.msg);
+              $('#success').show();
+              $("#success").scroll();
+              setTimeout(function(){
+                window.location.reload()
+              },3000);
+            }else{
+              $('#error').text(res.msg? res.msg : 'Error occurred! Please try again later.');
+              $('#error').show();
+              $("#error").scroll();
+            }
+          },
+          error:function (e){
+            $('#overlay').hide();
+            $('#error').text('Error occurred! Please try again later.');
+            $('#error').show();
+            $("#error").scroll();
+          }
+        })
+      }
+    });
+
     $("#addDiet").validate({
       submitHandler: function (form){
         $('#overlay').show();
@@ -686,6 +726,46 @@
               $("#success").scroll();
               setTimeout(function(){
                 window.location.href= res.data.url;
+              },3000);
+            }else{
+              $('#error').text(res.msg? res.msg : 'Error occurred! Please try again later.');
+              $('#error').show();
+              $("#error").scroll();
+            }
+          },
+          error:function (e){
+            $('#overlay').hide();
+            $('#error').text('Error occurred! Please try again later.');
+            $('#error').show();
+            $("#error").scroll();
+          }
+        })
+      }
+    });
+
+    $("#editDiet").validate({
+      submitHandler: function (form){
+        $('#overlay').show();
+        $('#error').text('');
+        $('#error').hide();
+        $('#success').text('');
+        $('#success').hide();
+        $.ajax({
+          url: SITE_URL+'api/coach/editDiet',
+          type: 'POST',
+          data: new FormData(form),
+          processData: false,
+          contentType: false,
+          success: function(data){
+            $('#overlay').hide();
+            const res = JSON.parse(data)
+            if(res.status==1)
+            {
+              $('#success').text(res.msg);
+              $('#success').show();
+              $("#success").scroll();
+              setTimeout(function(){
+                window.location.reload()
               },3000);
             }else{
               $('#error').text(res.msg? res.msg : 'Error occurred! Please try again later.');

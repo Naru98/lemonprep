@@ -79,6 +79,11 @@ $route['company/forms/edit/(:num)'] = 'company/forms/edit/$1';
 $route['company/shows'] = 'company/shows/index';
 $route['company/shows/add'] = 'company/shows/add';
 $route['company/show/view/(:num)'] = 'company/shows/view/$1';
+$route['company/athlete/view/(:num)/(:num)'] = 'company/athlete/view/$1/$2';
+$route['company/athlete/workout/add/(:num)'] = 'company/workout/add/$1';
+$route['company/athlete/workout/edit/(:num)'] = 'company/workout/edit/$1';
+$route['company/athlete/diet/add/(:num)'] = 'company/diet/add/$1';
+$route['company/athlete/diet/edit/(:num)'] = 'company/diet/edit/$1';
 
 //user api
 $route['api/company/coach'] = 'api/company/getCoach';

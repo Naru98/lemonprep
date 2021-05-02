@@ -4,7 +4,7 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 text-white d-inline-block mb-0">Edit Coach</h6>
+                    <h6 class="h2 text-dark d-inline-block mb-0">Edit Coach</h6>
                     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                         <li class="breadcrumb-item"><a href="<?php echo base_url().$this->session->userdata('type')?>"><i class="fas fa-home"></i></a></li>
@@ -84,6 +84,16 @@
                       <div class="form-group">
                         <label class="form-control-label" for="input-confirm-password">Confirm password</label>
                         <input type="password" id="input-confirm-password" class="form-control" placeholder="**********" name="cpassword">
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                      <label class="form-control-label d-block" for="input-image">Admin</label>
+                        <label class="custom-toggle">
+                          <input type="hidden" name="isVerifiyed" value="0">
+                          <input type="checkbox" name="isVerifiyed" value="1" <?php if($coach[0]['isVerifiyed']==1){ echo 'checked';}?>>
+                          <span class="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Yes"></span>
+                        </label>
                       </div>
                     </div>
                     <div class="col-lg-12">

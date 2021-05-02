@@ -94,6 +94,7 @@ class Web extends MY_Controller {
                         if($company)
                         {
                             $ses=array(
+                                'admin'=>$user[0]['isVerifiyed'],
                                 'type'=>$this->input->post('type'),
                                 'company_id'=>$user[0]['company_id'],
                                 'id'=>$user[0]['id'],
@@ -130,6 +131,8 @@ class Web extends MY_Controller {
                                 'email'=>$_POST['email'],
                                 'image'=>$user[0]['image'],
                                 'name'=>$user[0]['name'],
+                                'cimage'=>$company[0]['image'],
+                                'cname'=>$company[0]['name'],
                             );
                             $this->session->set_userdata($ses);
                             $this->msg(1,array( 'url' => $this->input->post('type') ),'Sign IN successfull.');

@@ -33,4 +33,14 @@ class Athlete extends MY_Controller {
 		$this->load->view('company/layout/index',$data);
 	}
 	
+	public function view($id,$type=1)
+	{
+		$data['nav']=2;
+		$data['snav']=$type;
+		$data['id']=$id;
+		$this->session->set_userdata('athlete_id',$id);
+		$data['athlete'] = $this->UserModel->getByID($id,$this->session->userdata('company_id'),'athlete');
+		$data['child'] = 'company/view_athlete';
+		$this->load->view('company/layout/index',$data);
+	}
 }

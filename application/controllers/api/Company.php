@@ -6,6 +6,7 @@ class Company extends MY_Controller {
     function __construct(){
 		parent::__construct();
 		$this->load->model('UserModel');
+        $this->load->model('CoachModel');
         $this->load->model('AthleteModel');
         $this->load->model('WorkoutModel');
         $this->load->model('DietModel');
@@ -136,6 +137,7 @@ class Company extends MY_Controller {
             $i++;
             $img = $coach->image? (base_url($coach->image)) : (base_url("assets/img/coach.png"));
             $data[] = array(
+                'id'=>$coach->id,
                 $i,
                 '<div class="media align-items-center">
                     <a href="#" class="avatar rounded-circle mr-3">
@@ -194,6 +196,7 @@ class Company extends MY_Controller {
                 }
             }
             $data[] = array(
+                'id'=>$athlete->id,
                 $i,
                 '<div class="media align-items-center">
                     <a href="#" class="avatar rounded-circle mr-3">
@@ -629,5 +632,281 @@ class Company extends MY_Controller {
         }else{
             $this->msg(0,[],'Fields are missing!');
         }
+    }
+
+    public function getWorkout()
+    {
+        $data = $row = array();
+        
+        // Fetch member's records
+        $coachData = $this->WorkoutModel->getWorkout($_POST);
+        
+        $i = $_POST['start'];
+        foreach($coachData as $coach){
+            $i++;
+            $data[] = array(
+                'id'=>$coach->id,
+                $i,
+                $coach->sdate,
+                $coach->edate,
+                '<div class="dropdown">
+                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                    <a class="dropdown-item" href="'.base_url("company/athlete/workout/edit/".$coach->id).'">Edit</a>
+                    <a class="dropdown-item" onclick="deleteModal(\'workouts\','.$coach->id.')">Delete</a>
+                    </div>
+                </div>'
+            );
+        }
+        
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->WorkoutModel->countAll(),
+            "recordsFiltered" => $this->WorkoutModel->countFiltered($_POST),
+            "data" => $data,
+        );
+        
+        // Output to JSON format
+        echo json_encode($output);
+    }
+
+    public function getDiet()
+    {
+        $data = $row = array();
+        
+        // Fetch member's records
+        $coachData = $this->DietModel->getDiet($_POST);
+        
+        $i = $_POST['start'];
+        foreach($coachData as $coach){
+            $i++;
+            $data[] = array(
+                'id'=>$coach->id,
+                $i,
+                $coach->sdate,
+                $coach->edate,
+                '<div class="dropdown">
+                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                    <a class="dropdown-item" href="'.base_url("company/athlete/diet/edit/".$coach->id).'">Edit</a>
+                    <a class="dropdown-item" onclick="deleteModal(\'diet\','.$coach->id.')">Delete</a>
+                    </div>
+                </div>'
+            );
+        }
+        
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->DietModel->countAll(),
+            "recordsFiltered" => $this->DietModel->countFiltered($_POST),
+            "data" => $data,
+        );
+        
+        // Output to JSON format
+        echo json_encode($output);
+    }
+
+    public function addWorkout()
+    {
+        if(!empty($this->input->post('sdate')) && !empty($this->input->post('edate')) && !empty($this->input->post('company_id')) && !empty($this->input->post('athlete_id')))
+        {
+            $sdata= date($this->input->post('sdate'));
+            $edata= date($this->input->post('edate'));
+            $workout=array(
+                'sdate'=> date('y-m-d',strtotime($sdata)),
+                'edate'=> date('y-m-d',strtotime($edata)),
+                'data'=> $this->input->post('data'),
+                'company_id'=>$this->input->post('company_id'),
+                'athlete_id'=>$this->input->post('athlete_id'),
+            );
+            if($this->UserModel->insert($workout,'workouts'))
+            {
+                $this->msg(1,array( 'url' => base_url('coach/athlete/view/'.$workout['athlete_id']) ),'Workout added successfully.');
+            }else{
+                $this->msg(0,[],'Error while adding workout!');
+            }
+        }else{
+            $this->msg(0,[],'Fields are missing!');
+        }
+    }
+
+    public function editWorkout()
+    {
+        if(!empty($this->input->post('sdate')) && !empty($this->input->post('edate')) && !empty($this->input->post('id')) )
+        {
+            $sdata= date($this->input->post('sdate'));
+            $edata= date($this->input->post('edate'));
+            $workout=array(
+                'sdate'=> date('y-m-d',strtotime($sdata)),
+                'edate'=> date('y-m-d',strtotime($edata)),
+                'data'=> $this->input->post('data'),
+            );
+            if($this->UserModel->updateByID($workout,$_POST['id'],'workouts'))
+            {
+                $this->msg(1,array(),'Workout updated successfully.');
+            }else{
+                $this->msg(0,[],'Error while adding workout!');
+            }
+        }else{
+            $this->msg(0,[],'Fields are missing!');
+        }
+    }
+
+
+    public function addDiet()
+    {
+        if(!empty($this->input->post('sdate')) && !empty($this->input->post('edate')) && !empty($this->input->post('company_id')) && !empty($this->input->post('athlete_id')))
+        {
+            $sdata= date($this->input->post('sdate'));
+            $edata= date($this->input->post('edate'));
+            $workout=array(
+                'sdate'=> date('y-m-d',strtotime($sdata)),
+                'edate'=> date('y-m-d',strtotime($edata)),
+                'data'=> $this->input->post('data'),
+                'company_id'=>$this->input->post('company_id'),
+                'athlete_id'=>$this->input->post('athlete_id'),
+            );
+            if($this->UserModel->insert($workout,'diet'))
+            {
+                $this->msg(1,array( 'url' => base_url('coach/athlete/view/'.$workout['athlete_id'].'/2') ),'Nutrition added successfully.');
+            }else{
+                $this->msg(0,[],'Error while adding Nutrition!');
+            }
+        }else{
+            $this->msg(0,[],'Fields are missing!');
+        }
+    }
+
+    public function editDiet()
+    {
+        if(!empty($this->input->post('sdate')) && !empty($this->input->post('edate')) && !empty($this->input->post('id')) )
+        {
+            $sdata= date($this->input->post('sdate'));
+            $edata= date($this->input->post('edate'));
+            $workout=array(
+                'sdate'=> date('y-m-d',strtotime($sdata)),
+                'edate'=> date('y-m-d',strtotime($edata)),
+                'data'=> $this->input->post('data'),
+            );
+            if($this->UserModel->updateByID($workout,$_POST['id'],'diet'))
+            {
+                $this->msg(1,array(),'Nutrition updated successfully.');
+            }else{
+                $this->msg(0,[],'Error while adding Nutrition!');
+            }
+        }else{
+            $this->msg(0,[],'Fields are missing!');
+        }
+    }
+
+    public function showsA()
+    {
+        $data = $row = array();
+        
+        // Fetch member's records
+        $athleteData = $this->ShowsModel->getAShowsA($_POST);
+        
+        $i = $_POST['start'];
+        foreach($athleteData as $athlete){
+            $i++;
+            $data[] = array(
+                'id'=>$athlete->id,
+                $i,
+                $athlete->title,
+                $athlete->date,
+                '<div class="dropdown">
+                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                    <a class="dropdown-item" href="'.base_url("company/show/view/".$athlete->id).'">View</a>
+                    </div>
+                </div>'
+            );
+        }
+        
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->WorkoutModel->countAllA(),
+            "recordsFiltered" => $this->WorkoutModel->countFilteredA($_POST),
+            "data" => $data,
+        );
+        
+        // Output to JSON format
+        echo json_encode($output);
+    }
+
+    public function formsA()
+    {
+        $data = $row = array();
+        
+        // Fetch member's records
+        $athleteData = $this->FormsModel->getCForms($_POST);
+        
+        $i = $_POST['start'];
+        foreach($athleteData as $athlete){
+            $i++;
+            $sub='<span class="text-danger h5">Not Signed</span>';
+            if($this->UserModel->checkForm($this->session->userdata('athlete_id'),$athlete->id))
+            {
+                $sub='<span class="text-dark h5">Signed</span>';
+            }
+            $data[] = array(
+                'id'=>$athlete->id,
+                $i,
+                $athlete->name,
+                $sub
+            );
+        }
+        
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->FormsModel->countAll(),
+            "recordsFiltered" => $this->FormsModel->countFiltered($_POST),
+            "data" => $data,
+        );
+        
+        // Output to JSON format
+        echo json_encode($output);
+    }
+
+    public function checkinA()
+    {
+        $data = $row = array();
+        
+        // Fetch member's records
+        $athleteData = $this->CheckinModel->getACheckin($_POST);
+        $i = $_POST['start'];
+        foreach($athleteData as $athlete){
+            $i++;
+            $data[] = array(
+                'id'=>$athlete->id,
+                $i,
+                date('Y-m-d',strtotime($athlete->created)),
+                '<div class="dropdown">
+                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                    <a class="dropdown-item" href="'.base_url("company/checkin/view/".$athlete->id).'">View</a>
+                    <a class="dropdown-item" onclick="deleteModal(\'check_in\','.$athlete->id.')">Delete</a>
+                    </div>
+                </div>'
+            );
+        }
+        
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->CheckinModel->countAll(),
+            "recordsFiltered" => $this->CheckinModel->countFiltered($_POST),
+            "data" => $data,
+        );
+        
+        // Output to JSON format
+        echo json_encode($output);
     }
 }

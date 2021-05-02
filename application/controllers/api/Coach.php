@@ -353,6 +353,28 @@ class Coach extends MY_Controller {
         }
     }
 
+    public function editWorkout()
+    {
+        if(!empty($this->input->post('sdate')) && !empty($this->input->post('edate')) && !empty($this->input->post('id')) )
+        {
+            $sdata= date($this->input->post('sdate'));
+            $edata= date($this->input->post('edate'));
+            $workout=array(
+                'sdate'=> date('y-m-d',strtotime($sdata)),
+                'edate'=> date('y-m-d',strtotime($edata)),
+                'data'=> $this->input->post('data'),
+            );
+            if($this->UserModel->updateByID($workout,$_POST['id'],'workouts'))
+            {
+                $this->msg(1,array(),'Workout updated successfully.');
+            }else{
+                $this->msg(0,[],'Error while adding workout!');
+            }
+        }else{
+            $this->msg(0,[],'Fields are missing!');
+        }
+    }
+
 
     public function addDiet()
     {
@@ -370,9 +392,31 @@ class Coach extends MY_Controller {
             );
             if($this->UserModel->insert($workout,'diet'))
             {
-                $this->msg(1,array( 'url' => base_url('coach/athlete/view/'.$workout['athlete_id'].'/2') ),'Diet added successfully.');
+                $this->msg(1,array( 'url' => base_url('coach/athlete/view/'.$workout['athlete_id'].'/2') ),'Nutrition added successfully.');
             }else{
-                $this->msg(0,[],'Error while adding Diet!');
+                $this->msg(0,[],'Error while adding Nutrition!');
+            }
+        }else{
+            $this->msg(0,[],'Fields are missing!');
+        }
+    }
+
+    public function editDiet()
+    {
+        if(!empty($this->input->post('sdate')) && !empty($this->input->post('edate')) && !empty($this->input->post('id')) )
+        {
+            $sdata= date($this->input->post('sdate'));
+            $edata= date($this->input->post('edate'));
+            $workout=array(
+                'sdate'=> date('y-m-d',strtotime($sdata)),
+                'edate'=> date('y-m-d',strtotime($edata)),
+                'data'=> $this->input->post('data'),
+            );
+            if($this->UserModel->updateByID($workout,$_POST['id'],'diet'))
+            {
+                $this->msg(1,array(),'Nutrition updated successfully.');
+            }else{
+                $this->msg(0,[],'Error while adding Nutrition!');
             }
         }else{
             $this->msg(0,[],'Fields are missing!');

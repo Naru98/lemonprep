@@ -85,24 +85,37 @@
             "url": "<?php echo base_url('api/company/coach'); ?>",
             "type": "POST"
         },
-        //Set column definition initialisation properties
         "columnDefs": [
           { 
             "targets": [0],
             "orderable": false
           },
-          { 
+          {
             "className": "text-right",
             "targets": [3],
             "orderable": false
           }
         ],
+        "createdRow": function( row, data, dataIndex ) {
+          $( row ).find('td:eq(0)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(1)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(2)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+        },
         'language': {
           'paginate': {
             'next': '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
             'previous': '<i class="fa fa-arrow-left" aria-hidden="true"></i>'  
           }
         }
+      });
+      $('#dtabel').on('click', 'td.clickable', function () {
+        window.location.href=SITE_URL+'company/coach/edit/'+$(this).attr('data-id');
       });
 
       $('#athleteDataTable').DataTable({
@@ -133,6 +146,20 @@
             "orderable": false
           }
         ],
+        "createdRow": function( row, data, dataIndex ) {
+          $( row ).find('td:eq(0)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(1)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(2)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(3)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+        },
         'language': {
           'paginate': {
             'next': '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
@@ -141,6 +168,10 @@
         }
       });
     } );
+
+    $('#athleteDataTable').on('click', 'td.clickable', function () {
+      window.location.href=SITE_URL+'company/athlete/view/'+$(this).attr('data-id')+'/1';
+    });
 
     function deleteModal(user,id)
     {
@@ -155,10 +186,10 @@
           type: 'POST',
           data: { id:id, table: user },
           success: function(data){
-            window.location.href= SITE_URL+'company/'+user;
+            window.location.reload();
           },
           error:function (e){
-            window.location.href= SITE_URL+'company/'+user;
+            window.location.reload();
           }
       })
     }
@@ -742,6 +773,381 @@
         })
       }
     });
+    $('#workoutDataTable').DataTable({
+        // Processing indicator
+        "processing": true,
+        // DataTables server-side processing mode
+        "serverSide": true,
+        // Initial no order.
+        "order": [],
+        // Load data from an Ajax source
+        "ajax": {
+            "url": "<?php echo base_url('api/company/getWorkout'); ?>",
+            "type": "POST"
+        },
+        //Set column definition initialisation properties
+        "columnDefs": [
+          { 
+            "targets": [0],
+            "orderable": false
+          },
+          {
+            "className": "text-right",
+            "targets": [3],
+            "orderable": false
+          }
+        ],
+        "createdRow": function( row, data, dataIndex ) {
+          $( row ).find('td:eq(0)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(1)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(2)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+        },
+        'language': {
+          'paginate': {
+            'next': '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
+            'previous': '<i class="fa fa-arrow-left" aria-hidden="true"></i>'  
+          }
+        }
+      });
+
+      $('#workoutDataTable').on('click', 'td.clickable', function () {
+        window.location.href=SITE_URL+'company/workout/edit/'+$(this).attr('data-id');
+      });
+
+      $('#dietDataTable').DataTable({
+        // Processing indicator
+        "processing": true,
+        // DataTables server-side processing mode
+        "serverSide": true,
+        // Initial no order.
+        "order": [],
+        // Load data from an Ajax source
+        "ajax": {
+            "url": "<?php echo base_url('api/company/getDiet'); ?>",
+            "type": "POST"
+        },
+        //Set column definition initialisation properties
+        "columnDefs": [
+          { 
+            "targets": [0],
+            "orderable": false
+          },
+          {
+            "className": "text-right",
+            "targets": [3],
+            "orderable": false
+          }
+        ],
+        "createdRow": function( row, data, dataIndex ) {
+          $( row ).find('td:eq(0)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(1)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(2)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+        },
+        'language': {
+          'paginate': {
+            'next': '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
+            'previous': '<i class="fa fa-arrow-left" aria-hidden="true"></i>'  
+          }
+        }
+      });
+
+      $('#dietDataTable').on('click', 'td.clickable', function () {
+        window.location.href=SITE_URL+'company/diet/edit/'+$(this).attr('data-id');
+      });
+
+      $("#addWorkout").validate({
+      submitHandler: function (form){
+        $('#overlay').show();
+        $('#error').text('');
+        $('#error').hide();
+        $('#success').text('');
+        $('#success').hide();
+        $.ajax({
+          url: SITE_URL+'api/company/addWorkout',
+          type: 'POST',
+          data: new FormData(form),
+          processData: false,
+          contentType: false,
+          success: function(data){
+            $('#overlay').hide();
+            const res = JSON.parse(data)
+            if(res.status==1)
+            {
+              $('#success').text(res.msg);
+              $('#success').show();
+              $("#success").scroll();
+              setTimeout(function(){
+                window.location.href= res.data.url;
+              },3000);
+            }else{
+              $('#error').text(res.msg? res.msg : 'Error occurred! Please try again later.');
+              $('#error').show();
+              $("#error").scroll();
+            }
+          },
+          error:function (e){
+            $('#overlay').hide();
+            $('#error').text('Error occurred! Please try again later.');
+            $('#error').show();
+            $("#error").scroll();
+          }
+        })
+      }
+    });
+
+    $("#editWorkout").validate({
+      submitHandler: function (form){
+        $('#overlay').show();
+        $('#error').text('');
+        $('#error').hide();
+        $('#success').text('');
+        $('#success').hide();
+        $.ajax({
+          url: SITE_URL+'api/company/editWorkout',
+          type: 'POST',
+          data: new FormData(form),
+          processData: false,
+          contentType: false,
+          success: function(data){
+            $('#overlay').hide();
+            const res = JSON.parse(data)
+            if(res.status==1)
+            {
+              $('#success').text(res.msg);
+              $('#success').show();
+              $("#success").scroll();
+              setTimeout(function(){
+                window.location.reload()
+              },3000);
+            }else{
+              $('#error').text(res.msg? res.msg : 'Error occurred! Please try again later.');
+              $('#error').show();
+              $("#error").scroll();
+            }
+          },
+          error:function (e){
+            $('#overlay').hide();
+            $('#error').text('Error occurred! Please try again later.');
+            $('#error').show();
+            $("#error").scroll();
+          }
+        })
+      }
+    });
+
+    $("#addDiet").validate({
+      submitHandler: function (form){
+        $('#overlay').show();
+        $('#error').text('');
+        $('#error').hide();
+        $('#success').text('');
+        $('#success').hide();
+        $.ajax({
+          url: SITE_URL+'api/company/addDiet',
+          type: 'POST',
+          data: new FormData(form),
+          processData: false,
+          contentType: false,
+          success: function(data){
+            $('#overlay').hide();
+            const res = JSON.parse(data)
+            if(res.status==1)
+            {
+              $('#success').text(res.msg);
+              $('#success').show();
+              $("#success").scroll();
+              setTimeout(function(){
+                window.location.href= res.data.url;
+              },3000);
+            }else{
+              $('#error').text(res.msg? res.msg : 'Error occurred! Please try again later.');
+              $('#error').show();
+              $("#error").scroll();
+            }
+          },
+          error:function (e){
+            $('#overlay').hide();
+            $('#error').text('Error occurred! Please try again later.');
+            $('#error').show();
+            $("#error").scroll();
+          }
+        })
+      }
+    });
+
+    $("#editDiet").validate({
+      submitHandler: function (form){
+        $('#overlay').show();
+        $('#error').text('');
+        $('#error').hide();
+        $('#success').text('');
+        $('#success').hide();
+        $.ajax({
+          url: SITE_URL+'api/company/editDiet',
+          type: 'POST',
+          data: new FormData(form),
+          processData: false,
+          contentType: false,
+          success: function(data){
+            $('#overlay').hide();
+            const res = JSON.parse(data)
+            if(res.status==1)
+            {
+              $('#success').text(res.msg);
+              $('#success').show();
+              $("#success").scroll();
+              setTimeout(function(){
+                window.location.reload()
+              },3000);
+            }else{
+              $('#error').text(res.msg? res.msg : 'Error occurred! Please try again later.');
+              $('#error').show();
+              $("#error").scroll();
+            }
+          },
+          error:function (e){
+            $('#overlay').hide();
+            $('#error').text('Error occurred! Please try again later.');
+            $('#error').show();
+            $("#error").scroll();
+          }
+        })
+      }
+    });
+
+    $('#checkinADataTable').DataTable({
+        // Processing indicator
+        "processing": true,
+        // DataTables server-side processing mode
+        "serverSide": true,
+        // Initial no order.
+        "order": [],
+        // Load data from an Ajax source
+        "ajax": {
+            "url": "<?php echo base_url('api/company/checkinA'); ?>",
+            "type": "POST"
+        },
+        //Set column definition initialisation properties
+        "columnDefs": [
+          { 
+            "targets": [0],
+            "orderable": false
+          },
+          { 
+            "className": "text-right",
+            "targets": [2],
+            "orderable": false
+          }
+        ],
+        "createdRow": function( row, data, dataIndex ) {
+          $( row ).find('td:eq(0)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(1)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+        },
+        'language': {
+          'paginate': {
+            'next': '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
+            'previous': '<i class="fa fa-arrow-left" aria-hidden="true"></i>'  
+          }
+        }
+      });
+      $('#checkinADataTable').on('click', 'td.clickable', function () {
+        window.location.href=SITE_URL+'company/checkin/view/'+$(this).attr('data-id');
+      });
+
+      $('#FormADataTable').DataTable({
+        // Processing indicator
+        "processing": true,
+        // DataTables server-side processing mode
+        "serverSide": true,
+        // Initial no order.
+        "order": [],
+        // Load data from an Ajax source
+        "ajax": {
+            "url": "<?php echo base_url('api/company/formsA'); ?>",
+            "type": "POST"
+        },
+        //Set column definition initialisation properties
+        "columnDefs": [
+          { 
+            "targets": [0],
+            "orderable": false
+          },
+          { 
+            "className": "text-right",
+            "targets": [2],
+            "orderable": false
+          }
+        ],
+        'language': {
+          'paginate': {
+            'next': '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
+            'previous': '<i class="fa fa-arrow-left" aria-hidden="true"></i>'  
+          }
+        }
+      });
+
+      $('#showsDataTable').DataTable({
+        // Processing indicator
+        "processing": true,
+        // DataTables server-side processing mode
+        "serverSide": true,
+        // Initial no order.
+        "order": [],
+        // Load data from an Ajax source
+        "ajax": {
+            "url": "<?php echo base_url('api/company/showsA'); ?>",
+            "type": "POST"
+        },
+        //Set column definition initialisation properties
+        "columnDefs": [
+          { 
+            "targets": [0],
+            "orderable": false
+          },
+          { 
+            "className": "text-right",
+            "targets": [3],
+            "orderable": false
+          }
+        ],
+        "createdRow": function( row, data, dataIndex ) {
+          $( row ).find('td:eq(0)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(1)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(2)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+        },
+        'language': {
+          'paginate': {
+            'next': '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
+            'previous': '<i class="fa fa-arrow-left" aria-hidden="true"></i>'  
+          }
+        }
+      });
+      $('#showsDataTable').on('click', 'td.clickable', function () {
+        window.location.href=SITE_URL+'company/show/view/'+$(this).attr('data-id');
+      });
+
   </script>
 </body>
 

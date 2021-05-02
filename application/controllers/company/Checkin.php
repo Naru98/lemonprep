@@ -15,4 +15,12 @@ class Checkin extends MY_Controller {
         $data['company']= $this->UserModel->getID($this->session->userdata('company_id'),'company');
 		$this->load->view('company/layout/index',$data);
     }
+
+	public function view($id)
+    {
+        $data['nav']=2;
+		$data['child'] = 'company/view_checkin';
+        $data['checkin']= $this->UserModel->getID($id,'check_in');
+		$this->load->view('company/layout/index',$data);
+    }
 }

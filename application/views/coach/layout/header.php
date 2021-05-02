@@ -129,12 +129,14 @@
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url()?>coach/athlete">My Athlete</a>
             </li>
+            <?php if($this->session->userdata('admin')==1){?>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url()?>coach/checkin">Check In</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url()?>coach/forms">Forms</a>
             </li>
+            <?php } ?>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url()?>coach/shows">Shows</a>
             </li>

@@ -54,19 +54,19 @@
             <div class="card-footer">
             <ul class="nav nav-pills nav-fill flex-column flex-sm-row" id="tabs-text" role="tablist">
               <li class="nav-item">
-                <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==1){ echo 'active'; } ?>" id="tabs-text-1-tab"  href="<?php echo base_url('coach/athlete/view/'.$id);?>" role="tab" aria-controls="tabs-text-1" aria-selected="true">Workouts</a>
+                <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==1){ echo 'active'; } ?>" id="tabs-text-1-tab"  href="<?php echo base_url('company/athlete/view/'.$id);?>" role="tab" aria-controls="tabs-text-1" aria-selected="true">Workouts</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==2){ echo 'active'; } ?>" id="tabs-text-2-tab" href="<?php echo base_url('coach/athlete/view/'.$id.'/2');?>" role="tab" aria-controls="tabs-text-2" aria-selected="false">Nutritions</a>
+                <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==2){ echo 'active'; } ?>" id="tabs-text-2-tab" href="<?php echo base_url('company/athlete/view/'.$id.'/2');?>" role="tab" aria-controls="tabs-text-2" aria-selected="false">Nutritions</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==3){ echo 'active'; } ?>" id="tabs-text-3-tab"  href="<?php echo base_url('coach/athlete/view/'.$id.'/3');?>" role="tab" aria-controls="tabs-text-3" aria-selected="false">Check-In</a>
+                <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==3){ echo 'active'; } ?>" id="tabs-text-3-tab"  href="<?php echo base_url('company/athlete/view/'.$id.'/3');?>" role="tab" aria-controls="tabs-text-3" aria-selected="false">Check-In</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==4){ echo 'active'; } ?>" id="tabs-text-3-tab"  href="<?php echo base_url('coach/athlete/view/'.$id.'/4');?>" role="tab" aria-controls="tabs-text-3" aria-selected="false">Forms</a>
+                <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==4){ echo 'active'; } ?>" id="tabs-text-3-tab"  href="<?php echo base_url('company/athlete/view/'.$id.'/4');?>" role="tab" aria-controls="tabs-text-3" aria-selected="false">Forms</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==5){ echo 'active'; } ?>" id="tabs-text-3-tab"  href="<?php echo base_url('coach/athlete/view/'.$id.'/5');?>" role="tab" aria-controls="tabs-text-3" aria-selected="false">Shows</a>
+                <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==5){ echo 'active'; } ?>" id="tabs-text-3-tab"  href="<?php echo base_url('company/athlete/view/'.$id.'/5');?>" role="tab" aria-controls="tabs-text-3" aria-selected="false">Shows</a>
               </li>
             </ul>
             </div>
@@ -76,20 +76,20 @@
         <?php
           if($snav==1)
           {
-            $this->load->view('coach/workout.php');
+            $this->load->view('company/workout.php');
           }else if($snav==2)
           {
-            $this->load->view('coach/diet.php');
+            $this->load->view('company/diet.php');
           }else if($snav==3)
           {
-            $this->load->view('coach/checkinA.php');
+            $this->load->view('company/checkinA.php');
           }else if($snav==4)
           {
-            $this->load->view('coach/formsA.php');
+            $this->load->view('company/formsA.php');
           }
           else if($snav==5)
           {
-            $this->load->view('coach/showsA.php');
+            $this->load->view('company/showsA.php');
           }
         ?>
         </div>
