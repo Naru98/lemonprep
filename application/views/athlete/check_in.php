@@ -46,7 +46,7 @@
                     }
                     ?>
                 </div>
-                <button class="btn btn-primary" type="submit">Add</button>
+                <button class="btn btn-primary" type="submit">Send</button>
               </form>
             </div>
           </div>

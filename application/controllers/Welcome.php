@@ -16,7 +16,13 @@ class Welcome extends MY_Controller {
 			$data['child'] = 'login';
 			$this->load->view('layout/index',$data);
 		}else{
-			redirect(base_url().$this->session->userdata('type'),'refresh');
+			if(!empty($this->session->userdata('admin')))
+			{
+				$data['child'] = 'login';
+				$this->load->view('layout/index',$data);
+			}else{
+				redirect(base_url().$this->session->userdata('type'),'refresh');
+			}
 		}
 	}
 
@@ -27,7 +33,13 @@ class Welcome extends MY_Controller {
 			$data['child'] = 'register';
 			$this->load->view('layout/index',$data);
 		}else{
-			redirect(base_url().$this->session->userdata('type'),'refresh');
+			if(!empty($this->session->userdata('admin')))
+			{
+				$data['child'] = 'register';
+				$this->load->view('layout/index',$data);
+			}else{
+				redirect(base_url().$this->session->userdata('type'),'refresh');
+			}
 		}
 	}
 

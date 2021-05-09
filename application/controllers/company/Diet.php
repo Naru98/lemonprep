@@ -6,6 +6,15 @@ class Diet extends MY_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model('UserModel');
+		if(empty($this->session->userdata('type')))
+		{
+			redirect(base_url('login'));
+		}else{
+			if($this->session->userdata('type')!='company')
+			{
+				redirect(base_url($this->session->userdata('type')),'refresh');
+			}
+		}
 	}
 
 	public function add($id)

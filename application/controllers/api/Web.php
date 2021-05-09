@@ -16,7 +16,177 @@ class Web extends MY_Controller {
             {
                 if(!$this->WebModel->checkEmail($this->input->post('email'),'users'))
                 {
-                    $company_id=$this->WebModel->createCompany(array('name'=>$this->input->post('name')));
+                    $arr=array(
+                        array(
+                            'f'=>1,
+                            't'=>'Date',
+                            'o'=>1,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>2,
+                            't'=>'Date',
+                            'o'=>2,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>3,
+                            't'=>'Date',
+                            'o'=>3,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>4,
+                            't'=>'Image',
+                            'o'=>4,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>5,
+                            't'=>'Image',
+                            'o'=>5,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>6,
+                            't'=>'Image',
+                            'o'=>6,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>7,
+                            't'=>'File',
+                            'o'=>7,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>8,
+                            't'=>'Text',
+                            'o'=>8,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>9,
+                            't'=>'Text',
+                            'o'=>9,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>10,
+                            't'=>'Text',
+                            'o'=>10,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>11,
+                            't'=>'Text',
+                            'o'=>11,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>12,
+                            't'=>'Text',
+                            'o'=>12,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>13,
+                            't'=>'Text',
+                            'o'=>13,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>14,
+                            't'=>'Text',
+                            'o'=>14,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>15,
+                            't'=>'Text',
+                            'o'=>15,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>16,
+                            't'=>'Text',
+                            'o'=>16,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>17,
+                            't'=>'Text',
+                            'o'=>17,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>18,
+                            't'=>'Text',
+                            'o'=>18,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>19,
+                            't'=>'Text',
+                            'o'=>19,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>20,
+                            't'=>'Text',
+                            'o'=>20,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>21,
+                            't'=>'Text',
+                            'o'=>21,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                    );
+                    $company_id=$this->WebModel->createCompany(array('name'=>$this->input->post('name'),'data' => json_encode($arr)));
                     if($company_id)
                     {
                         $_POST['name']=NULL;
@@ -25,6 +195,7 @@ class Web extends MY_Controller {
                         if($this->WebModel->createUser($_POST))
                         {
                             $ses=array(
+                                'admin'=> '',
                                 'type'=>'company',
                                 'company_id'=>$company_id,
                                 'email'=>$_POST['email'],
@@ -66,6 +237,7 @@ class Web extends MY_Controller {
                         if($company)
                         {
                             $ses=array(
+                                'admin'=> '',
                                 'type'=>$this->input->post('type'),
                                 'company_id'=>$user[0]['company_id'],
                                 'email'=>$_POST['email'],
@@ -94,6 +266,7 @@ class Web extends MY_Controller {
                         if($company)
                         {
                             $ses=array(
+                                'admin'=> '',
                                 'admin'=>$user[0]['isVerifiyed'],
                                 'type'=>$this->input->post('type'),
                                 'company_id'=>$user[0]['company_id'],
@@ -125,6 +298,7 @@ class Web extends MY_Controller {
                         if($company)
                         {
                             $ses=array(
+                                'admin'=> '',
                                 'type'=>$this->input->post('type'),
                                 'company_id'=>$user[0]['company_id'],
                                 'id'=>$user[0]['id'],

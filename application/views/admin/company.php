@@ -4,13 +4,16 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 d-inline-block mb-0">My Forms</h6>
+                    <h6 class="h2 text-dark d-inline-block mb-0">Company</h6>
                     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                        <li class="breadcrumb-item"><a href="<?php echo base_url().$this->session->userdata('type')?>"><i class="fas fa-home"></i></a></li>
-                        <li class="breadcrumb-item active" aria-current="page"><a>My Forms</a></li>
+                        <li class="breadcrumb-item"><a href="<?php echo base_url().'admin'?>"><i class="fas fa-home"></i></a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a>Company</a></li>
                         </ol>
                     </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    <a href="<?php echo base_url()?>admin/company/add" class="btn btn-secondary">Add</a>
                 </div>
             </div>
         </div>
@@ -44,8 +47,8 @@
                 } ?>
             </div>
             <!-- Light table -->
-            <div >
-              <table id="athleteFormsDatatable" class="table align-items-center table-flush">
+            <div>
+              <table id="companyTable" class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
                     <th>#</th>

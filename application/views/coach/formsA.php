@@ -28,7 +28,7 @@
               </div>
             </div>
             <!-- Light table -->
-            <div class="table-responsive">
+            <div >
               <table id="FormADataTable" class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>

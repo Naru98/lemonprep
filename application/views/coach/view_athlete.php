@@ -57,7 +57,7 @@
                 <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==1){ echo 'active'; } ?>" id="tabs-text-1-tab"  href="<?php echo base_url('coach/athlete/view/'.$id);?>" role="tab" aria-controls="tabs-text-1" aria-selected="true">Workouts</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==2){ echo 'active'; } ?>" id="tabs-text-2-tab" href="<?php echo base_url('coach/athlete/view/'.$id.'/2');?>" role="tab" aria-controls="tabs-text-2" aria-selected="false">Nutritions</a>
+                <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==2){ echo 'active'; } ?>" id="tabs-text-2-tab" href="<?php echo base_url('coach/athlete/view/'.$id.'/2');?>" role="tab" aria-controls="tabs-text-2" aria-selected="false">Nutrition</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link mb-sm-3 mb-md-0 <?php if($snav==3){ echo 'active'; } ?>" id="tabs-text-3-tab"  href="<?php echo base_url('coach/athlete/view/'.$id.'/3');?>" role="tab" aria-controls="tabs-text-3" aria-selected="false">Check-In</a>

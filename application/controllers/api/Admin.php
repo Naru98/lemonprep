@@ -1,18 +1,20 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Company extends MY_Controller {
+class Admin extends MY_Controller {
 
     function __construct(){
 		parent::__construct();
 		$this->load->model('UserModel');
         $this->load->model('CoachModel');
+        $this->load->model('CompanyModel');
         $this->load->model('AthleteModel');
         $this->load->model('WorkoutModel');
         $this->load->model('DietModel');
         $this->load->model('ShowsModel');
         $this->load->model('FormsModel');
         $this->load->model('CheckinModel');
+        $this->load->model('WebModel');
 	}
 
     public function addCoach()
@@ -125,6 +127,287 @@ class Company extends MY_Controller {
         }    
     }
 
+    public function addCompany()
+    {
+        if(!empty($this->input->post('name')) && !empty($this->input->post('email')) && !empty($this->input->post('password')))
+        {
+            if(!$this->WebModel->checkComapny($this->input->post('name')))
+            {
+                if(!$this->WebModel->checkEmail($this->input->post('email'),'users'))
+                {
+                    if(!empty($_FILES['image']['name']))
+                    {
+                        $config['upload_path'] = './uploads/company';
+                        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                        $config['max_size'] = 0;
+                        $new_name = time() . '-' . $_FILES["image"]['name'];
+                        $config['file_name'] = $new_name;
+                        $this->load->library('upload', $config);
+                        if (!$this->upload->do_upload('image')) {
+                            $this->msg(0,[],$this->upload->display_errors());
+                            exit();
+                        } else {
+                            $_POST['image'] = 'uploads/company/'.$this->upload->data('file_name');
+                        }
+                    }
+                    $arr=array(
+                        array(
+                            'f'=>1,
+                            't'=>'Date',
+                            'o'=>1,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>2,
+                            't'=>'Date',
+                            'o'=>2,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>3,
+                            't'=>'Date',
+                            'o'=>3,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>4,
+                            't'=>'Image',
+                            'o'=>4,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>5,
+                            't'=>'Image',
+                            'o'=>5,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>6,
+                            't'=>'Image',
+                            'o'=>6,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>7,
+                            't'=>'File',
+                            'o'=>7,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>8,
+                            't'=>'Text',
+                            'o'=>8,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>9,
+                            't'=>'Text',
+                            'o'=>9,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>10,
+                            't'=>'Text',
+                            'o'=>10,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>11,
+                            't'=>'Text',
+                            'o'=>11,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>12,
+                            't'=>'Text',
+                            'o'=>12,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>13,
+                            't'=>'Text',
+                            'o'=>13,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>14,
+                            't'=>'Text',
+                            'o'=>14,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>15,
+                            't'=>'Text',
+                            'o'=>15,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>16,
+                            't'=>'Text',
+                            'o'=>16,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>17,
+                            't'=>'Text',
+                            'o'=>17,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>18,
+                            't'=>'Text',
+                            'o'=>18,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>19,
+                            't'=>'Text',
+                            'o'=>19,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>20,
+                            't'=>'Text',
+                            'o'=>20,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                        array(
+                            'f'=>21,
+                            't'=>'Text',
+                            'o'=>21,
+                            'r'=>0,
+                            'm'=>0,
+                            'l'=>''
+                        ),
+                    );
+                    $comp=array(
+                        'name'=>$this->input->post('name'),
+                        'data' => json_encode($arr),
+                        'image'=> NULL);
+                    if(!empty($_POST['image']))
+                    {
+                        $comp['image']=$_POST['image'];
+                    }
+                    $company_id=$this->WebModel->createCompany($comp);
+                    if($company_id)
+                    {
+                        $_POST['name']=NULL;
+                        unset($_POST['image']);
+                        unset($_POST['cpassword']);
+                        $_POST['company_id']=$company_id;
+                        $_POST['password']=md5($_POST['password']);
+                        if($this->WebModel->createUser($_POST))
+                        {
+                            $this->msg(1,[],'Company created successfully.');
+                        }else
+                        {
+                            $this->msg(0,[],'Error while creating account!');
+                        }
+                    }else{
+                        $this->msg(0,[],'Error while creating account!');
+                    }
+                }else{
+                    $this->msg(0,[],'Email already exists!');
+                }
+            }else{
+                $this->msg(0,[],'Name already exists!');
+            }
+        }else{
+            $this->msg(0,[],'Fields are missing!');
+        }
+    }
+
+    public function editCompany()
+    {
+        if(!empty($this->input->post('name')) && !empty($this->input->post('email')) && !empty($this->input->post('id') && !empty($this->input->post('company_id')) ))
+        {
+                if(!$this->UserModel->checkEmailByID($this->input->post('email'),$this->input->post('id'),'users'))
+                {
+                    $company=array();
+                    if(!empty($_FILES['image']['name']))
+                    {
+                        $config['upload_path'] = './uploads/company';
+                        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                        $config['max_size'] = 0;
+                        $new_name = time() . '-' . $_FILES["image"]['name'];
+                        $config['file_name'] = $new_name;
+                        $this->load->library('upload', $config);
+                        if (!$this->upload->do_upload('image')) {
+                            $this->msg(0,[],$this->upload->display_errors());
+                            exit();
+                        } else {
+                            $company['image'] = 'uploads/company/'.$this->upload->data('file_name');
+                            $this->session->set_userdata('image',$company['image']);
+                        }
+                    }
+                    $company['name']=$_POST['name'];
+                    $this->UserModel->updateByID($company,$this->input->post('company_id'),'company');
+                    if(!empty($this->input->post('password')))
+                    {
+                        $_POST['password']=md5($_POST['password']);
+                    }else{
+                        unset($_POST['password']);
+                    }
+                    $id=$_POST['id'];
+                    unset($_POST['id']);
+                    unset($_POST['company_id']);
+                    unset($_POST['cpassword']);
+                    unset($_POST['name']);
+                    if($this->UserModel->updateByID($_POST,$id,'users'))
+                    {
+
+                        $this->msg(1,[],'Company updated successfully.');
+                    }else{
+                        $this->msg(0,[],'Error while adding coach!');
+                    }
+                }else{
+                    $this->msg(0,[],'Email already exists!');
+                }
+        }else{
+            $this->msg(0,[],'Fields are missing!');
+        }
+    }
+
     public function getCoach()
     {
         $data = $row = array();
@@ -170,6 +453,52 @@ class Company extends MY_Controller {
         // Output to JSON format
         echo json_encode($output);
     }
+
+    public function getCompany()
+    {
+        $data = $row = array();
+        
+        // Fetch member's records
+        $coachData = $this->CompanyModel->getCompany($_POST);
+        
+        $i = $_POST['start'];
+        foreach($coachData as $coach){
+            $i++;
+            $img = $coach->image? (base_url($coach->image)) : (base_url("assets/img/company.png"));
+            $data[] = array(
+                'id'=>$coach->id,
+                $i,
+                '<div class="media align-items-center">
+                    <a href="#" class="avatar rounded-circle mr-3">
+                    <img alt="Image placeholder" src="'.$img.'">
+                    </a>
+                    <div class="media-body">
+                    <span class="name mb-0 text-sm">'.$coach->name.'</span>
+                    </div>
+                </div>',
+                '<div class="dropdown">
+                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                    <a class="dropdown-item" href="'.base_url("admin/company/edit/".$coach->id).'">Edit</a>
+                    <a class="dropdown-item" onclick="deleteModal(\'company\','.$coach->id.')">Delete</a>
+                    </div>
+                </div>'
+            );
+        }
+        
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->CompanyModel->countAll(),
+            "recordsFiltered" => $this->CompanyModel->countFiltered($_POST),
+            "data" => $data,
+        );
+        
+        // Output to JSON format
+        echo json_encode($output);
+    }
+
 
     public function getAthlete()
     {
@@ -233,31 +562,11 @@ class Company extends MY_Controller {
 
     public function editProfile()
     {
-        if(!empty($this->input->post('name')) && !empty($this->input->post('email')) && !empty($this->input->post('id')))
+        if(!empty($this->input->post('username')) && !empty($this->input->post('id')))
         {
-            if(!empty($this->session->userdata('company_id')))
-            {
                 if(!$this->UserModel->checkEmailByID($this->input->post('email'),$this->input->post('id'),'users'))
                 {
                     $company=array();
-                    if(!empty($_FILES['image']['name']))
-                    {
-                        $config['upload_path'] = './uploads/company';
-                        $config['allowed_types'] = 'gif|jpg|png|jpeg';
-                        $config['max_size'] = 0;
-                        $new_name = time() . '-' . $_FILES["image"]['name'];
-                        $config['file_name'] = $new_name;
-                        $this->load->library('upload', $config);
-                        if (!$this->upload->do_upload('image')) {
-                            $this->msg(0,[],$this->upload->display_errors());
-                            exit();
-                        } else {
-                            $company['image'] = 'uploads/company/'.$this->upload->data('file_name');
-                            $this->session->set_userdata('image',$company['image']);
-                        }
-                    }
-                    $company['name']=$_POST['name'];
-                    $this->UserModel->updateByID($company,$this->session->userdata('company_id'),'company');
                     if(!empty($this->input->post('password')))
                     {
                         $_POST['password']=md5($_POST['password']);
@@ -267,20 +576,21 @@ class Company extends MY_Controller {
                     $id=$_POST['id'];
                     unset($_POST['id']);
                     unset($_POST['cpassword']);
-                    unset($_POST['name']);
-                    if($this->UserModel->updateByID($_POST,$id,'users'))
+                    if($this->UserModel->updateByID($_POST,$id,'admin'))
                     {
-
+                        $ses= array(
+                            'admin'=> $this->input->post('username'),
+                            'admin_id'=> $this->input->post('id')
+                        );
+                        $this->session->set_userdata($ses);
                         $this->msg(1,[],'Profile updated successfully.');
                     }else{
                         $this->msg(0,[],'Error while adding coach!');
                     }
                 }else{
-                    $this->msg(0,[],'Email already exists!');
+                    $this->msg(0,[],'username already exists!');
                 }
-            }else{
-                $this->msg(0,[],'Error occurred please try again later!');
-            }
+
         }else{
             $this->msg(0,[],'Fields are missing!');
         }

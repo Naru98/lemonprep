@@ -148,3 +148,14 @@ $route['api/athlete/forms'] = 'api/athlete/getForms';
 $route['api/athlete/applyForm'] = 'api/athlete/applyForm';
 $route['api/athlete/addCheckIn'] = 'api/athlete/addCheckIn';
 
+
+
+//admin
+$route['admin'] = 'admin/main/index';
+$route['admin/login'] = 'admin/login/index';
+$route['admin/logout'] = 'admin/login/logout';
+$route['admin/login/check'] = 'admin/login/check';
+$route['admin/profile'] = 'admin/main/profile';
+
+//admin api
+$route['api/admin/company'] = 'api/admin/getCompany';

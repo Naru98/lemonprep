@@ -7,6 +7,15 @@ class Shows extends MY_Controller {
 		parent::__construct();
 		$this->session->set_userdata('athlete_id','');
 		$this->load->model('UserModel');
+		if(empty($this->session->userdata('type')))
+		{
+			redirect(base_url('login'));
+		}else{
+			if($this->session->userdata('type')!='company')
+			{
+				redirect(base_url($this->session->userdata('type')),'refresh');
+			}
+		}
 	}
 
     public function index()

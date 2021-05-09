@@ -47,7 +47,7 @@
                 } ?>
             </div>
             <!-- Light table -->
-            <div class="table-responsive">
+            <div >
               <table id="athleteDataTable" class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>

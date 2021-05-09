@@ -130,7 +130,7 @@
               <a class="nav-link" href="<?php echo base_url()?>athlete/workouts">My Workouts</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url()?>athlete/diets">My Nutritions</a>
+              <a class="nav-link" href="<?php echo base_url()?>athlete/diets">My Nutrition</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url()?>athlete/shows">My Shows</a>

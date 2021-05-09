@@ -29,7 +29,7 @@
               </div>
             </div>
             <!-- Light table -->
-            <div class="table-responsive">
+            <div >
               <table id="workoutDataTable" class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
