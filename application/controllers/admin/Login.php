@@ -22,7 +22,7 @@ class Login extends CI_Controller {
 
 	public function index()
 	{
-        if(!empty($this->session->userdata('admin')))
+        if(!empty($this->session->userdata('madmin')))
 		{
 			redirect(base_url('admin'));
 		}
@@ -42,7 +42,7 @@ class Login extends CI_Controller {
                     
                     $ses= array(
                         'type'=> '',
-                        'admin'=> $this->input->post('username'),
+                        'madmin'=> $this->input->post('username'),
                         'admin_id'=> $user[0]['id']
                     );
                     $this->session->set_userdata($ses);

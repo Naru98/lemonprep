@@ -65,6 +65,15 @@
                     </div>
                     <div class="col-lg-12">
                       <div class="form-group">
+                      <label class="form-control-label d-block" for="input-image">Check-In Setting</label>
+                        <label class="custom-toggle">
+                          <input type="checkbox" name="isVerifiyed" value="1">
+                          <span class="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Yes"></span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="form-group">
                         <label class="form-control-label" for="input-image">Picture</label>
                         <input type="file" id="input-image" class="form-control" name="image">
                       </div>

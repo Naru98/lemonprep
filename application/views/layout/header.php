@@ -104,7 +104,7 @@
             </a>
           </li>
           <?php }else{ ?>
-            <?php if(!empty($this->session->userdata('admin'))) {?>
+            <?php if(!empty($this->session->userdata('madmin'))) {?>
           <li class="nav-item">
             <a href="<?php echo base_url()?>login" class="nav-link">
               <span class="nav-link-inner--text">Login</span>

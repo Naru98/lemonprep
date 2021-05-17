@@ -88,7 +88,7 @@
     <nav class="navbar navbar-nav  navbar-top navbar-expand-lg navbar-light bg-primary border-bottom">
       <div class="container-fluid">
         <a class="navbar-brand" href="<?php echo base_url()?>">Lemon Prep</a>
-        <?php if(!empty($this->session->userdata('admin'))){?>
+        <?php if(!empty($this->session->userdata('madmin'))){?>
         <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -100,7 +100,7 @@
                   <img alt="Image placeholder" src="<?php echo base_url("assets/img/admin.png"); ?>">
                 </span>
                 <div class="media-body  ml-2  d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold"><?php if(!empty($this->session->userdata('admin'))){ echo $this->session->userdata('admin'); }else{ echo 'admin';} ?></span>
+                  <span class="mb-0 text-sm  font-weight-bold"><?php if(!empty($this->session->userdata('madmin'))){ echo $this->session->userdata('madmin'); }else{ echo 'admin';} ?></span>
                 </div>
               </div>
             </a>

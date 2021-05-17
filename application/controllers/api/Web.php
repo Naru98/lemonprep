@@ -195,7 +195,7 @@ class Web extends MY_Controller {
                         if($this->WebModel->createUser($_POST))
                         {
                             $ses=array(
-                                'admin'=> '',
+                                'admin'=> 0,
                                 'type'=>'company',
                                 'company_id'=>$company_id,
                                 'email'=>$_POST['email'],
@@ -237,7 +237,7 @@ class Web extends MY_Controller {
                         if($company)
                         {
                             $ses=array(
-                                'admin'=> '',
+                                'admin'=> $user[0]['isVerifiyed'],
                                 'type'=>$this->input->post('type'),
                                 'company_id'=>$user[0]['company_id'],
                                 'email'=>$_POST['email'],
@@ -265,8 +265,9 @@ class Web extends MY_Controller {
                         $company=$this->WebModel->getComapny($user[0]['company_id']);
                         if($company)
                         {
+                            $admin=$this->WebModel->getByField('company_id',$user[0]['company_id'],'users');
                             $ses=array(
-                                'admin'=> '',
+                                'checkin'=>$admin[0]['isVerifiyed'],
                                 'admin'=>$user[0]['isVerifiyed'],
                                 'type'=>$this->input->post('type'),
                                 'company_id'=>$user[0]['company_id'],

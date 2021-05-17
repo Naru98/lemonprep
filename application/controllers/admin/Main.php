@@ -5,7 +5,7 @@ class Main extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
-		if(empty($this->session->userdata('admin')))
+		if(empty($this->session->userdata('madmin')))
 		{
 			redirect(base_url('admin/login'));
 		}

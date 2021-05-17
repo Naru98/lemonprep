@@ -87,12 +87,12 @@
     <!-- Topnav -->
     <nav class="navbar navbar-nav  navbar-top navbar-expand-lg navbar-light bg-primary border-bottom">
       <div class="container-fluid">
-      <?php if(empty($this->session->userdata('admin'))){?> <a class="navbar-brand" href="<?php echo base_url()?>">Lemon Prep</a> <?php }else{ ?> <a class="navbar-brand" href="<?php echo base_url('admin/company')?>">Back to Main  Dashboard</a> <?php } ?>
+      <?php if(empty($this->session->userdata('madmin'))){?> <a class="navbar-brand" href="<?php echo base_url()?>">Lemon Prep</a> <?php }else{ ?> <a class="navbar-brand" href="<?php echo base_url('admin/company')?>">Back to Main  Dashboard</a> <?php } ?>
         <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <?php 
-        if(empty($this->session->userdata('admin'))){?>
+        if(empty($this->session->userdata('madmin'))){?>
         <ul class="navbar-nav align-items-center  ml-auto ml-md-0 order-md-2">
           <li class="nav-item dropdown">
             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -134,9 +134,12 @@
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url()?>company/athlete">Athlete</a>
             </li>
+            <?php 
+            if(!empty($this->session->userdata('admin')) || !empty($this->session->userdata('madmin'))){?>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url()?>company/checkin">Check In</a>
             </li>
+            <?php } ?>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url()?>company/forms">Forms</a>
             </li>

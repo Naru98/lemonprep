@@ -16,7 +16,7 @@ class Welcome extends MY_Controller {
 			$data['child'] = 'login';
 			$this->load->view('layout/index',$data);
 		}else{
-			if(!empty($this->session->userdata('admin')))
+			if(!empty($this->session->userdata('madmin')))
 			{
 				$data['child'] = 'login';
 				$this->load->view('layout/index',$data);
@@ -33,7 +33,7 @@ class Welcome extends MY_Controller {
 			$data['child'] = 'register';
 			$this->load->view('layout/index',$data);
 		}else{
-			if(!empty($this->session->userdata('admin')))
+			if(!empty($this->session->userdata('madmin')))
 			{
 				$data['child'] = 'register';
 				$this->load->view('layout/index',$data);
