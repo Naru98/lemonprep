@@ -19,6 +19,14 @@ class Main extends CI_Controller {
 		$this->load->view('admin/layout/index',$data);
 	}
 
+	public function settings()
+	{
+		$data['nav']=1;
+		$data['child'] = 'admin/setting';
+		$data['data'] = $this->UserModel->getTable('settings');
+		$this->load->view('admin/layout/index',$data);
+	}
+
 	public function profile()
 	{
 		$data['nav']=0;

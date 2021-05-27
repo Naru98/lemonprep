@@ -96,6 +96,23 @@ class Main extends MY_Controller {
 
 	public function check_in()
 	{
+		$data['status']=0;
+		$user=$this->UserModel->getByField('email',$this->session->userdata('email'),'athlete');
+		$csdate=$user[0]['csdate'];
+		$cedate=$user[0]['cedate'];
+		if($csdate)
+		{
+			$cdate=date('Y-m-d');
+			if(strtotime($csdate) <= strtotime($cdate) && strtotime($cedate) >= strtotime($cdate))
+			{
+				$data['status']=1;
+			}else
+			{
+				$data['status']=2;
+				$data['csdate']=$user[0]['csdate'];
+				$data['cedate']=$user[0]['cedate'];
+			}
+		}
 		$data['nav']=2;
 		$data['company']=$this->UserModel->getID($this->session->userdata('company_id'),'company');
 		$data['child'] = 'athlete/check_in';

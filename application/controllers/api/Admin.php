@@ -17,6 +17,25 @@ class Admin extends MY_Controller {
         $this->load->model('WebModel');
 	}
 
+    public function settings()
+    {
+        if(!empty($this->input->post('count')))
+        {
+            for($i=1; $i<$this->input->post('count'); $i++)
+            {
+                $data=array('value'=>0);
+                if(!empty($this->input->post('value'.$i)))
+                {
+                    $data['value']=1;
+                }
+                $this->UserModel->updateByID($data,$this->input->post('id'.$i),'settings');
+            }
+            $this->msg(1,[],'Settings updated successfully.');
+        }else{
+            $this->msg(0,[],'Fields are missing!');
+        }
+
+    }
     public function addCoach()
     {
         if(!empty($this->input->post('name')) && !empty($this->input->post('email')) && !empty($this->input->post('password')))

@@ -74,6 +74,31 @@
       cursor: pointer;
     }
   </style>
+  <?php
+    $settingLogoValue=0;
+    $this->db->select("*");
+    $this->db->from('settings');
+    $this->db->where('name','logo');
+    $settingLogo = $this->db->get();
+    if ($settingLogo->num_rows() > 0) {
+      $settingLogo=$settingLogo->result_array();
+      foreach($settingLogo as $s)
+      {
+        $settingLogoValue=$s['value'];
+      }
+    }
+    if($settingLogoValue==0)
+    {
+      ?>
+      <style>
+        .card-profile-image .rounded-circle
+        {
+          border-radius: 0% !important;
+        }
+      </style>
+      <?php
+    }
+  ?>
   <script>
   let SELECTED_VALUE=[];
   </script>

@@ -88,6 +88,20 @@
                       </div>
                     </div>
                   </div>
+                  <div class="row input-daterange datepicker align-items-center">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-password">Check-In start date</label>
+                        <input type="text" id="input-sadte" class="form-control"  name="csdate" <?php if($athlete[0]['csdate']){ echo 'value="'.date('m/d/Y',strtotime($athlete[0]['csdate'])).'"'; }?> >
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-confirm-password">Check-In end date</label>
+                        <input type="text" id="input-edate" class="form-control" name="cedate"<?php if($athlete[0]['cedate']){ echo 'value="'.date('m/d/Y',strtotime($athlete[0]['cedate'])).'"'; }?> >
+                      </div>
+                    </div>
+                  </div>
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">

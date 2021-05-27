@@ -94,6 +94,18 @@ class UserModel extends CI_Model {
         }
     }
 
+    public function getTable($table)
+    {
+        $this->db->select("*");
+		$this->db->from($table);
+		$result = $this->db->get();
+        if ($result->num_rows() > 0) {
+            return $result->result_array();
+        }else{
+            return false;
+        }
+    }
+
     public function getByField($field, $value, $table)
     {
         $this->db->select("*");

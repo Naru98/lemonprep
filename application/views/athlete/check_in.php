@@ -16,6 +16,10 @@
         </div>
     </div>
 </div>
+<?php
+if($status==1)
+{
+?>
 <div class="container-fluid mt--6">
     <div class="row">
         <div class="col-xl-12">
@@ -53,3 +57,12 @@
         </div>
     </div>
 </div>
+<?php }else{ ?>
+<div class="container-fluid mt--6">
+    <div class="row">
+        <div class="col-xl-12">
+            <h2>Please contact admin for check in</h2>
+        </div>
+    </div>
+<div>
+<?php } ?>

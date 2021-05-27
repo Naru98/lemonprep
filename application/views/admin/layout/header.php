@@ -76,6 +76,31 @@
   <script>
   let SELECTED_VALUE=[];
   </script>
+  <?php
+    $settingLogoValue=0;
+    $this->db->select("*");
+    $this->db->from('settings');
+    $this->db->where('name','logo');
+    $settingLogo = $this->db->get();
+    if ($settingLogo->num_rows() > 0) {
+      $settingLogo=$settingLogo->result_array();
+      foreach($settingLogo as $s)
+      {
+        $settingLogoValue=$s['value'];
+      }
+    }
+    if($settingLogoValue==0)
+    {
+      ?>
+      <style>
+        .card-profile-image .rounded-circle
+        {
+          border-radius: 0% !important;
+        }
+      </style>
+      <?php
+    }
+  ?>
 </head>
 
 <body>
@@ -128,6 +153,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link active" href="<?php echo base_url()?>admin/company">Company</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="<?php echo base_url()?>admin/settings">Settings</a>
             </li>
           </ul>
         </div>

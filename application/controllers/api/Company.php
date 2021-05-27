@@ -192,7 +192,7 @@ class Company extends MY_Controller {
                     $cimg= $c['image']? (base_url($c['image'])) : (base_url("assets/img/coach.png"));
                     $coachText.='<a href="'.$curl.'" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="'.$c['name'].'">
                                 <img alt="Image placeholder" src="'.$cimg.'">
-                                </a>';
+                                </a>'.$c['name'].' ';
                 }
             }
             $data[] = array(
@@ -207,7 +207,7 @@ class Company extends MY_Controller {
                     </div>
                 </div>',
                 $athlete->email,
-                '<div class="avatar-group">'.$coachText.'</div>',
+                '<div>'.$coachText.'</div>',
                 '<div class="dropdown">
                     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-ellipsis-v"></i>
@@ -314,6 +314,17 @@ class Company extends MY_Controller {
                     unset($_POST['cpassword']);
                     $_POST['sdate']=date('Y-m-d',strtotime($_POST['sdate']));
                     $_POST['edate']=date('Y-m-d',strtotime($_POST['edate']));
+                    if(!empty($_POST['csdate']))
+                    {
+                        $_POST['csdate']=date('Y-m-d',strtotime($_POST['csdate']));
+                        if(!empty($_POST['cedate']))
+                        {
+                            $_POST['cedate']=date('Y-m-d',strtotime($_POST['cedate']));
+                        }else
+                        {
+                            $_POST['cedate']=date('Y-m-d',strtotime($_POST['csdate']));
+                        }
+                    }
                     $_POST['password']=md5($_POST['password']);
                     $_POST['company_id']=$this->session->userdata('company_id');
                     $athlete_id=$this->UserModel->insert($_POST,'athlete');
@@ -376,6 +387,17 @@ class Company extends MY_Controller {
                     unset($_POST['coach']);
                     $_POST['sdate']=date('Y-m-d',strtotime($_POST['sdate']));
                     $_POST['edate']=date('Y-m-d',strtotime($_POST['edate']));
+                    if(!empty($_POST['csdate']))
+                    {
+                        $_POST['csdate']=date('Y-m-d',strtotime($_POST['csdate']));
+                        if(!empty($_POST['cedate']))
+                        {
+                            $_POST['cedate']=date('Y-m-d',strtotime($_POST['cedate']));
+                        }else
+                        {
+                            $_POST['cedate']=date('Y-m-d',strtotime($_POST['csdate']));
+                        }
+                    }
                     if($this->UserModel->updateByID($_POST,$id,'athlete'))
                     {
                         $this->UserModel->deleteByField('athlete_id',$id,'coach_athlete');

@@ -10,6 +10,12 @@ user_guide_src/cilexer/build/*
 user_guide_src/cilexer/dist/*
 user_guide_src/cilexer/pycilexer.egg-info/*
 
+uploads/athlete
+uploads/check_in
+uploads/coach
+uploads/company
+uploads/forms
+
 #codeigniter 3
 application/logs/*
 !application/logs/index.html

@@ -156,6 +156,7 @@ $route['admin/login'] = 'admin/login/index';
 $route['admin/logout'] = 'admin/login/logout';
 $route['admin/login/check'] = 'admin/login/check';
 $route['admin/profile'] = 'admin/main/profile';
+$route['admin/settings'] = 'admin/main/settings';
 
 //admin api
 $route['api/admin/company'] = 'api/admin/getCompany';
