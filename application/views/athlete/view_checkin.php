@@ -8,7 +8,7 @@
                     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                         <li class="breadcrumb-item"><a href="<?php echo base_url().$this->session->userdata('type')?>"><i class="fas fa-home"></i></a></li>
-                        <li class="breadcrumb-item"><a href="<?php echo base_url()?>/company/checkin">Check IN</a></li>
+                        <li class="breadcrumb-item"><a href="<?php echo base_url()?>/coach/checkin">Check IN</a></li>
                         <li class="breadcrumb-item active" aria-current="page"><a>View</a></li>
                         </ol>
                     </nav>
@@ -33,16 +33,12 @@
               </div>
             </div>
             <div class="card-body">
-                <div id="success" class="alert alert-success" role="alert" style="display:none;">
-                </div>
-                <div id="error" class="alert alert-warning" role="alert" style="display:none;">
-                </div>
                 <?php
                 foreach($data as $key=>$value) {
                     ?>
                     <div class="row mb-1">
                         <div class="col-sm-2"><?php echo $key;?>:- </div>
-                        <div class="col-sm-2"><?php
+                        <div class="col-sm-10"><?php
                             if($value->t=='File')
                             {
                                 ?> <a href="<?php echo base_url($value->v);?>">View</a><?php
@@ -60,18 +56,10 @@
 
                 }
                 ?>
-                <form id="checkinNote">
-                    <div class="row">
-                        <div class="col-lg-12">
-                        <div class="form-group">
-                            <input type="hidden" name="id" value="<?php echo $checkin['id']?>" />
-                            <label class="form-control-label">Note</label>
-                            <textarea class="form-control" name="note" required><?php echo $checkin['note']?></textarea>
-                        </div>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary" type="submit">Submit</button>
-                </form>
+                <div class="row mb-1">
+                    <div class="col-sm-2">Note:- </div>
+                    <div class="col-sm-10"><?php echo $checkin['note'];?></div>
+                </div>
             </div>
           </div>
         </div>

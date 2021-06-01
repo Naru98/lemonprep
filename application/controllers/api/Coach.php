@@ -304,7 +304,8 @@ class Coach extends MY_Controller {
             $data[] = array(
                 'id'=>$athlete->id,
                 $i,
-                date('Y-m-d',strtotime($athlete->created)),
+                date('d-M-Y',strtotime($athlete->from)),
+                date('d-M-Y',strtotime($athlete->to)),
                 '<div class="dropdown">
                     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-ellipsis-v"></i>

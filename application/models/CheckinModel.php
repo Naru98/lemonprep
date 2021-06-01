@@ -4,19 +4,25 @@ class CheckinModel extends CI_Model {
 		parent::__construct();
         // Set table name
         $this->table = 'check_in';
+        $this->athlete_id= 0;
         if(!empty($this->session->userdata('athlete_id')))
         {
             $this->athlete_id= $this->session->userdata('athlete_id'); 
         }else{
-            $this->athlete_id= 0;
+            if($this->session->userdata('type')=='athlete')
+            {
+                $this->athlete_id= $this->session->userdata('id');
+            }else{
+                $this->athlete_id= 0;
+            }
         }
         
         // Set orderable column fields
-        $this->column_order = array(null, 'created');
+        $this->column_order = array(null, 'from', 'to');
         // Set searchable column fields
-        $this->column_search = array('created');
+        $this->column_search = array('from','to');
         // Set default order
-        $this->order = array('created' => 'asc');
+        $this->order = array('from' => 'asc');
 	}
 
     public function getACheckin($postData){

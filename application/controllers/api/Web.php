@@ -6,6 +6,7 @@ class Web extends MY_Controller {
     function __construct(){
 		parent::__construct();
 		$this->load->model('WebModel');
+        $this->load->model('UserModel');
 	}
 
 	public function register()
@@ -325,4 +326,59 @@ class Web extends MY_Controller {
             $this->msg(0,[],'Fields are missing!');
         }
     }
+
+    public function checkin()
+    {
+        $html='';
+        if(!empty($_POST['sdate']) && !empty($_POST['edate']) && !empty($_POST['csdate']) && !empty($_POST['freq']))
+        {
+            $sdate= date('Y-m-d',strtotime($_POST['sdate']));
+            $edate= date('Y-m-d',strtotime($_POST['edate']));
+            $csdate= date('Y-m-d',strtotime($_POST['csdate']));
+            $freq=$_POST['freq'];
+            if($sdate < $edate && $freq > 0)
+            {
+                $html.='<div class="col-sm-12 h4">Check In Dates </div>';
+                $loop=1;
+                while($loop == 1)
+                {
+                    $fdate = date('Y-m-d', strtotime($sdate. ' + '.$freq.' days'));
+                    if($sdate < $edate && $fdate <= $edate)
+                    {
+                        $html.= '<div class="col-sm-3">'.date('d M',strtotime($sdate)).' - '.date('d M',strtotime($fdate)).'</div>';
+                    } 
+                    if($sdate < $edate && $fdate >= $edate)
+                    {
+                        $html.= '<div class="col-sm-3">'.date('d M',strtotime($sdate)).' - '.date('d M',strtotime($edate)).'</div>';
+                        $loop=2;
+                    }
+                    if($sdate >= $edate || $fdate >= $edate)
+                    {
+                        $loop=2;
+                    }
+                    $sdate= date('Y-m-d', strtotime($fdate. ' + 1 days'));
+                }
+            }
+        }
+        $html.='<br><br>';
+        echo $html;
+    }
+
+    public function checkinNote()
+    {
+        if(!empty($_POST['id']) && !empty($_POST['note']))
+        {
+            $id=$_POST['id'];
+            unset($_POST['id']);
+            if($this->UserModel->updateByID($_POST,$id,'check_in'))
+            {
+                $this->msg(1,[],'updated successfully.');
+            }else
+            {
+                $this->msg(0,[],'Error while updating show!');
+            }
+        }else{
+            $this->msg(0,[],'Fields are missing!');
+        }
+    } 
 }

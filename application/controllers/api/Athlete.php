@@ -10,6 +10,7 @@ class Athlete extends MY_Controller {
         $this->load->model('DietModel');
         $this->load->model('ShowsModel');
         $this->load->model('FormsModel');
+        $this->load->model('CheckinModel');
 	}
 
     public function getworkouts()
@@ -193,6 +194,43 @@ class Athlete extends MY_Controller {
         }
     }
 
+    public function checkin()
+    {
+        $data = $row = array();
+        
+        // Fetch member's records
+        $athleteData = $this->CheckinModel->getACheckin($_POST);
+        $i = $_POST['start'];
+        foreach($athleteData as $athlete){
+            $i++;
+            $data[] = array(
+                'id'=>$athlete->id,
+                $i,
+                date('d-M-Y',strtotime($athlete->from)),
+                date('d-M-Y',strtotime($athlete->to)),
+                '<div class="dropdown">
+                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                    <a class="dropdown-item" href="'.base_url("athlete/check_in/view/".$athlete->id).'">View</a>
+                    <a class="dropdown-item" onclick="deleteModal(\'check_in\','.$athlete->id.')">Delete</a>
+                    </div>
+                </div>'
+            );
+        }
+        
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->CheckinModel->countAll(),
+            "recordsFiltered" => $this->CheckinModel->countFiltered($_POST),
+            "data" => $data,
+        );
+        
+        // Output to JSON format
+        echo json_encode($output);
+    }
+
     public function addCheckIn()
     {
         $data=$this->UserModel->getID($this->session->userdata('company_id'),'company');
@@ -201,6 +239,7 @@ class Athlete extends MY_Controller {
             $data= json_decode($data[0]['data']);
             foreach($data as $d)
             {
+                $d->l=str_replace(' ', '', $d->l);
                 if($d->r==1)
                 {
                     if($d->m==1)
@@ -226,6 +265,7 @@ class Athlete extends MY_Controller {
             $fdata=[];
             foreach($data as $d)
             {
+                $d->l=str_replace(' ', '', $d->l);
                 if($d->r==1)
                 {
                     if($d->t=='Image' || $d->t=='File')
@@ -263,6 +303,8 @@ class Athlete extends MY_Controller {
                 'athlete_id'=> $this->session->userdata('id'),
                 'comp_id'=>$this->session->userdata('company_id'),
                 'data'=> json_encode($fdata),
+                'from'=> $_POST['csdate'],
+                'to'=> $_POST['cedate']
             );
             if($this->UserModel->insert($rdata,'check_in'))
             {

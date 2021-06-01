@@ -314,17 +314,44 @@ class Company extends MY_Controller {
                     unset($_POST['cpassword']);
                     $_POST['sdate']=date('Y-m-d',strtotime($_POST['sdate']));
                     $_POST['edate']=date('Y-m-d',strtotime($_POST['edate']));
+                    $_POST['data']= array();
                     if(!empty($_POST['csdate']))
                     {
-                        $_POST['csdate']=date('Y-m-d',strtotime($_POST['csdate']));
-                        if(!empty($_POST['cedate']))
+                        $sdate= date('Y-m-d',strtotime($_POST['sdate']));
+                        $edate= date('Y-m-d',strtotime($_POST['edate']));
+                        $csdate= date('Y-m-d',strtotime($_POST['csdate']));
+                        $freq=$_POST['freq'];
+                        if($sdate < $edate && $freq > 0)
                         {
-                            $_POST['cedate']=date('Y-m-d',strtotime($_POST['cedate']));
-                        }else
-                        {
-                            $_POST['cedate']=date('Y-m-d',strtotime($_POST['csdate']));
+                            $loop=1;
+                            while($loop == 1)
+                            {
+                                $fdate = date('Y-m-d', strtotime($sdate. ' + '.$freq.' days'));
+                                if($sdate < $edate && $fdate <= $edate)
+                                {
+                                    $_POST['data'][]=array(
+                                        'from'=>date('Y-m-d',strtotime($sdate)),
+                                        'to'=>date('Y-m-d',strtotime($fdate))
+                                    );
+                                } 
+                                if($sdate < $edate && $fdate >= $edate)
+                                {
+                                    $_POST['data'][]=array(
+                                        'from'=>date('Y-m-d',strtotime($sdate)),
+                                        'to'=>date('Y-m-d',strtotime($fdate))
+                                    );
+                                    $loop=2;
+                                }
+                                if($sdate >= $edate || $fdate >= $edate)
+                                {
+                                    $loop=2;
+                                }
+                                $sdate= date('Y-m-d', strtotime($fdate. ' + 1 days'));
+                            }
                         }
                     }
+                    $_POST['data']=json_encode($_POST['data']);
+                    $_POST['csdate']=date('Y-m-d',strtotime($_POST['csdate']));
                     $_POST['password']=md5($_POST['password']);
                     $_POST['company_id']=$this->session->userdata('company_id');
                     $athlete_id=$this->UserModel->insert($_POST,'athlete');
@@ -387,17 +414,44 @@ class Company extends MY_Controller {
                     unset($_POST['coach']);
                     $_POST['sdate']=date('Y-m-d',strtotime($_POST['sdate']));
                     $_POST['edate']=date('Y-m-d',strtotime($_POST['edate']));
+                    $_POST['data']= array();
                     if(!empty($_POST['csdate']))
                     {
-                        $_POST['csdate']=date('Y-m-d',strtotime($_POST['csdate']));
-                        if(!empty($_POST['cedate']))
+                        $sdate= date('Y-m-d',strtotime($_POST['sdate']));
+                        $edate= date('Y-m-d',strtotime($_POST['edate']));
+                        $csdate= date('Y-m-d',strtotime($_POST['csdate']));
+                        $freq=$_POST['freq'];
+                        if($sdate < $edate && $freq > 0)
                         {
-                            $_POST['cedate']=date('Y-m-d',strtotime($_POST['cedate']));
-                        }else
-                        {
-                            $_POST['cedate']=date('Y-m-d',strtotime($_POST['csdate']));
+                            $loop=1;
+                            while($loop == 1)
+                            {
+                                $fdate = date('Y-m-d', strtotime($sdate. ' + '.$freq.' days'));
+                                if($sdate < $edate && $fdate <= $edate)
+                                {
+                                    $_POST['data'][]=array(
+                                        'from'=>date('Y-m-d',strtotime($sdate)),
+                                        'to'=>date('Y-m-d',strtotime($fdate))
+                                    );
+                                } 
+                                if($sdate < $edate && $fdate >= $edate)
+                                {
+                                    $_POST['data'][]=array(
+                                        'from'=>date('Y-m-d',strtotime($sdate)),
+                                        'to'=>date('Y-m-d',strtotime($fdate))
+                                    );
+                                    $loop=2;
+                                }
+                                if($sdate >= $edate || $fdate >= $edate)
+                                {
+                                    $loop=2;
+                                }
+                                $sdate= date('Y-m-d', strtotime($fdate. ' + 1 days'));
+                            }
                         }
                     }
+                    $_POST['data']=json_encode($_POST['data']);
+                    $_POST['csdate']=date('Y-m-d',strtotime($_POST['csdate']));
                     if($this->UserModel->updateByID($_POST,$id,'athlete'))
                     {
                         $this->UserModel->deleteByField('athlete_id',$id,'coach_athlete');
@@ -908,7 +962,8 @@ class Company extends MY_Controller {
             $data[] = array(
                 'id'=>$athlete->id,
                 $i,
-                date('Y-m-d',strtotime($athlete->created)),
+                date('d-M-Y',strtotime($athlete->from)),
+                date('d-M-Y',strtotime($athlete->to)),
                 '<div class="dropdown">
                     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-ellipsis-v"></i>

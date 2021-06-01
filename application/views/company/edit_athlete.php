@@ -77,29 +77,31 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-password">Valid From</label>
-                        <input type="text" id="input-sadte" class="form-control"  name="sdate" <?php if($athlete[0]['sdate']){ echo 'value="'.date('m/d/Y',strtotime($athlete[0]['sdate'])).'"'; }?> required>
+                        <input type="text" id="input-sadte" class="form-control"  name="sdate" onchange="setCheckin()" <?php if($athlete[0]['sdate']){ echo 'value="'.date('m/d/Y',strtotime($athlete[0]['sdate'])).'"'; }?> required>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-confirm-password">Valid To</label>
-                        <input type="text" id="input-edate" class="form-control" name="edate" <?php if($athlete[0]['edate']){ echo 'value="'.date('m/d/Y',strtotime($athlete[0]['edate'])).'"'; }?> required>
+                        <input type="text" id="input-edate" class="form-control" name="edate" onchange="setCheckin()" <?php if($athlete[0]['edate']){ echo 'value="'.date('m/d/Y',strtotime($athlete[0]['edate'])).'"'; }?> required>
                       </div>
                     </div>
                   </div>
-                  <div class="row input-daterange datepicker align-items-center">
+                  <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-password">Check-In start date</label>
-                        <input type="text" id="input-sadte" class="form-control"  name="csdate" <?php if($athlete[0]['csdate']){ echo 'value="'.date('m/d/Y',strtotime($athlete[0]['csdate'])).'"'; }?> >
+                        <label class="form-control-label" for="date">Check-In start date</label>
+                        <input class="form-control" type="text" id="date" name="csdate" onchange="setCheckin()" <?php if($athlete[0]['csdate']){ echo 'value="'.date('m/d/Y',strtotime($athlete[0]['csdate'])).'"'; }?> required>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-confirm-password">Check-In end date</label>
-                        <input type="text" id="input-edate" class="form-control" name="cedate"<?php if($athlete[0]['cedate']){ echo 'value="'.date('m/d/Y',strtotime($athlete[0]['cedate'])).'"'; }?> >
+                        <label class="form-control-label" for="input-confirm-password">Frequency</label>
+                        <input type="number"class="form-control" name="freq" onchange="setCheckin()" value="<?php echo $athlete[0]['freq']?>" required>
                       </div>
                     </div>
+                  </div>
+                  <div class="row" id="checkinDates">
                   </div>
                   <div class="row">
                     <div class="col-lg-6">
@@ -158,6 +160,9 @@ if(!empty($selected_coach))
                 ?> SELECTED_VALUE.push(<?php echo $scoach['coach_id'];?>);<?php
             }
         ?>
+        document.addEventListener('DOMContentLoaded', (event)=>{
+          setCheckin();
+        })
     </script>
     <?php
 }

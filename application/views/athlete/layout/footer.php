@@ -194,6 +194,52 @@
         window.location.href=SITE_URL+'athlete/show/'+$(this).attr('data-id');
       });
 
+      $('#athletecheckinDatatable').DataTable({
+        // Processing indicator
+        "processing": true,
+        // DataTables server-side processing mode
+        "serverSide": true,
+        // Initial no order.
+        "order": [],
+        // Load data from an Ajax source
+        "ajax": {
+            "url": "<?php echo base_url('api/athlete/checkin'); ?>",
+            "type": "POST"
+        },
+        //Set column definition initialisation properties
+        "columnDefs": [
+          { 
+            "targets": [0],
+            "orderable": false
+          },
+          { 
+            "className": "text-right",
+            "targets": [3],
+            "orderable": false
+          }
+        ],
+        "createdRow": function( row, data, dataIndex ) {
+          $( row ).find('td:eq(0)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(1)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(2)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+        },
+        'language': {
+          'paginate': {
+            'next': '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
+            'previous': '<i class="fa fa-arrow-left" aria-hidden="true"></i>'  
+          }
+        }
+      });
+      $('#athletecheckinDatatable').on('click', 'td.clickable', function () {
+        window.location.href=SITE_URL+'athlete/check_in/view/'+$(this).attr('data-id');
+      });
+
       $('#athleteFormsDatatable').DataTable({
         // Processing indicator
         "processing": true,
@@ -351,7 +397,7 @@
               $('#success').show();
               $("#success").scroll();
               setTimeout(function(){
-                window.location.reload();
+                window.location.href=SITE_URL+'athlete/check_in';
               },3000);
             }else{
               $('#error').text(res.msg? res.msg : 'Error occurred! Please try again later.');

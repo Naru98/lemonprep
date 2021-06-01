@@ -98,24 +98,61 @@ class Main extends MY_Controller {
 	{
 		$data['status']=0;
 		$user=$this->UserModel->getByField('email',$this->session->userdata('email'),'athlete');
-		$csdate=$user[0]['csdate'];
-		$cedate=$user[0]['cedate'];
-		if($csdate)
+		$data['data']=$user[0]['data'];
+		if($data['data'] || !empty($data['data']))
 		{
-			$cdate=date('Y-m-d');
-			if(strtotime($csdate) <= strtotime($cdate) && strtotime($cedate) >= strtotime($cdate))
+			$cdata=json_decode($data['data']);
+			foreach($cdata as $cd)
 			{
-				$data['status']=1;
-			}else
-			{
-				$data['status']=2;
-				$data['csdate']=$user[0]['csdate'];
-				$data['cedate']=$user[0]['cedate'];
+				$from= date('Y-m-d',strtotime($cd->from));
+				$to= date('Y-m-d',strtotime($cd->to));
+				$cur = date('Y-m-d');
+				if( $from <= $cur && $to >= $cur)
+				{
+					$data['status'] = 1;
+					$data['csdate'] = $from;
+					$data['cedate'] = $to;
+				}
 			}
 		}
 		$data['nav']=2;
 		$data['company']=$this->UserModel->getID($this->session->userdata('company_id'),'company');
 		$data['child'] = 'athlete/check_in';
+		$this->load->view('athlete/layout/index',$data);
+	}
+
+	public function add_check_in()
+	{
+		$data['status']=0;
+		$user=$this->UserModel->getByField('email',$this->session->userdata('email'),'athlete');
+		$data['data']=$user[0]['data'];
+		if($data['data'] || $data['data'] != 'null')
+		{
+			$cdata=json_decode($data['data']);
+			foreach($cdata as $cd)
+			{
+				$from= date('Y-m-d',strtotime($cd->from));
+				$to= date('Y-m-d',strtotime($cd->to));
+				$cur = date('Y-m-d');
+				if( $from <= $cur && $to >= $cur)
+				{
+					$data['status'] = 1;
+					$data['csdate'] = $from;
+					$data['cedate'] = $to;
+				}
+			}
+		}
+		$data['nav']=2;
+		$data['company']=$this->UserModel->getID($this->session->userdata('company_id'),'company');
+		$data['child'] = 'athlete/add_check_in';
+		$this->load->view('athlete/layout/index',$data);
+	}
+
+	public function view_check_in($id)
+	{
+		$data['nav']=2;
+		$data['checkin']= $this->UserModel->getID($id,'check_in');
+		$data['child'] = 'athlete/view_checkin';
 		$this->load->view('athlete/layout/index',$data);
 	}
 }

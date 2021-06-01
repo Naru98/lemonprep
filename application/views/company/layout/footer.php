@@ -1047,7 +1047,7 @@
           },
           { 
             "className": "text-right",
-            "targets": [2],
+            "targets": [3],
             "orderable": false
           }
         ],
@@ -1056,6 +1056,9 @@
             .attr('data-id', data.id)
             .addClass('clickable');
           $( row ).find('td:eq(1)')
+            .attr('data-id', data.id)
+            .addClass('clickable');
+          $( row ).find('td:eq(2)')
             .attr('data-id', data.id)
             .addClass('clickable');
         },
@@ -1148,6 +1151,65 @@
         window.location.href=SITE_URL+'company/show/view/'+$(this).attr('data-id');
       });
 
+      $("#checkinNote").validate({
+      submitHandler: function (form){
+        $('#overlay').show();
+        $('#error').text('');
+        $('#error').hide();
+        $('#success').text('');
+        $('#success').hide();
+        $.ajax({
+          url: SITE_URL+'api/web/checkinNote',
+          type: 'POST',
+          data: new FormData(form),
+          processData: false,
+          contentType: false,
+          success: function(data){
+            $('#overlay').hide();
+            const res = JSON.parse(data)
+            if(res.status==1)
+            {
+              $('#success').text(res.msg);
+              $('#success').show();
+              $("#success").scroll();
+              window.location.reload();
+            }else{
+              $('#error').text(res.msg? res.msg : 'Error occurred! Please try again later.');
+              $('#error').show();
+              $("#error").scroll();
+            }
+          },
+          error:function (e){
+            $('#overlay').hide();
+            $('#error').text('Error occurred! Please try again later.');
+            $('#error').show();
+            $("#error").scroll();
+          }
+        })
+      }
+    })
+    
+    function setCheckin()
+    {
+      $('#checkinDates').html('Loading....');
+      let sdate = $('input[name=sdate]').val();
+      let edate = $('input[name=edate]').val();
+      let csdate = $('input[name=csdate]').val();
+      let freq = $('input[name=freq]').val();
+      if(sdate && edate && csdate && freq)
+      {
+        $.ajax({
+          method: "POST",
+          url: "<?php echo base_url('api/web/checkin'); ?>",
+          data: { sdate: sdate, edate: edate, csdate: csdate, freq:freq }
+        })
+        .done(function( data ) {
+          $('#checkinDates').html(data);
+        });
+      }else{
+        $('#checkinDates').empty();
+      }
+    }
   </script>
 </body>
 

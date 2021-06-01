@@ -160,7 +160,7 @@
               <a class="nav-link" href="<?php echo base_url()?>company/athlete">Athlete</a>
             </li>
             <?php 
-            if(!empty($this->session->userdata('admin')) || !empty($this->session->userdata('madmin'))){?>
+            if(!empty($this->session->userdata('admin')) || !empty($this->session->userdata('madmin')) || $this->session->userdata('type')=='company'){?>
             <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url()?>company/checkin">Check In</a>
             </li>

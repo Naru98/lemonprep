@@ -54,29 +54,31 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-password">Valid From</label>
-                        <input type="text" id="input-sadte" class="form-control"  name="sdate" required>
+                        <input type="text" id="input-sadte" class="form-control"  name="sdate" onchange="setCheckin()" required>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-confirm-password">Valid To</label>
-                        <input type="text" id="input-edate" class="form-control" name="edate" required>
+                        <input type="text" id="input-edate" class="form-control" name="edate" onchange="setCheckin()" required>
                       </div>
                     </div>
                   </div>
-                  <div class="row input-daterange datepicker align-items-center">
+                  <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-password">Check-In start date</label>
-                        <input type="text" id="input-sadte" class="form-control"  name="csdate">
+                        <label class="form-control-label" for="date">Check-In start date</label>
+                        <input class="form-control" type="text" id="date" name="csdate" onchange="setCheckin()" required>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-confirm-password">Check-In end date</label>
-                        <input type="text" id="input-edate" class="form-control" name="cedate">
+                        <label class="form-control-label" for="input-confirm-password">Frequency</label>
+                        <input type="number"class="form-control" name="freq" onchange="setCheckin()" required>
                       </div>
                     </div>
+                  </div>
+                  <div class="row" id="checkinDates">
                   </div>
                   <div class="row">
                     <div class="col-lg-6">

@@ -34,7 +34,8 @@
                 <thead class="thead-light">
                   <tr>
                     <th>#</th>
-                    <th scope="col" class="sort" data-sort="name">Date</th>
+                    <th scope="col" class="sort" data-sort="name">Start Date</th>
+                    <th scope="col" class="sort" data-sort="name">End Date</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>

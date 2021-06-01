@@ -33,6 +33,10 @@
               </div>
             </div>
             <div class="card-body">
+            <div id="success" class="alert alert-success" role="alert" style="display:none;">
+                </div>
+                <div id="error" class="alert alert-warning" role="alert" style="display:none;">
+                </div>
                 <?php
                 foreach($data as $key=>$value) {
                     ?>
@@ -56,6 +60,18 @@
 
                 }
                 ?>
+                <form id="checkinNote">
+                    <div class="row">
+                        <div class="col-lg-12">
+                        <div class="form-group">
+                            <input type="hidden" name="id" value="<?php echo $checkin['id']?>" />
+                            <label class="form-control-label">Note</label>
+                            <textarea class="form-control" name="note" required><?php echo $checkin['note']?></textarea>
+                        </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </form>
             </div>
           </div>
         </div>

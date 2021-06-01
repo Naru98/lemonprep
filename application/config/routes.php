@@ -139,6 +139,8 @@ $route['athlete/show/(:num)'] = 'athlete/main/show/$1';
 $route['athlete/forms'] = 'athlete/main/forms';
 $route['athlete/form/(:num)'] = 'athlete/main/form/$1';
 $route['athlete/check_in'] = 'athlete/main/check_in';
+$route['athlete/check_in/add'] = 'athlete/main/add_check_in';
+$route['athlete/check_in/view/(:num)'] = 'athlete/main/view_check_in/$1';
 
 //athlete api
 $route['api/athlete/workouts'] = 'api/athlete/getworkouts';
