@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'freedb.tech',
-	'username' => 'freedbtech_userlemonprep',
-	'password' => 'lemonprep@123',
-	'database' => 'freedbtech_lemonprep',
+	'hostname' => 'localhost',
+	'username' => 'user_lemonprep',
+	'password' => '(vh&D{XlRtl0',
+	'database' => 'lemonprep',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
