@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //$config['base_url'] = 'http://localhost/lemonprep';
-$config['base_url'] = 'https://lemonprep.herokuapp.com/';
+$config['base_url'] = 'https://lemonprep.lemonkiosk.com/';
 
 /*
 |--------------------------------------------------------------------------
