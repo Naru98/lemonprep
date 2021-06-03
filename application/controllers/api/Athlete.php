@@ -239,20 +239,19 @@ class Athlete extends MY_Controller {
             $data= json_decode($data[0]['data']);
             foreach($data as $d)
             {
-                $d->l=str_replace(' ', '', $d->l);
                 if($d->r==1)
                 {
                     if($d->m==1)
                     {
                         if($d->t=='Image' || $d->t=='File')
                         {
-                            if(empty($_FILES[$d->l]['name']))
+                            if(empty($_FILES['field'.$d->f]['name']))
                             {
                                 $this->msg(0,[],'Fields are missing!');
                                 exit();
                             }
                         }else{
-                            if(empty($_POST[$d->l]))
+                            if(empty($_POST['field'.$d->f]))
                             {
                                 $this->msg(0,[],'Fields are missing!');
                                 exit();
@@ -265,37 +264,35 @@ class Athlete extends MY_Controller {
             $fdata=[];
             foreach($data as $d)
             {
-                $d->l=str_replace(' ', '', $d->l);
-                if($d->r==1)
+                if($d->t=='Image' || $d->t=='File')
                 {
-                    if($d->t=='Image' || $d->t=='File')
+                    if(!empty($_FILES['field'.$d->f]['name']))
                     {
-                        if(!empty($_FILES[$d->l]['name']))
-                        {
-                            $config['upload_path'] = './uploads/check_in';
-                            $config['allowed_types'] = '*';
-                            $config['max_size'] = 0;
-                            $new_name = time() . '-' . $_FILES[$d->l]['name'];
-                            $config['file_name'] = $new_name;
-                            $this->load->library('upload', $config);
-                            if (!$this->upload->do_upload($d->l)) {
-                                $this->msg(0,[],$this->upload->display_errors());
-                                exit();
-                            } else {
-                                $fdata[$d->l] = array(
-                                    't'=>$d->t,
-                                    'v'=>'uploads/check_in/'.$this->upload->data('file_name')
-                                );
-                            }
-                        }
-                    }else{
-                        if(!empty($_POST[$d->l]))
-                        {
-                            $fdata[$d->l] = array(
-                                't'=>'Text',
-                                'v'=>$_POST[$d->l]
+                        $config['upload_path'] = './uploads/check_in';
+                        $config['allowed_types'] = '*';
+                        $config['max_size'] = 0;
+                        $new_name = time() . '-' . $_FILES['field'.$d->f]['name'];
+                        $config['file_name'] = $new_name;
+                        $this->load->library('upload', $config);
+                        if (!$this->upload->do_upload('field'.$d->f)) {
+                            $this->msg(0,[],$this->upload->display_errors());
+                            exit();
+                        } else {
+                            $fdata[$d->f] = array(
+                                'l'=>$d->l,
+                                't'=>$d->t,
+                                'v'=>'uploads/check_in/'.$this->upload->data('file_name')
                             );
                         }
+                    }
+                }else{
+                    if(!empty($_POST['field'.$d->f]))
+                    {
+                        $fdata[$d->f] = array(
+                            'l'=>$d->l,
+                            't'=>'Text',
+                            'v'=>$_POST['field'.$d->f]
+                        );
                     }
                 }
             }

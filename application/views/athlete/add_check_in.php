@@ -41,12 +41,11 @@ if($status==1)
                     {
                         if($d->r==1)
                         {
-                            $d->l=str_replace(' ', '', $d->l);
                         ?>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label"><?php echo $d->l;?></label>
-                                    <input class="form-control <?php if($d->t=="Date"){ echo "date"; }?>" type="<?php if($d->t=='Image' || $d->t=='File'){ echo "file"; }else{ echo "text";} ?>" name="<?php echo $d->l;?>" <?php if($d->m==1){ echo "required"; }?>>
+                                    <input class="form-control <?php if($d->t=="Date"){ echo "date"; }?>" type="<?php if($d->t=='Image' || $d->t=='File'){ echo "file"; }else{ echo "text";} ?>" name="field<?php echo $d->f;?>" <?php if($d->m==1){ echo "required"; }?>>
                                 </div>
                             </div>
                         <?php

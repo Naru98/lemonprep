@@ -34,10 +34,10 @@
             </div>
             <div class="card-body">
                 <?php
-                foreach($data as $key=>$value) {
+                foreach($data as $value) {
                     ?>
                     <div class="row mb-1">
-                        <div class="col-sm-2"><?php echo $key;?>:- </div>
+                        <div class="col-sm-2"><?php echo $value->l;?>:- </div>
                         <div class="col-sm-10"><?php
                             if($value->t=='File')
                             {

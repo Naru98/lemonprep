@@ -38,10 +38,10 @@
                 <div id="error" class="alert alert-warning" role="alert" style="display:none;">
                 </div>
                 <?php
-                foreach($data as $key=>$value) {
+                foreach($data as $value) {
                     ?>
                     <div class="row mb-1">
-                        <div class="col-sm-2"><?php echo $key;?>:- </div>
+                        <div class="col-sm-2"><?php echo $value->l;?>:- </div>
                         <div class="col-sm-2"><?php
                             if($value->t=='File')
                             {
