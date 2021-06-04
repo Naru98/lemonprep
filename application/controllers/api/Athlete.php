@@ -375,7 +375,8 @@ class Athlete extends MY_Controller {
                     $f++;
                 }
             }
-            $data.=' <div class="card" style="width: 18rem;">
+            $data.=' <div class="col-lg-4 col-md-3 xol-sm-12">
+                    <div class="card">
                     <div id="carouselExampleIndicators'.$aData->id.'" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
                             '.$idata.'
@@ -397,6 +398,7 @@ class Athlete extends MY_Controller {
                     <div class="card-footer">
                         <p class="h5 text-muted">Submitted on '.date('d-M-Y',strtotime($aData->created)).'</p>
                     </div>
+                </div>
                 </div>';
             $i++;
         }
@@ -405,7 +407,7 @@ class Athlete extends MY_Controller {
             $data='<h4>No data found!</h4>';
         }
         echo '<div class="container">
-                '.$data.'
+                <div class="row">'.$data.'</div>
                 <div class="d-flex pb-4">
                 '.$pre.$nxt.'
                 </div>
