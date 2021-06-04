@@ -314,4 +314,101 @@ class Athlete extends MY_Controller {
             $this->msg(0,[],'Check IN data are missing!');
         }
     }
+
+    public function checkinHistory()
+    {
+        $pre='';
+        $nxt='';
+        $page=$_POST['page'];
+        $athleteData = $this->CheckinModel->getACheckinHistory($page*10,11);
+        if($page>0)
+        {
+            $pre= '<button onclick="getCheckin('.($page-1).')" class="btn btn-primary mx-auto">Pre</button>';
+        }
+        if($athleteData->num_rows()==11)
+        {
+            $nxt='<button onclick="getCheckin('.($page+1).')" class="btn btn-primary mx-auto">Next</button>';
+        }
+        $data='';
+        $athleteData=$athleteData->result();
+        $i=1;
+        foreach($athleteData as $aData)
+        {
+            $cdata=json_decode($aData->data);
+            if($i==11)
+            {
+                break;
+            }
+            $fdata='';
+            $idata='';
+            $f=1;
+            foreach($cdata as $value) {
+                if($value->t=='File')
+                {
+                    $fdata.='<p class="card-text">'.$value->l.':-<a href="'.base_url($value->v).'">View</a></p>';
+                }elseif($value->t=='Image')
+                {
+                    if($idata=='')
+                    {
+                        $idata.='<div class="carousel-item active">
+                            <img class="w-100" src="'.base_url($value->v).'">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>'.$value->l.'</h5>
+                                </div>
+                            </div>';
+                    }else{
+                        $idata.='<div class="carousel-item">
+                            <img class="w-100" src="'.base_url($value->v).'">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>'.$value->l.'</h5>
+                                </div>
+                            </div>';
+                    }
+                }else
+                {
+                    if($f>5)
+                    {
+                        $hfdata='';
+                    }else{
+                        $fdata.='<p class="card-text">'.$value->l.':-'.$value->v.'</p>';
+                    }
+                    $f++;
+                }
+            }
+            $data.=' <div class="card" style="width: 18rem;">
+                    <div id="carouselExampleIndicators'.$aData->id.'" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            '.$idata.'
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators'.$aData->id.'" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators'.$aData->id.'" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                    <h5 class="card-title text-center">'.date('d-M-Y',strtotime($aData->from)).' - '.date('d-M-Y',strtotime($aData->to)).'</h5>
+                    '.$fdata.'
+                    <a href="'.base_url('athlete/check_in/view/'.$aData->id).'" class="btn btn-primary btn-sm">view</a>
+                    </div>
+                    <div class="card-footer">
+                        <p class="h5 text-muted">Submitted on '.date('d-M-Y',strtotime($aData->created)).'</p>
+                    </div>
+                </div>';
+            $i++;
+        }
+        if($data=='')
+        {
+            $data='<h4>No data found!</h4>';
+        }
+        echo '<div class="container">
+                '.$data.'
+                <div class="d-flex pb-4">
+                '.$pre.$nxt.'
+                </div>
+            </div>';
+    }
 }

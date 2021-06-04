@@ -455,6 +455,19 @@
       }
     });
   });
+
+  function getCheckin(p)
+  {
+    $('#checkinHistory').empty();
+    $.ajax({
+      method: "POST",
+      url: "<?php echo base_url('api/athlete/checkinHistory'); ?>",
+      data: { page: p }
+    })
+    .done(function( data ) {
+      $('#checkinHistory').html(data);
+    });
+  }
   </script>
 </body>
 

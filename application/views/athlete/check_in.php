@@ -57,7 +57,7 @@
                 <?php } ?>
             </div>
             <!-- Light table -->
-            <div >
+            <div class="d-none" >
               <table id="athletecheckinDatatable" class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
@@ -72,7 +72,15 @@
                 </tbody>
               </table>
             </div>
+            <h2 class="text-center pb-4">Check In History</h2>
+            <div id="checkinHistory">
+            </div>
           </div>
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', (event)=>{
+      getCheckin(0);
+    })
+</script>

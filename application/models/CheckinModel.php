@@ -25,6 +25,16 @@ class CheckinModel extends CI_Model {
         $this->order = array('from' => 'asc');
 	}
 
+    public function getACheckinHistory($s,$l){
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->where('athlete_id',$this->athlete_id);
+        $this->db->order_by('created','asc');
+        $this->db->limit($l,$s);
+        $query = $this->db->get();
+        return $query;
+    }
+
     public function getACheckin($postData){
         $this->_get_datatables_query($postData);
         if($postData['length'] != -1){
